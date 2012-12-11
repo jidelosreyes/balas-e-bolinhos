@@ -130,6 +130,28 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApostasBalasBusinessModel\ApostasBalasBusinessModel.csproj">
+      <Project>{5487C08B-7A56-4407-99C5-49B37FBB7BC3}</Project>
+      <Name>ApostasBalasBusinessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApostasBalasDataModel\ApostasBalasDataModel.csproj">
+      <Project>{C7C3BA81-159A-4024-9EDF-FE07F9959720}</Project>
+      <Name>ApostasBalasDataModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\custom.appsettings.config">
+      <Link>Config\custom.appsettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\custom.connectionstrings.config">
+      <Link>Config\custom.connectionstrings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
