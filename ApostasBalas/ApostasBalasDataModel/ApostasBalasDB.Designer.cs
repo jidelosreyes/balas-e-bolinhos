@@ -63,10 +63,218 @@ namespace ApostasBalasDataModel
     
         #endregion
     
+        #region ObjectSet Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Utilizador> Utilizador
+        {
+            get
+            {
+                if ((_Utilizador == null))
+                {
+                    _Utilizador = base.CreateObjectSet<Utilizador>("Utilizador");
+                }
+                return _Utilizador;
+            }
+        }
+        private ObjectSet<Utilizador> _Utilizador;
+
+        #endregion
+        #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Utilizador EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUtilizador(Utilizador utilizador)
+        {
+            base.AddObject("Utilizador", utilizador);
+        }
+
+        #endregion
     }
     
 
     #endregion
     
+    #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ApostasBalasDBModel", Name="Utilizador")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Utilizador : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Utilizador object.
+        /// </summary>
+        /// <param name="idUtilizador">Initial value of the IdUtilizador property.</param>
+        public static Utilizador CreateUtilizador(global::System.Int32 idUtilizador)
+        {
+            Utilizador utilizador = new Utilizador();
+            utilizador.IdUtilizador = idUtilizador;
+            return utilizador;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdUtilizador
+        {
+            get
+            {
+                return _IdUtilizador;
+            }
+            set
+            {
+                if (_IdUtilizador != value)
+                {
+                    OnIdUtilizadorChanging(value);
+                    ReportPropertyChanging("IdUtilizador");
+                    _IdUtilizador = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IdUtilizador");
+                    OnIdUtilizadorChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdUtilizador;
+        partial void OnIdUtilizadorChanging(global::System.Int32 value);
+        partial void OnIdUtilizadorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NomeUtilizador
+        {
+            get
+            {
+                return _NomeUtilizador;
+            }
+            set
+            {
+                OnNomeUtilizadorChanging(value);
+                ReportPropertyChanging("NomeUtilizador");
+                _NomeUtilizador = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NomeUtilizador");
+                OnNomeUtilizadorChanged();
+            }
+        }
+        private global::System.String _NomeUtilizador;
+        partial void OnNomeUtilizadorChanging(global::System.String value);
+        partial void OnNomeUtilizadorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Administrador
+        {
+            get
+            {
+                return _Administrador;
+            }
+            set
+            {
+                OnAdministradorChanging(value);
+                ReportPropertyChanging("Administrador");
+                _Administrador = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Administrador");
+                OnAdministradorChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Administrador;
+        partial void OnAdministradorChanging(Nullable<global::System.Boolean> value);
+        partial void OnAdministradorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataCriacao
+        {
+            get
+            {
+                return _DataCriacao;
+            }
+            set
+            {
+                OnDataCriacaoChanging(value);
+                ReportPropertyChanging("DataCriacao");
+                _DataCriacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataCriacao");
+                OnDataCriacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataCriacao;
+        partial void OnDataCriacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataCriacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataActualizacao
+        {
+            get
+            {
+                return _DataActualizacao;
+            }
+            set
+            {
+                OnDataActualizacaoChanging(value);
+                ReportPropertyChanging("DataActualizacao");
+                _DataActualizacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataActualizacao");
+                OnDataActualizacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataActualizacao;
+        partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataActualizacaoChanged();
+
+        #endregion
+    
+    }
+
+    #endregion
     
 }
