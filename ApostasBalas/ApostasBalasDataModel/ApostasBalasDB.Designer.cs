@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace ApostasBalasDataModel
 {
     #region Contexts
@@ -82,6 +82,7 @@ namespace ApostasBalasDataModel
         private ObjectSet<Utilizador> _Utilizador;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -93,11 +94,11 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -122,6 +123,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -272,9 +274,11 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

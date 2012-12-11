@@ -5,21 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ApostasBalasDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="ApostasBalasDBModelStoreContainer">
-          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Store.Utilizador" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
-        <EntityType Name="Utilizador">
-          <Key>
-            <PropertyRef Name="IdUtilizador" />
-          </Key>
-          <Property Name="IdUtilizador" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NomeUtilizador" Type="varchar(max)" />
-          <Property Name="Password" Type="varchar(max)" />
-          <Property Name="Administrador" Type="bit" />
-          <Property Name="DataCriacao" Type="datetime" />
-          <Property Name="DataActualizacao" Type="datetime" />
-        </EntityType>
-      </Schema></edmx:StorageModels>
+  <EntityContainer Name="ApostasBalasDBModelStoreContainer">
+    <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Store.Utilizador" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Utilizador">
+    <Key>
+      <PropertyRef Name="IdUtilizador" />
+    </Key>
+    <Property Name="IdUtilizador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeUtilizador" Type="varchar(max)" Nullable="true" />
+    <Property Name="Password" Type="varchar(max)" Nullable="true" />
+    <Property Name="Administrador" Type="bit" Nullable="true" />
+    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
+    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
+  </EntityType>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ApostasBalasDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -41,23 +41,22 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ApostasBalasDBModelStoreContainer" CdmEntityContainer="ApostasBalasDBEntities" >
-          <EntitySetMapping Name="Utilizador">
-            <EntityTypeMapping TypeName="ApostasBalasDBModel.Utilizador">
-              <MappingFragment StoreEntitySet="Utilizador">
-                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-                <ScalarProperty Name="Administrador" ColumnName="Administrador" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="NomeUtilizador" ColumnName="NomeUtilizador" />
-                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ApostasBalasDBModelStoreContainer" CdmEntityContainer="ApostasBalasDBEntities">
+    <EntitySetMapping Name="Utilizador">
+      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Utilizador)">
+        <MappingFragment StoreEntitySet="Utilizador">
+          <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+          <ScalarProperty Name="NomeUtilizador" ColumnName="NomeUtilizador" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Administrador" ColumnName="Administrador" />
+          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
