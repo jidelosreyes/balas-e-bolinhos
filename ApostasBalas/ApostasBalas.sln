@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasDataModel", "ApostasBalasDataModel\ApostasBalasDataModel.csproj", "{C7C3BA81-159A-4024-9EDF-FE07F9959720}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ficheiros", "Ficheiros", "{9B1B1FC4-13D0-4C73-BE90-603F1F376032}"
+	ProjectSection(SolutionItems) = preProject
+		custom.appsettings.config = custom.appsettings.config
+		custom.connectionstrings.config = custom.connectionstrings.config
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasBusinessModel", "ApostasBalasBusinessModel\ApostasBalasBusinessModel.csproj", "{5487C08B-7A56-4407-99C5-49B37FBB7BC3}"
 EndProject
