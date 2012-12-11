@@ -1,21 +1,19 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalas", "ApostasBalas\ApostasBalas.csproj", "{179B81C8-6819-4484-8D06-02E53EB556CA}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{6DD5369C-2473-4F17-B535-3E293B926085}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebForms", "WebForms", "{45EE5AAC-23FD-41FB-9E0F-552F03A894C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasMvc", "ApostasBalasMvc\ApostasBalasMvc.csproj", "{9ED2C4D0-29B2-481F-822B-C603AF1C2E71}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasDataModel", "ApostasBalasDataModel\ApostasBalasDataModel.csproj", "{C7C3BA81-159A-4024-9EDF-FE07F9959720}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ficheiros", "Ficheiros", "{9B1B1FC4-13D0-4C73-BE90-603F1F376032}"
 	ProjectSection(SolutionItems) = preProject
 		custom.appsettings.config = custom.appsettings.config
 		custom.connectionstrings.config = custom.connectionstrings.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalas", "ApostasBalas\ApostasBalas.csproj", "{179B81C8-6819-4484-8D06-02E53EB556CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasDataModel", "ApostasBalasDataModel\ApostasBalasDataModel.csproj", "{C7C3BA81-159A-4024-9EDF-FE07F9959720}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApostasBalasBusinessModel", "ApostasBalasBusinessModel\ApostasBalasBusinessModel.csproj", "{5487C08B-7A56-4407-99C5-49B37FBB7BC3}"
 EndProject
@@ -33,10 +31,6 @@ Global
 		{179B81C8-6819-4484-8D06-02E53EB556CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{179B81C8-6819-4484-8D06-02E53EB556CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{179B81C8-6819-4484-8D06-02E53EB556CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9ED2C4D0-29B2-481F-822B-C603AF1C2E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9ED2C4D0-29B2-481F-822B-C603AF1C2E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9ED2C4D0-29B2-481F-822B-C603AF1C2E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9ED2C4D0-29B2-481F-822B-C603AF1C2E71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7C3BA81-159A-4024-9EDF-FE07F9959720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7C3BA81-159A-4024-9EDF-FE07F9959720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7C3BA81-159A-4024-9EDF-FE07F9959720}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -50,7 +44,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9ED2C4D0-29B2-481F-822B-C603AF1C2E71} = {6DD5369C-2473-4F17-B535-3E293B926085}
 		{179B81C8-6819-4484-8D06-02E53EB556CA} = {45EE5AAC-23FD-41FB-9E0F-552F03A894C2}
 		{C7C3BA81-159A-4024-9EDF-FE07F9959720} = {45EE5AAC-23FD-41FB-9E0F-552F03A894C2}
 		{5487C08B-7A56-4407-99C5-49B37FBB7BC3} = {45EE5AAC-23FD-41FB-9E0F-552F03A894C2}
