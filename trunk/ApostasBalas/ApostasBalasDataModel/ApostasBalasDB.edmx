@@ -4,20 +4,58 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ApostasBalasDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="ApostasBalasDBModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="ApostasBalasDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ApostasBalasDBModelStoreContainer">
+          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Store.Utilizador" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NomeUtilizador" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Administrador" Type="bit" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ApostasBalasDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ApostasBalasDBEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="ApostasBalasDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Utilizador" />
+        </EntityContainer>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Type="Int32" Name="IdUtilizador" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NomeUtilizador" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Administrador" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ApostasBalasDBModelStoreContainer" CdmEntityContainer="ApostasBalasDBEntities" />
+        <EntityContainerMapping StorageEntityContainer="ApostasBalasDBModelStoreContainer" CdmEntityContainer="ApostasBalasDBEntities" >
+          <EntitySetMapping Name="Utilizador">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Administrador" ColumnName="Administrador" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="NomeUtilizador" ColumnName="NomeUtilizador" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -31,13 +69,15 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ApostasBalasDB" />
+      <Diagram Name="ApostasBalasDB" >
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Utilizador" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" />
+      </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>
