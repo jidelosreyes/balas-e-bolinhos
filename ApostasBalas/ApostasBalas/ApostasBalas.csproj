@@ -126,6 +126,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Css\style.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Images\back.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\graphic.png" />
@@ -133,7 +135,11 @@
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\search.png" />
     <Content Include="Images\tab.png" />
-    <Content Include="Pages\Default.aspx" />
+    <Content Include="Pages\Apostas.aspx" />
+    <Content Include="Pages\Campeonatos.aspx" />
+    <Content Include="Pages\Classificacao.aspx" />
+    <Content Include="Pages\Home.aspx" />
+    <Content Include="Pages\Estatisticas.aspx" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
@@ -148,12 +154,50 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\Default.aspx.cs">
+    <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Default.aspx.designer.cs">
+    <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Apostas.aspx.cs">
+      <DependentUpon>Apostas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Apostas.aspx.designer.cs">
+      <DependentUpon>Apostas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Campeonatos.aspx.cs">
+      <DependentUpon>Campeonatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Campeonatos.aspx.designer.cs">
+      <DependentUpon>Campeonatos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Classificacao.aspx.cs">
+      <DependentUpon>Classificacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Classificacao.aspx.designer.cs">
+      <DependentUpon>Classificacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Estatisticas.aspx.cs">
+      <DependentUpon>Estatisticas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Estatisticas.aspx.designer.cs">
+      <DependentUpon>Estatisticas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
