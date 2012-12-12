@@ -180,22 +180,6 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Noticia> Noticia
-        {
-            get
-            {
-                if ((_Noticia == null))
-                {
-                    _Noticia = base.CreateObjectSet<Noticia>("Noticia");
-                }
-                return _Noticia;
-            }
-        }
-        private ObjectSet<Noticia> _Noticia;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<UtilizadorCompeticao> UtilizadorCompeticao
         {
             get
@@ -208,6 +192,22 @@ namespace ApostasBalasDataModel
             }
         }
         private ObjectSet<UtilizadorCompeticao> _UtilizadorCompeticao;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Noticia> Noticia
+        {
+            get
+            {
+                if ((_Noticia == null))
+                {
+                    _Noticia = base.CreateObjectSet<Noticia>("Noticia");
+                }
+                return _Noticia;
+            }
+        }
+        private ObjectSet<Noticia> _Noticia;
 
         #endregion
         #region AddTo Methods
@@ -269,19 +269,19 @@ namespace ApostasBalasDataModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Noticia EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToNoticia(Noticia noticia)
-        {
-            base.AddObject("Noticia", noticia);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the UtilizadorCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUtilizadorCompeticao(UtilizadorCompeticao utilizadorCompeticao)
         {
             base.AddObject("UtilizadorCompeticao", utilizadorCompeticao);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Noticia EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNoticia(Noticia noticia)
+        {
+            base.AddObject("Noticia", noticia);
         }
 
         #endregion
@@ -1513,6 +1513,30 @@ namespace ApostasBalasDataModel
         private global::System.Int32 _IdNoticia;
         partial void OnIdNoticiaChanging(global::System.Int32 value);
         partial void OnIdNoticiaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Titulo
+        {
+            get
+            {
+                return _Titulo;
+            }
+            set
+            {
+                OnTituloChanging(value);
+                ReportPropertyChanging("Titulo");
+                _Titulo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Titulo");
+                OnTituloChanged();
+            }
+        }
+        private global::System.String _Titulo;
+        partial void OnTituloChanging(global::System.String value);
+        partial void OnTituloChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
