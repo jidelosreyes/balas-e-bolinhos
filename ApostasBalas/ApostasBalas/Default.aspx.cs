@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
 
 namespace ApostasBalas
 {
@@ -14,13 +15,22 @@ namespace ApostasBalas
 
         }
 
-        public void Login()
-        { }
+        [WebMethod]
+        public static string Login()
+        {
+            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
+        }
 
-        public void Registar()
-        { }
+        [WebMethod]
+        public static string Registar()
+        {
+            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
+        }
 
-        public void RecuperarPassword()
-        { }
+        [WebMethod]
+        public static string RecuperarPassword()
+        {
+            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
+        }
     }
 }
