@@ -13,5 +13,14 @@ namespace ApostasBalas
         {
 
         }
+
+        public void Login()
+        { }
+
+        public void Registar()
+        { }
+
+        public void RecuperarPassword()
+        { }
     }
 }
