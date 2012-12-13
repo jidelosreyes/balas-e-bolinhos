@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Code\Login.js" />
+    <Content Include="Code\Master.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -194,6 +196,7 @@
     <Content Include="Images\link.png" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\search.png" />
+    <Content Include="Images\spinner.gif" />
     <Content Include="Images\tab.png" />
     <Content Include="Pages\Apostas.aspx" />
     <Content Include="Pages\Campeonatos.aspx" />
