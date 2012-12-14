@@ -42,8 +42,14 @@
                                 <input id="txtPassword" type="password" title="Insere a pass." />
                             </p>
                             <p>
+                                <span>Lembrar-me?</span>
+                                <input type="checkbox" class="checkbox" name="name" value="" />
+                            </p>
+                            <p>
                                 <input id="btnLogin" class="submit" type="button" value="Login" />
                                 <input id="btnRegistar" class="submit" type="button" value="Registar" />
+                            </p>
+                            <p>
                                 <a id="btnRecuperar" href="#">Recuperar Password</a>
                             </p>
                         </div>
