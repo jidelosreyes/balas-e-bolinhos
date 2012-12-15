@@ -1,5 +1,6 @@
 ﻿/// <reference path="../Scripts/jquery-1.8.3.min.js" />
 /// <reference path="../Scripts/jquery-ui-1.9.2.min.js" />
+/// <reference path="../Scripts/jquery.validate.min.js" />
 $.fx.speeds._default = 1000;
 $(document).ready(function () {
 
@@ -102,4 +103,39 @@ $(document).ready(function () {
     });
 
     //#endregion
+
+    //#region Validation
+
+    $('#form1').validate(
+        {
+            rules: {
+                name: {
+                    minlength: 2,
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                subject: {
+                    minlength: 2,
+                    required: true
+                },
+                message: {
+                    minlength: 2,
+                    required: true
+                }
+            },
+            highlight: function (label) {
+                $(label).closest('.control-group').addClass('error');
+            },
+            success: function (label) {
+                label
+                  .text('OK!').addClass('valid')
+                  .closest('.control-group').addClass('success');
+            }
+        });
+
+    //#endregion
+
 });
