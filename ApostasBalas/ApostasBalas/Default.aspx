@@ -74,14 +74,12 @@
                         </p>
                     </div>
                 </div>
-                <%--<span>Email Address</span>
-                <input type="text" name="email" id="email">
-                <button type="submit">Submit</button>--%>
                 <div id="mdRecuperarPassword" title="Recuperar Password">
                     <div class="login_settings">
                         <p>
-                            <span>Email:</span>
-                            <input type="text" name="txtEmail" id="txtEmailRecup">
+                            <label>Email:</label>
+                            <br />
+                            <input type="text" name="email" class="required" id="txtEmailRecup">
                         </p>
                         <p>
                             <input id="btnRecuperarPassword" class="submit" type="button" value="Submeter" />
@@ -92,19 +90,19 @@
                     <div class="login_settings">
                         <p>
                             <span>Email:</span>
-                            <input type="text" />
+                            <input type="text" name="email" id="txtEmailRegisto" />
                         </p>
                         <p>
                             <span>Nome:</span>
-                            <input type="text" />
+                            <input type="text" name="nome" id="txtNomeRegisto" />
                         </p>
                         <p>
                             <span>Password:</span>
-                            <input type="password" />
+                            <input type="password" name="password" id="txtPasswordRegisto" />
                         </p>
                         <p>
                             <span>Confirmar Password:</span>
-                            <input type="password" />
+                            <input type="password" name="conf_password" id="txtConfPasswordRegisto" />
                         </p>
                         <p>
                             <input id="btnSubmeterRegisto" class="submit" type="button" value="Registar" />
@@ -114,6 +112,5 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>
-
 </body>
 </html>

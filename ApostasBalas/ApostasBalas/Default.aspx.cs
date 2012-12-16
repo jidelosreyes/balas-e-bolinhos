@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using System.Text.RegularExpressions;
 
 namespace ApostasBalas
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : ApostasBalasBusinessModel.PlatformModel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,9 +29,9 @@ namespace ApostasBalas
         }
 
         [WebMethod]
-        public static string RecuperarPassword()
-        {
-            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
+        public static string RecuperarPassword(string args)
+        {       
+            return args;
         }
     }
 }

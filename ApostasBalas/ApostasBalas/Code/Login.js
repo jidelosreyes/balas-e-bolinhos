@@ -9,10 +9,10 @@ $(document).ready(function () {
     $(document).tooltip(
     {
         show: {
-            effect: "slideDown"
+            effect: 'slideDown'
         },
         hide: {
-            effect: "slideUp"
+            effect: 'slideUp'
         }
     });
 
@@ -20,38 +20,41 @@ $(document).ready(function () {
 
     //#region Dialog Events
 
-    $("#mdRecuperarPassword, #mdRegistar").dialog({
+    $('#mdRecuperarPassword, #mdRegistar').dialog({
         autoOpen: false,
         draggable: false,
         resizable: false,
-        show: "blind",
-        hide: "blind"
+        show: 'blind',
+        hide: 'blind',
+        create: function (type, data) {
+            $(this).parent().appendTo('#form1');
+        }
     });
 
     //#endregion    
 
     //#region Click Events
 
-    $("#btnRecuperar").click(function () {
-        $("#mdRecuperarPassword").dialog("open");
+    $('#btnRecuperar').click(function () {
+        $('#mdRecuperarPassword').dialog('open');
         return false;
     });
 
-    $("#btnRegistar").click(function () {
-        $("#mdRegistar").dialog("open");
+    $('#btnRegistar').click(function () {
+        $('#mdRegistar').dialog('open');
         return false;
     });
 
-    $("#btnLogin").click(function () {
+    $('#btnLogin').click(function () {
         $.ajax({
-            type: "POST",
-            url: "Default.aspx/Login",
+            type: 'POST',
+            url: 'Default.aspx/Login',
             // If you want to pass parameter or data to server side function you can try line
-            //data: "{'args':'Hello World'}",
+            //data: '{'args':'Hello World'}",
             //else If you don't want to pass any value to server side function leave the data to blank line below
-            data: "{}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             success: function (msg) {
                 //Got the response from server and render to the client
                 alert(msg.d);
@@ -62,18 +65,18 @@ $(document).ready(function () {
         });
     });
 
-    $("#btnRecuperarPassword").click(function () {
+    $('#btnRecuperarPassword').click(function () {
+        var email = $('#txtEmailRecup').val();
+        if (!$('#form1').valid()) {
+            return false;
+        }
         $.ajax({
-            type: "POST",
-            url: "Default.aspx/RecuperarPassword",
-            // If you want to pass parameter or data to server side function you can try line
-            //data: "{'args':'Hello World'}",
-            //else If you don't want to pass any value to server side function leave the data to blank line below
-            data: "{}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            type: 'POST',
+            url: 'Default.aspx/RecuperarPassword',
+            data: "{'args':'" + email + "'}",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             success: function (msg) {
-                //Got the response from server and render to the client
                 alert(msg.d);
             },
             error: function () {
@@ -83,6 +86,9 @@ $(document).ready(function () {
     });
 
     $("#btnSubmeterRegisto").click(function () {
+        if (!$('#form1').valid()) {
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: "Default.aspx/Registar",
@@ -106,33 +112,48 @@ $(document).ready(function () {
 
     //#region Validation
 
-    $('#form1').validate(
+    $("#form1").validate(
         {
             rules: {
-                name: {
-                    minlength: 2,
-                    required: true
-                },
                 email: {
                     required: true,
                     email: true
                 },
-                subject: {
-                    minlength: 2,
+                nome: {
                     required: true
                 },
-                message: {
-                    minlength: 2,
+                password: {
                     required: true
+                },
+                conf_password:
+                    {
+                        required: true,
+                        equalTo: "#txtPasswordRegisto"
+                    }
+            },
+            messages: {
+                email: {
+                    required: "O campo email é obrigatorio.",
+                    email: "Insere um e-mail válido."
+                },
+                nome: {
+                    required: "O campo nome é obrigatorio.",
+                },
+                password: {
+                    required: "O campo password é obrigatorio.",
+                },
+                conf_password: {
+                    required: "O campo confirmação de senha é obrigatorio.",
+                    equalTo: "O campo confirmação de password deve ser identico ao campo password."
                 }
             },
             highlight: function (label) {
-                $(label).closest('.control-group').addClass('error');
+                $(label).addClass('error');
             },
             success: function (label) {
                 label
-                  .text('OK!').addClass('valid')
-                  .closest('.control-group').addClass('success');
+                    .text('OK!').addClass('valid')
+                   .addClass('success');
             }
         });
 
