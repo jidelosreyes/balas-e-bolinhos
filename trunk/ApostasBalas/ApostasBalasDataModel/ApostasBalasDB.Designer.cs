@@ -1782,6 +1782,30 @@ namespace ApostasBalasDataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Activo
+        {
+            get
+            {
+                return _Activo;
+            }
+            set
+            {
+                OnActivoChanging(value);
+                ReportPropertyChanging("Activo");
+                _Activo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Activo");
+                OnActivoChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Activo;
+        partial void OnActivoChanging(Nullable<global::System.Boolean> value);
+        partial void OnActivoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> DataCriacao
         {
             get
