@@ -1,4 +1,5 @@
-﻿/// <reference path="../Scripts/jquery-1.8.3.min.js" />
+﻿/// <reference path="../Scripts/jNotify.jquery.min.js" />
+/// <reference path="../Scripts/jquery-1.8.3.min.js" />
 /// <reference path="../Scripts/jquery-ui-1.9.2.min.js" />
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $.fx.speeds._default = 1000;
@@ -66,10 +67,10 @@ $(document).ready(function () {
     });
 
     $('#btnRecuperarPassword').click(function () {
-        var email = $('#txtEmailRecup').val();
         if (!$('#form1').valid()) {
             return false;
         }
+        var email = $('#txtEmailRecup').val();
         $.ajax({
             type: 'POST',
             url: 'Default.aspx/RecuperarPassword',
@@ -89,21 +90,37 @@ $(document).ready(function () {
         if (!$('#form1').valid()) {
             return false;
         }
+        var email = $('#txtEmailRegisto');
+        var nome = $('#txtNomeRegisto');
+        var password = $('#txtConfPasswordRegisto');
         $.ajax({
-            type: "POST",
-            url: "Default.aspx/Registar",
-            // If you want to pass parameter or data to server side function you can try line
-            //data: "{'args':'Hello World'}",
-            //else If you don't want to pass any value to server side function leave the data to blank line below
-            data: "{}",
+            type: 'POST',
+            url: 'Default.aspx/Registar',
+            data: "{'Email':'" + email.val() + "','Nome':'" + nome.val() + "','Password':'" + password.val() + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (msg) {
-                //Got the response from server and render to the client
-                alert(msg.d);
+            success: function () {
+                jSuccess('Registo criado com sucesso.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+                $('#mdRegistar').dialog('close');
+                email.val('');
+                nome.val('');
+                password.val('');
+                $('#txtConfPasswordRegisto').val('');
             },
             error: function () {
-                alert('erro');
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                 {
+                     autoHide: false,
+                     TimeShown: 3000,
+                     HorizontalPosition: 'center',
+                     clickOverlay: true
+                 });
             }
         });
     });

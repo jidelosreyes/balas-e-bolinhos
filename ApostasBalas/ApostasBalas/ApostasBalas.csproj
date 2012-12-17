@@ -188,6 +188,7 @@
     <Content Include="Content\themes\custom-theme\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\custom-theme\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\custom-theme\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Css\jNotify.jquery.css" />
     <Content Include="Css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -195,10 +196,12 @@
     <Content Include="Images\bullet.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\graphic.png" />
+    <Content Include="Images\info.png" />
     <Content Include="Images\link.png" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\search.png" />
     <Content Include="Images\spinner.gif" />
+    <Content Include="Images\success.png" />
     <Content Include="Images\tab.png" />
     <Content Include="Images\valid.png" />
     <Content Include="Pages\Apostas.aspx" />
@@ -206,6 +209,7 @@
     <Content Include="Pages\Classificacao.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\Estatisticas.aspx" />
+    <Content Include="Scripts\jNotify.jquery.min.js" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />

@@ -68,22 +68,6 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Utilizador> Utilizador
-        {
-            get
-            {
-                if ((_Utilizador == null))
-                {
-                    _Utilizador = base.CreateObjectSet<Utilizador>("Utilizador");
-                }
-                return _Utilizador;
-            }
-        }
-        private ObjectSet<Utilizador> _Utilizador;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Log> Log
         {
             get
@@ -208,18 +192,26 @@ namespace ApostasBalasDataModel
             }
         }
         private ObjectSet<Noticia> _Noticia;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Utilizador> Utilizador
+        {
+            get
+            {
+                if ((_Utilizador == null))
+                {
+                    _Utilizador = base.CreateObjectSet<Utilizador>("Utilizador");
+                }
+                return _Utilizador;
+            }
+        }
+        private ObjectSet<Utilizador> _Utilizador;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Utilizador EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUtilizador(Utilizador utilizador)
-        {
-            base.AddObject("Utilizador", utilizador);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -283,6 +275,14 @@ namespace ApostasBalasDataModel
         public void AddToNoticia(Noticia noticia)
         {
             base.AddObject("Noticia", noticia);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Utilizador EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUtilizador(Utilizador utilizador)
+        {
+            base.AddObject("Utilizador", utilizador);
         }
 
         #endregion
@@ -1680,6 +1680,30 @@ namespace ApostasBalasDataModel
         private global::System.Int32 _IdUtilizador;
         partial void OnIdUtilizadorChanging(global::System.Int32 value);
         partial void OnIdUtilizadorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

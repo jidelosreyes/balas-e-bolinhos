@@ -23,10 +23,10 @@ namespace ApostasBalas
         }
 
         [WebMethod]
-        public static string Registar()
-        {
-            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
-        }
+        public static void Registar(string Email, string Nome, string Password)
+        {            
+            Logic.RegistarUtilizador();
+        }        
 
         [WebMethod]
         public static string RecuperarPassword(string args)

@@ -40,12 +40,13 @@ namespace ApostasBalasBusinessModel
                 Password="Teste"
             };
             ApostasBalasDB.Utilizador.AddObject(Utilizador);
+            ApostasBalasDB.SaveChanges();
         }       
     }
 
     public abstract class PlatformModel : System.Web.UI.Page
     {
-        public BusinessModel Logic = BusinessModel.GetInstance;
+        public static BusinessModel Logic = BusinessModel.GetInstance;
     }
 
     public static class LoggingModel

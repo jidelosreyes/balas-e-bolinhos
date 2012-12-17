@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/12/2012 20:39:52
+-- Date Created: 12/16/2012 22:17:16
 -- Generated from EDMX file: C:\Projectos\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
 -- --------------------------------------------------
 
@@ -53,17 +53,6 @@ GO
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
-
--- Creating table 'Utilizador'
-CREATE TABLE [dbo].[Utilizador] (
-    [IdUtilizador] int IDENTITY(1,1) NOT NULL,
-    [NomeUtilizador] varchar(max)  NULL,
-    [Password] varchar(max)  NULL,
-    [Administrador] bit  NULL,
-    [DataCriacao] datetime  NULL,
-    [DataActualizacao] datetime  NULL
-);
-GO
 
 -- Creating table 'Log'
 CREATE TABLE [dbo].[Log] (
@@ -156,15 +145,21 @@ CREATE TABLE [dbo].[Noticia] (
 );
 GO
 
+-- Creating table 'Utilizador'
+CREATE TABLE [dbo].[Utilizador] (
+    [IdUtilizador] int IDENTITY(1,1) NOT NULL,
+    [Email] varchar(100)  NULL,
+    [NomeUtilizador] varchar(max)  NULL,
+    [Password] varchar(max)  NULL,
+    [Administrador] bit  NULL,
+    [DataCriacao] datetime  NULL,
+    [DataActualizacao] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
-
--- Creating primary key on [IdUtilizador] in table 'Utilizador'
-ALTER TABLE [dbo].[Utilizador]
-ADD CONSTRAINT [PK_Utilizador]
-    PRIMARY KEY CLUSTERED ([IdUtilizador] ASC);
-GO
 
 -- Creating primary key on [Id], [Date], [Thread], [Level], [Logger], [Message] in table 'Log'
 ALTER TABLE [dbo].[Log]
@@ -212,6 +207,12 @@ GO
 ALTER TABLE [dbo].[Noticia]
 ADD CONSTRAINT [PK_Noticia]
     PRIMARY KEY CLUSTERED ([IdNoticia] ASC);
+GO
+
+-- Creating primary key on [IdUtilizador] in table 'Utilizador'
+ALTER TABLE [dbo].[Utilizador]
+ADD CONSTRAINT [PK_Utilizador]
+    PRIMARY KEY CLUSTERED ([IdUtilizador] ASC);
 GO
 
 -- --------------------------------------------------
