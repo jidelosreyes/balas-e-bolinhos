@@ -47,21 +47,24 @@ $(document).ready(function () {
     });
 
     $('#btnLogin').click(function () {
+        var email = $('#txtEmail').val();
+        var password = $('#txtPassword').val();
         $.ajax({
             type: 'POST',
-            url: 'Default.aspx/Login',
-            // If you want to pass parameter or data to server side function you can try line
-            //data: '{'args':'Hello World'}",
-            //else If you don't want to pass any value to server side function leave the data to blank line below
-            data: '{}',
+            url: 'Default.aspx/Login',            
+            data: "{'Email':'" + email + "','Password':'" + password + "'}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            success: function (msg) {
-                //Got the response from server and render to the client
-                alert(msg.d);
+            success: function () {
             },
             error: function () {
-                alert('erro');
+                  jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                     {
+                         autoHide: false,
+                         TimeShown: 3000,
+                         HorizontalPosition: 'center',
+                         clickOverlay: true
+                     });
             }
         });
     });
@@ -70,18 +73,32 @@ $(document).ready(function () {
         if (!$('#form1').valid()) {
             return false;
         }
-        var email = $('#txtEmailRecup').val();
+        var email = $('#txtEmailRecup');
         $.ajax({
             type: 'POST',
             url: 'Default.aspx/RecuperarPassword',
-            data: "{'args':'" + email + "'}",
+            data: "{'Email':'" + email.val() + "'}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            success: function (msg) {
-                alert(msg.d);
+            success: function () {
+                jSuccess('Email enviado com sucesso.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+                   email.val('');
+                   $('#mdRecuperarPassword').dialog('close');
             },
             error: function () {
-                alert('erro');
+                 jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                     {
+                         autoHide: false,
+                         TimeShown: 3000,
+                         HorizontalPosition: 'center',
+                         clickOverlay: true
+                     });
             }
         });
     });
