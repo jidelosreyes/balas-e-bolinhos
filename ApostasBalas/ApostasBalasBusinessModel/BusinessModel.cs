@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using ApostasBalasDataModel;
 using log4net;
 
 namespace ApostasBalasBusinessModel
 {
-    public sealed class BusinessModel
+    public sealed class BusinessModel : PlatformModel
     {
         #region Instancia & Contructor
 
@@ -29,27 +32,135 @@ namespace ApostasBalasBusinessModel
 
         #endregion
 
-        public void RegistarUtilizador()
+        public void RegistarUtilizador(string Email, string Nome, string Password)
         {
-            var Utilizador = new Utilizador()
+            try
             {
-                Administrador = false,
-                DataActualizacao = DateTime.Now,
-                DataCriacao = DateTime.Now,
-                NomeUtilizador = "Teste",
-                Password="Teste"
-            };
-            ApostasBalasDB.Utilizador.AddObject(Utilizador);
-            ApostasBalasDB.SaveChanges();
-        }       
+                var Utilizador = new Utilizador()
+                           {
+                               Activo = false,
+                               Administrador = false,
+                               DataActualizacao = DateTime.Now,
+                               DataCriacao = DateTime.Now,
+                               Email = Email,
+                               NomeUtilizador = Nome,
+                               Password = Password
+                           };
+                ApostasBalasDB.Utilizador.AddObject(Utilizador);
+                ApostasBalasDB.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void RecuperarPassword(string Email)
+        {
+            try
+            {
+
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void Login(string Email, string Password)
+        {
+            try
+            {                
+                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.Email == Email & u.Password == Password & u.Activo == true).Single();
+                if (Utilizador != null)
+                {
+                    NomeUtilizadorSessao = Utilizador.NomeUtilizador;
+                    PasswordSessao = Utilizador.Password;
+                    IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
+                    Response.RedirectToRoute(ConstantsModel.HomeRoute);
+                }
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
     }
 
     public abstract class PlatformModel : System.Web.UI.Page
     {
         public static BusinessModel Logic = BusinessModel.GetInstance;
+
+        internal string NomeUtilizadorSessao
+        {
+            get
+            {
+                if (Session["NomeUtilizadorSessao"] == null || Session["NomeUtilizadorSessao"].Equals(string.Empty))
+                {
+                    return string.Empty;
+                }
+                return Session["NomeUtilizadorSessao"].ToString();
+            }
+            set
+            {
+                Session["NomeUtilizadorSessao"] = value;
+            }
+        }
+
+        internal string PasswordSessao
+        {
+            get
+            {
+                if (Session["PasswordSessao"] == null || Session["PasswordSessao"].Equals(string.Empty))
+                {
+                    return string.Empty;
+                }
+                return Session["PasswordSessao"].ToString();
+            }
+            set
+            {
+                Session["PasswordSessao"] = value;
+            }
+        }
+
+        internal string IdUtilizadorSessao
+        {
+            get
+            {
+                if (Session["IdUtilizadorSessao"].Equals(string.Empty))
+                {
+                    return string.Empty;
+                }
+                return Session["IdUtilizadorSessao"].ToString();
+            }
+            set
+            {
+                Session["IdUtilizadorSessao"] = value;
+            }
+        }
+
+        internal bool VerificarSessao()
+        {
+            if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
-    public static class LoggingModel
+    public static class ConstantsModel
+    {
+        public static string LogMode = ConfigurationManager.AppSettings["LogMode"].ToString();
+        public const int SessionTimeOut = 15;
+        public const string BemVindo = "Bem Vindo ";
+        public const string HomeRoute = "Home";
+    }
+
+    internal static class LoggingModel
     {
         public static void Log(string Mode, Exception Ex, string Method)
         {
@@ -74,41 +185,5 @@ namespace ApostasBalasBusinessModel
                     break;
             }
         }
-    }
-
-    public static class ConstantsModel
-    {
-        public static string LogMode = ConfigurationManager.AppSettings["LogMode"].ToString();
-        public const int SessionTimeOut = 15;
-        public const string Seccao = "Seccao";
-        public const string IdAnuncio = "IdAnuncio";
-        public const string IdAnuncioDefaultValue = "0";
-
-        public const string Index = "Index";
-        public const string Detalhe = "Detalhe";
-        public const string Anunciar = "Anunciar";
-        public const string Termos = "Termos";
-
-        public const string BemVindo = "Bem Vindo ";
-
-        public const string SeccaoMasculina = "H";
-        public const string SeccaoFeminina = "M";
-
-        public const string DistritoPT = "DistritoPT";
-        public const string TipoConvivio = "TipoConvivio";
-        public const string OutroHorario = "Outro";
-        public const string HorarioCompleto = "24h";
-        public const string DdlDefaultText = "<<Seleccione>>";
-        public const string DdlDefaultValue = "-1";
-        public const string DdlTextField = "Descricao";
-        public const string DdlValueField = "IDReferencia";
-        public const string DdlTextFieldNome = "Nome";
-        public const string DdlValueFieldIdAnuncio = "IdAnuncio";
-
-        public const string StrFalse = "False";
-        public const string lblActivo = "lblActivo";
-        public const string sqlDsOrders = "sqlDsOrders";
-        public const string RptCmdEdit = "Edit";
-        public const string RptCmdView = "View";
     }
 }

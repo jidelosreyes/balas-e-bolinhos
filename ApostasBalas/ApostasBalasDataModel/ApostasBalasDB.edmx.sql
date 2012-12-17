@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/16/2012 22:17:16
--- Generated from EDMX file: C:\Projectos\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
+-- Date Created: 12/17/2012 09:38:59
+-- Generated from EDMX file: C:\JP\Projects\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -152,6 +152,7 @@ CREATE TABLE [dbo].[Utilizador] (
     [NomeUtilizador] varchar(max)  NULL,
     [Password] varchar(max)  NULL,
     [Administrador] bit  NULL,
+    [Activo] bit  NULL,
     [DataCriacao] datetime  NULL,
     [DataActualizacao] datetime  NULL
 );

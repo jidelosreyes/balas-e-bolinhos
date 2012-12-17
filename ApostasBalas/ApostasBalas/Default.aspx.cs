@@ -13,25 +13,25 @@ namespace ApostasBalas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         [WebMethod]
-        public static string Login()
+        public static void Login(string Email, string Password)
         {
-            return DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss");
+            Logic.Login(Email, Password);
         }
 
         [WebMethod]
         public static void Registar(string Email, string Nome, string Password)
         {            
-            Logic.RegistarUtilizador();
+            Logic.RegistarUtilizador(Email, Nome, Password);            
         }        
 
         [WebMethod]
-        public static string RecuperarPassword(string args)
-        {       
-            return args;
+        public static void RecuperarPassword(string Email)
+        {
+            Logic.RecuperarPassword(Email);
         }
     }
 }
