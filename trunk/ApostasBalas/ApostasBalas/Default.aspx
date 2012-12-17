@@ -6,9 +6,11 @@
     <title>Balas & Bolinhos</title>
     <link href="../Css/style.css" rel="stylesheet" />
     <link href="Content/themes/custom-theme/jquery-ui.css" rel="stylesheet" />
+    <link href="Css/jNotify.jquery.css" rel="stylesheet" />
     <script type="text/javascript" src="Scripts/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="Scripts/jquery-ui-1.9.2.min.js"></script>
     <script type="text/javascript" src="Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="Scripts/jNotify.jquery.min.js"></script>
     <script type="text/javascript" src="Code/Login.js"></script>
 </head>
 <body>
