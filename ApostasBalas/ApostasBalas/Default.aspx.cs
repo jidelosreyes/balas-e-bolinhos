@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace ApostasBalas
 {
@@ -13,20 +14,23 @@ namespace ApostasBalas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (IsCookie)
+            {
+                Logic.CookieLogin();
+            }
         }
 
         [WebMethod]
-        public static void Login(string Email, string Password)
+        public static bool Login(string Email, string Password, string Lembrarme)
         {
-            Logic.Login(Email, Password);
+            return Logic.Login(Email, Password, bool.Parse(Lembrarme));
         }
 
         [WebMethod]
         public static void Registar(string Email, string Nome, string Password)
-        {            
-            Logic.RegistarUtilizador(Email, Nome, Password);            
-        }        
+        {
+            Logic.RegistarUtilizador(Email, Nome, Password);
+        }
 
         [WebMethod]
         public static void RecuperarPassword(string Email)

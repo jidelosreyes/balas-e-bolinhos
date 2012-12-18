@@ -49,22 +49,26 @@ $(document).ready(function () {
     $('#btnLogin').click(function () {
         var email = $('#txtEmail').val();
         var password = $('#txtPassword').val();
+        var lembrarme = $('#chkLembrarme').attr('checked') ? true : false;
         $.ajax({
             type: 'POST',
-            url: 'Default.aspx/Login',            
-            data: "{'Email':'" + email + "','Password':'" + password + "'}",
+            url: 'Default.aspx/Login',
+            data: "{'Email':'" + email + "','Password':'" + password + "','Lembrarme':'" + lembrarme + "'}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            success: function () {
+            success: function (result) {
+                if (result.d) {
+                    $(window.location).attr('href', 'Home')
+                }
             },
             error: function () {
-                  jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-                     {
-                         autoHide: false,
-                         TimeShown: 3000,
-                         HorizontalPosition: 'center',
-                         clickOverlay: true
-                     });
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
             }
         });
     });
@@ -88,17 +92,17 @@ $(document).ready(function () {
                        HorizontalPosition: 'center',
                        clickOverlay: true
                    });
-                   email.val('');
-                   $('#mdRecuperarPassword').dialog('close');
+                email.val('');
+                $('#mdRecuperarPassword').dialog('close');
             },
             error: function () {
-                 jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-                     {
-                         autoHide: false,
-                         TimeShown: 3000,
-                         HorizontalPosition: 'center',
-                         clickOverlay: true
-                     });
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                    {
+                        autoHide: false,
+                        TimeShown: 3000,
+                        HorizontalPosition: 'center',
+                        clickOverlay: true
+                    });
             }
         });
     });

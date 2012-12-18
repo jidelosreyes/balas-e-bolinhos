@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace ApostasBalas.Pages
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Home : ApostasBalasBusinessModel.PlatformModel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

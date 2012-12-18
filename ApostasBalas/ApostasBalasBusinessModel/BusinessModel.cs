@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Web;
 using ApostasBalasDataModel;
 using log4net;
 
@@ -69,18 +70,63 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public void Login(string Email, string Password)
+        public bool Login(string Email, string Password, bool Lembrarme)
         {
             try
-            {                
-                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.Email == Email & u.Password == Password & u.Activo == true).Single();
+            {
+                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.Email == Email & u.Password == Password & u.Activo == true).SingleOrDefault();
                 if (Utilizador != null)
                 {
                     NomeUtilizadorSessao = Utilizador.NomeUtilizador;
                     PasswordSessao = Utilizador.Password;
                     IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
-                    Response.RedirectToRoute(ConstantsModel.HomeRoute);
+                    Session.Timeout = ConstantsModel.SessionTimeOut;
+                    if (Lembrarme)
+                    {
+                        HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
+                        Cookie.Value = IdUtilizadorSessao;
+                        Cookie.Expires = DateTime.Now.AddDays(5);
+                        HttpContext.Current.Response.Cookies.Add(Cookie);
+                    }
+                    return true;
                 }
+                return false;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void CookieLogin()
+        {
+            try
+            {
+                var IdUtilizador = Int32.Parse(HttpContext.Current.Request.Cookies[ConstantsModel.CookieName].Value.ToString());
+                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.IdUtilizador == IdUtilizador).SingleOrDefault();
+                NomeUtilizadorSessao = Utilizador.NomeUtilizador;
+                PasswordSessao = Utilizador.Password;
+                IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
+                Session.Timeout = ConstantsModel.SessionTimeOut;
+                HttpContext.Current.Response.RedirectToRoute(ConstantsModel.HomeRoute);
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public bool VerificarSessao()
+        {
+            try
+            {
+                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception Ex)
             {
@@ -93,15 +139,13 @@ namespace ApostasBalasBusinessModel
     public abstract class PlatformModel : System.Web.UI.Page
     {
         public static BusinessModel Logic = BusinessModel.GetInstance;
-
+        
         internal string NomeUtilizadorSessao
         {
             get
             {
                 if (Session["NomeUtilizadorSessao"] == null || Session["NomeUtilizadorSessao"].Equals(string.Empty))
-                {
                     return string.Empty;
-                }
                 return Session["NomeUtilizadorSessao"].ToString();
             }
             set
@@ -115,9 +159,7 @@ namespace ApostasBalasBusinessModel
             get
             {
                 if (Session["PasswordSessao"] == null || Session["PasswordSessao"].Equals(string.Empty))
-                {
                     return string.Empty;
-                }
                 return Session["PasswordSessao"].ToString();
             }
             set
@@ -131,9 +173,7 @@ namespace ApostasBalasBusinessModel
             get
             {
                 if (Session["IdUtilizadorSessao"].Equals(string.Empty))
-                {
                     return string.Empty;
-                }
                 return Session["IdUtilizadorSessao"].ToString();
             }
             set
@@ -142,19 +182,21 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        internal bool VerificarSessao()
+        public bool IsCookie
         {
-            if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty)
+            get
             {
-                return true;
+                if (HttpContext.Current.Request.Cookies[ApostasBalasBusinessModel.ConstantsModel.CookieName] != null)
+                    return true;
+                return false;
             }
-            return false;
         }
     }
 
     public static class ConstantsModel
     {
         public static string LogMode = ConfigurationManager.AppSettings["LogMode"].ToString();
+        public static string CookieName = ConfigurationManager.AppSettings["CookieName"].ToString();
         public const int SessionTimeOut = 15;
         public const string BemVindo = "Bem Vindo ";
         public const string HomeRoute = "Home";
