@@ -3,5 +3,5 @@
 /// <reference path="../Scripts/jquery-ui-1.9.2.min.js" />
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
-    $('#liHome').addClass('selected');
+    $('#liApostas').addClass('selected');
 });

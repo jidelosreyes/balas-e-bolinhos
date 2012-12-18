@@ -99,6 +99,26 @@ namespace ApostasBalasBusinessModel
             }
         }
 
+        public void LogOut()
+        {
+            try
+            {
+                Session.Clear();
+                Session.Abandon();
+                if (IsCookie)
+                {
+                    HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
+                    Cookie.Expires = DateTime.Now.AddDays(-1d);
+                    HttpContext.Current.Response.Cookies.Add(Cookie);
+                }
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
         public void CookieLogin()
         {
             try
@@ -139,7 +159,7 @@ namespace ApostasBalasBusinessModel
     public abstract class PlatformModel : System.Web.UI.Page
     {
         public static BusinessModel Logic = BusinessModel.GetInstance;
-        
+
         internal string NomeUtilizadorSessao
         {
             get
