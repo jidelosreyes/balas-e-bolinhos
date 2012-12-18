@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Code\Apostas.js" />
     <Content Include="Code\Home.js" />
     <Content Include="Code\Login.js" />
     <Content Include="Code\Master.js" />

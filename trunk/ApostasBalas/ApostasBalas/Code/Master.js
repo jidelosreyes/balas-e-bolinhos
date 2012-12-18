@@ -24,7 +24,29 @@ $(document).ready(function () {
         $(window.location).attr('href', 'Estatisticas');
     });
 
-    //#endregion
+    //#endregion   
+
+    $('#btnLogOut').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'Pages/Home.aspx/LogOut',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+                $(window.location).attr('href', 'Inicio')
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            }
+        });
+    });
 
     //#region Process Indicator
 
