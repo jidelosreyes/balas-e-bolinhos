@@ -43,7 +43,7 @@
                                 </p>
                                 <p>
                                     <span>Lembrar-me?</span>
-                                    <input type="checkbox" class="checkbox" />
+                                    <input id="chkLembrarme" type="checkbox" class="checkbox" />
                                 </p>
                                 <p>
                                     <input id="btnLogin" class="submit" type="button" value="Login" />

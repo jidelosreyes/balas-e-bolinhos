@@ -3,8 +3,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#liCampeonatos').addClass('selected');
+        $(document).ready(function () {            
+            $('#liCampeonatos').addClass('selected');            
         });
     </script>
 </asp:Content>

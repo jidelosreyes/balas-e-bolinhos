@@ -64,7 +64,7 @@
     <p>
         images can be placed on the left, in the center or on the right:</p>
     <span class="left">
-        <img src="style/graphic.png" alt="example graphic" /></span>
+        <img src="../Images/graphic.png" alt="example graphic" /></span>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -72,8 +72,8 @@
         irure dolor in reprehenderit in voluptate velit esse cillum.
     </p>
     <span class="center">
-        <img src="style/graphic.png" alt="example graphic" /></span> <span class="right">
-            <img src="style/graphic.png" alt="example graphic" /></span>
+        <img src="../Images/graphic.png" alt="example graphic" /></span> <span class="right">
+            <img src="../Images/graphic.png" alt="example graphic" /></span>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
