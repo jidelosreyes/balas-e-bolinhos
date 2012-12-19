@@ -12,7 +12,15 @@ namespace ApostasBalas.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                lblNome.Text = ApostasBalasBusinessModel.PlatformModel.Logic.VerificarSessao();
 
-        }           
+                var Noticia = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaNoticia();
+                tituloNoticia.InnerText = Noticia.Titulo;
+                descricaoNoticia.InnerText = Noticia.Descricao;
+                dataNoticia.InnerText = Noticia.DataCriacao.ToString();
+            }
+        }
     }
 }
