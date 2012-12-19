@@ -19,82 +19,71 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="main">
-        <div id="header">
-            <div id="logo">
-                <div id="logo_text">
-                    <!-- class="logo_colour", allows you to change the colour of the text -->
-                    <h1>
-                        <a href="Home.aspx">Balas &<span class="logo_colour"> Bolinhos</span></a></h1>
-                    <h2>
-                        A meta é a camisola amarela!</h2>
+        <div id="main">
+            <div id="header">
+                <div id="logo">
+                    <div id="logo_text">
+                        <!-- class="logo_colour", allows you to change the colour of the text -->
+                        <h1>
+                            <a href="Home.aspx">Balas &<span class="logo_colour"> Bolinhos</span></a></h1>
+                        <h2>A meta é a camisola amarela!</h2>
+                    </div>
+                </div>
+                <div id="menubar">
+                    <ul id="menu">
+                        <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+                        <li id="liHome"><a href="#">Home</a></li>
+                        <li id="liCampeonatos"><a href="#">Campeonatos</a></li>
+                        <li id="liApostas"><a href="#">Apostas</a></li>
+                        <li id="liClassificacao"><a href="#">Classificacao</a></li>
+                        <li id="liEstatisticas"><a href="#">Estatisticas</a></li>
+                    </ul>
                 </div>
             </div>
-            <div id="menubar">
-                <ul id="menu">
-                    <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-                    <li id="liHome"><a href="#">Home</a></li>
-                    <li id="liCampeonatos"><a href="#">Campeonatos</a></li>
-                    <li id="liApostas"><a href="#">Apostas</a></li>
-                    <li id="liClassificacao"><a href="#">Classificacao</a></li>
-                    <li id="liEstatisticas"><a href="#">Estatisticas</a></li>
-                </ul>
+            <div id="site_content">
+                <div class="sidebar">
+                    <h1>Dados</h1>
+                    <h4>Bem Vindo 
+                        <asp:Label ID="lblNome" runat="server" Text="Label"></asp:Label>
+                    </h4>
+                    <a id="btnLogOut" href="#">Log Out</a>
+
+                    <h1>Noticias</h1>
+                    <h4 id="tituloNoticia" runat="server"></h4>
+                    <h5 id="dataNoticia" runat="server"></h5>
+                    <p id="descricaoNoticia" runat="server"></p>
+                    <h1>Ultimos Resultados</h1>
+                    <ul>
+                        <li><a href="">[Resultado 1]</a></li>
+                        <li><a href="">[Resultado 2]</a></li>
+                        <li><a href="">[Resultado 3]</a></li>
+                        <li><a href="">[Resultado 4]</a></li>
+                    </ul>
+                    <h1>Links Uteis</h1>
+                    <p>
+                    </p>
+                </div>
+                <div id="content">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
             </div>
-        </div>
-        <div id="site_content">
-            <div class="sidebar">
-                <h1>
-                    Dados</h1>
-                <h4>
-                    Bem Vindo <span>
-                        <%=Session["NomeUtilizadorSessao"].ToString()%></span>
-                </h4>
-                <a id="btnLogOut" href="#">Log Out</a>
-                <h1>
-                    Noticias</h1>
-                <h4>
-                    [Titulo]</h4>
-                <h5>
-                    [Data]</h5>
+            <div id="footer">
                 <p>
-                    [Descricao]
+                    <a href="Home.aspx">Home</a> | <a href="Campeonatos.aspx">Campeonatos</a> | <a href="Apostas.aspx">Apostas</a> | <a href="Classificacao.aspx">Classificacao</a> | <a href="Estatisticas.aspx">Estatisticas</a>
                 </p>
-                <h1>
-                    Ultimos Resultados</h1>
-                <ul>
-                    <li><a href="">[Resultado 1]</a></li>
-                    <li><a href="">[Resultado 2]</a></li>
-                    <li><a href="">[Resultado 3]</a></li>
-                    <li><a href="">[Resultado 4]</a></li>
-                </ul>
-                <h1>
-                    Links Uteis</h1>
                 <p>
+                    Copyright &copy; Balas & Bolinhos
                 </p>
             </div>
-            <div id="content">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
         </div>
-        <div id="footer">
-            <p>
-                <a href="Home.aspx">Home</a> | <a href="Campeonatos.aspx">Campeonatos</a> | <a href="Apostas.aspx">
-                    Apostas</a> | <a href="Classificacao.aspx">Classificacao</a> | <a href="Estatisticas.aspx">
-                        Estatisticas</a>
-            </p>
-            <p>
-                Copyright &copy; Balas & Bolinhos
-            </p>
+        <div id="ProcessFilter">
         </div>
-    </div>
-    <div id="ProcessFilter">
-    </div>
-    <div id="ProcessMessage">
-        Por Favor Aguarde...
+        <div id="ProcessMessage">
+            Por Favor Aguarde...
         <br />
-        <img alt="Loading" src="../Images/spinner.gif" />
-    </div>
+            <img alt="Loading" src="../Images/spinner.gif" />
+        </div>
     </form>
 </body>
 </html>
