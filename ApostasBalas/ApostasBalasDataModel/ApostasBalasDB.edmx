@@ -5,141 +5,86 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ApostasBalasDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-  <EntityContainer Name="ApostasBalasDBModelStoreContainer">
-    <EntitySet Name="Log" EntityType="ApostasBalasDBModel.Store.Log" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Aposta" EntityType="ApostasBalasDBModel.Store.Aposta" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Classificacao" EntityType="ApostasBalasDBModel.Store.Classificacao" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Competicao" EntityType="ApostasBalasDBModel.Store.Competicao" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Jogo" EntityType="ApostasBalasDBModel.Store.Jogo" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="JogoCompeticao" EntityType="ApostasBalasDBModel.Store.JogoCompeticao" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UtilizadorCompeticao" EntityType="ApostasBalasDBModel.Store.UtilizadorCompeticao" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Noticia" EntityType="ApostasBalasDBModel.Store.Noticia" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Store.Utilizador" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="Log">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Date" />
-      <PropertyRef Name="Thread" />
-      <PropertyRef Name="Level" />
-      <PropertyRef Name="Logger" />
-      <PropertyRef Name="Message" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Thread" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="Level" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Logger" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="Message" Type="varchar" Nullable="false" MaxLength="4000" />
-    <Property Name="Exception" Type="varchar" Nullable="true" MaxLength="2000" />
-  </EntityType>
-  <EntityType Name="Aposta">
-    <Key>
-      <PropertyRef Name="IdAposta" />
-    </Key>
-    <Property Name="IdAposta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUtilizador" Type="int" Nullable="true" />
-    <Property Name="IdJogoCompeticao" Type="int" Nullable="true" />
-    <Property Name="Descricao" Type="varchar(max)" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Classificacao">
-    <Key>
-      <PropertyRef Name="IdClassificacao" />
-    </Key>
-    <Property Name="IdClassificacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUtilizador" Type="int" Nullable="true" />
-    <Property Name="IdCompeticao" Type="int" Nullable="true" />
-    <Property Name="Vitorias" Type="int" Nullable="true" />
-    <Property Name="Empates" Type="int" Nullable="true" />
-    <Property Name="Derrotas" Type="int" Nullable="true" />
-    <Property Name="GolosMarcados" Type="int" Nullable="true" />
-    <Property Name="GolosSofridos" Type="int" Nullable="true" />
-    <Property Name="Pontos" Type="int" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Competicao">
-    <Key>
-      <PropertyRef Name="IdCompeticao" />
-    </Key>
-    <Property Name="IdCompeticao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descricao" Type="varchar(max)" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Jogo">
-    <Key>
-      <PropertyRef Name="IdJogo" />
-    </Key>
-    <Property Name="IdJogo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descricao" Type="varchar(max)" Nullable="true" />
-    <Property Name="Data" Type="datetime" Nullable="true" />
-    <Property Name="Resultado" Type="varchar(max)" Nullable="true" />
-    <Property Name="Realizado" Type="bit" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="JogoCompeticao">
-    <Key>
-      <PropertyRef Name="IdJogoCompeticao" />
-    </Key>
-    <Property Name="IdJogoCompeticao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdJogo" Type="int" Nullable="true" />
-    <Property Name="IdCompeticao" Type="int" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="UtilizadorCompeticao">
-    <Key>
-      <PropertyRef Name="IdUtilizadorCompeticao" />
-    </Key>
-    <Property Name="IdUtilizadorCompeticao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUtilizador" Type="int" Nullable="true" />
-    <Property Name="IdCompeticao" Type="int" Nullable="true" />
-    <Property Name="Activo" Type="bit" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Noticia">
-    <Key>
-      <PropertyRef Name="IdNoticia" />
-    </Key>
-    <Property Name="IdNoticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Titulo" Type="varchar(max)" Nullable="true" />
-    <Property Name="Descricao" Type="varchar(max)" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Utilizador">
-    <Key>
-      <PropertyRef Name="IdUtilizador" />
-    </Key>
-    <Property Name="IdUtilizador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="NomeUtilizador" Type="varchar(max)" Nullable="true" />
-    <Property Name="Password" Type="varchar(max)" Nullable="true" />
-    <Property Name="Administrador" Type="bit" Nullable="true" />
-    <Property Name="Activo" Type="bit" Nullable="true" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="true" />
-    <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-  </EntityType>
-</Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="ApostasBalasDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ApostasBalasDBEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Log" EntityType="ApostasBalasDBModel.Log" />
-          <EntitySet Name="Aposta" EntityType="ApostasBalasDBModel.Aposta" />
-          <EntitySet Name="Classificacao" EntityType="ApostasBalasDBModel.Classificacao" />
-          <EntitySet Name="Competicao" EntityType="ApostasBalasDBModel.Competicao" />
-          <EntitySet Name="Jogo" EntityType="ApostasBalasDBModel.Jogo" />
-          <EntitySet Name="JogoCompeticao" EntityType="ApostasBalasDBModel.JogoCompeticao" />
-          <EntitySet Name="UtilizadorCompeticao" EntityType="ApostasBalasDBModel.UtilizadorCompeticao" />
-          <EntitySet Name="Noticia" EntityType="ApostasBalasDBModel.Noticia" />
-          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Utilizador" />
+        <EntityContainer Name="ApostasBalasDBModelStoreContainer">
+          <EntitySet Name="Aposta" EntityType="ApostasBalasDBModel.Store.Aposta" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Classificacao" EntityType="ApostasBalasDBModel.Store.Classificacao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Competicao" EntityType="ApostasBalasDBModel.Store.Competicao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Jogo" EntityType="ApostasBalasDBModel.Store.Jogo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="JogoCompeticao" EntityType="ApostasBalasDBModel.Store.JogoCompeticao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Jornada" EntityType="ApostasBalasDBModel.Store.Jornada" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Log" EntityType="ApostasBalasDBModel.Store.Log" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Noticia" EntityType="ApostasBalasDBModel.Store.Noticia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Store.Utilizador" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UtilizadorCompeticao" EntityType="ApostasBalasDBModel.Store.UtilizadorCompeticao" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="Aposta">
+          <Key>
+            <PropertyRef Name="IdAposta" />
+          </Key>
+          <Property Name="IdAposta" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUtilizador" Type="int" />
+          <Property Name="IdJogoCompeticao" Type="int" />
+          <Property Name="Descricao" Type="varchar(max)" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Classificacao">
+          <Key>
+            <PropertyRef Name="IdClassificacao" />
+          </Key>
+          <Property Name="IdClassificacao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUtilizador" Type="int" />
+          <Property Name="IdCompeticao" Type="int" />
+          <Property Name="Vitorias" Type="int" />
+          <Property Name="Empates" Type="int" />
+          <Property Name="Derrotas" Type="int" />
+          <Property Name="GolosMarcados" Type="int" />
+          <Property Name="GolosSofridos" Type="int" />
+          <Property Name="Pontos" Type="int" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Competicao">
+          <Key>
+            <PropertyRef Name="IdCompeticao" />
+          </Key>
+          <Property Name="IdCompeticao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar(max)" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Jogo">
+          <Key>
+            <PropertyRef Name="IdJogo" />
+          </Key>
+          <Property Name="IdJogo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar(max)" />
+          <Property Name="Data" Type="datetime" />
+          <Property Name="Resultado" Type="varchar(max)" />
+          <Property Name="Realizado" Type="bit" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JogoCompeticao">
+          <Key>
+            <PropertyRef Name="IdJogoCompeticao" />
+          </Key>
+          <Property Name="IdJogoCompeticao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdJogo" Type="int" />
+          <Property Name="IdCompeticao" Type="int" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Jornada">
+          <Key>
+            <PropertyRef Name="IdJornada" />
+          </Key>
+          <Property Name="IdJornada" Type="int" Nullable="false" />
+          <Property Name="IdCompeticao" Type="int" />
+          <Property Name="IdJogo" Type="int" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -149,14 +94,64 @@
             <PropertyRef Name="Logger" />
             <PropertyRef Name="Message" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
-          <Property Type="String" Name="Thread" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Level" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Logger" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Message" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Exception" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Level" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Logger" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="4000" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
         </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="IdNoticia" />
+          </Key>
+          <Property Name="IdNoticia" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="varchar(max)" />
+          <Property Name="Descricao" Type="varchar(max)" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IdUtilizador" />
+          </Key>
+          <Property Name="IdUtilizador" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="NomeUtilizador" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Administrador" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UtilizadorCompeticao">
+          <Key>
+            <PropertyRef Name="IdUtilizadorCompeticao" />
+          </Key>
+          <Property Name="IdUtilizadorCompeticao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUtilizador" Type="int" />
+          <Property Name="IdCompeticao" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="DataCriacao" Type="datetime" />
+          <Property Name="DataActualizacao" Type="datetime" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApostasBalasDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ApostasBalasDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Aposta" EntityType="ApostasBalasDBModel.Aposta" />
+          <EntitySet Name="Classificacao" EntityType="ApostasBalasDBModel.Classificacao" />
+          <EntitySet Name="Competicao" EntityType="ApostasBalasDBModel.Competicao" />
+          <EntitySet Name="Jogo" EntityType="ApostasBalasDBModel.Jogo" />
+          <EntitySet Name="JogoCompeticao" EntityType="ApostasBalasDBModel.JogoCompeticao" />
+          <EntitySet Name="Log" EntityType="ApostasBalasDBModel.Log" />
+          <EntitySet Name="Noticia" EntityType="ApostasBalasDBModel.Noticia" />
+          <EntitySet Name="Utilizador" EntityType="ApostasBalasDBModel.Utilizador" />
+          <EntitySet Name="UtilizadorCompeticao" EntityType="ApostasBalasDBModel.UtilizadorCompeticao" />
+          <EntitySet Name="Jornada" EntityType="ApostasBalasDBModel.Jornada" />
+        </EntityContainer>
         <EntityType Name="Aposta">
           <Key>
             <PropertyRef Name="IdAposta" />
@@ -165,8 +160,8 @@
           <Property Type="Int32" Name="IdUtilizador" />
           <Property Type="Int32" Name="IdJogoCompeticao" />
           <Property Type="String" Name="Descricao" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
         <EntityType Name="Classificacao">
           <Key>
@@ -181,8 +176,8 @@
           <Property Type="Int32" Name="GolosMarcados" />
           <Property Type="Int32" Name="GolosSofridos" />
           <Property Type="Int32" Name="Pontos" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
         <EntityType Name="Competicao">
           <Key>
@@ -190,8 +185,8 @@
           </Key>
           <Property Type="Int32" Name="IdCompeticao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Descricao" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
         <EntityType Name="Jogo">
           <Key>
@@ -199,11 +194,11 @@
           </Key>
           <Property Type="Int32" Name="IdJogo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Descricao" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="Data" Precision="3" />
+          <Property Type="DateTime" Name="Data" />
           <Property Type="String" Name="Resultado" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="Realizado" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
         <EntityType Name="JogoCompeticao">
           <Key>
@@ -212,19 +207,25 @@
           <Property Type="Int32" Name="IdJogoCompeticao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="IdJogo" />
           <Property Type="Int32" Name="IdCompeticao" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
-        <EntityType Name="UtilizadorCompeticao">
+        <EntityType Name="Log">
           <Key>
-            <PropertyRef Name="IdUtilizadorCompeticao" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
           </Key>
-          <Property Type="Int32" Name="IdUtilizadorCompeticao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="IdUtilizador" />
-          <Property Type="Int32" Name="IdCompeticao" />
-          <Property Type="Boolean" Name="Activo" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Thread" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Logger" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Exception" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Noticia">
           <Key>
@@ -233,8 +234,8 @@
           <Property Type="Int32" Name="IdNoticia" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Titulo" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Descricao" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
         <EntityType Name="Utilizador">
           <Key>
@@ -246,129 +247,161 @@
           <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="Administrador" />
           <Property Type="Boolean" Name="Activo" />
-          <Property Type="DateTime" Name="DataCriacao" Precision="3" />
-          <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
         </EntityType>
-      </Schema>
+        <EntityType Name="UtilizadorCompeticao">
+          <Key>
+            <PropertyRef Name="IdUtilizadorCompeticao" />
+          </Key>
+          <Property Type="Int32" Name="IdUtilizadorCompeticao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdUtilizador" />
+          <Property Type="Int32" Name="IdCompeticao" />
+          <Property Type="Boolean" Name="Activo" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
+        </EntityType>
+        <EntityType Name="Jornada">
+          <Key>
+            <PropertyRef Name="IdJornada" />
+          </Key>
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCompeticao" />
+          <Property Type="Int32" Name="IdJogo" />
+          <Property Type="DateTime" Name="DataCriacao" />
+          <Property Type="DateTime" Name="DataActualizacao" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ApostasBalasDBModelStoreContainer" CdmEntityContainer="ApostasBalasDBEntities">
-    <EntitySetMapping Name="Log">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Log)">
-        <MappingFragment StoreEntitySet="Log">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Thread" ColumnName="Thread" />
-          <ScalarProperty Name="Level" ColumnName="Level" />
-          <ScalarProperty Name="Logger" ColumnName="Logger" />
-          <ScalarProperty Name="Message" ColumnName="Message" />
-          <ScalarProperty Name="Exception" ColumnName="Exception" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Aposta">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Aposta)">
-        <MappingFragment StoreEntitySet="Aposta">
-          <ScalarProperty Name="IdAposta" ColumnName="IdAposta" />
-          <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
-          <ScalarProperty Name="IdJogoCompeticao" ColumnName="IdJogoCompeticao" />
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Classificacao">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Classificacao)">
-        <MappingFragment StoreEntitySet="Classificacao">
-          <ScalarProperty Name="IdClassificacao" ColumnName="IdClassificacao" />
-          <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
-          <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
-          <ScalarProperty Name="Vitorias" ColumnName="Vitorias" />
-          <ScalarProperty Name="Empates" ColumnName="Empates" />
-          <ScalarProperty Name="Derrotas" ColumnName="Derrotas" />
-          <ScalarProperty Name="GolosMarcados" ColumnName="GolosMarcados" />
-          <ScalarProperty Name="GolosSofridos" ColumnName="GolosSofridos" />
-          <ScalarProperty Name="Pontos" ColumnName="Pontos" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Competicao">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Competicao)">
-        <MappingFragment StoreEntitySet="Competicao">
-          <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Jogo">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Jogo)">
-        <MappingFragment StoreEntitySet="Jogo">
-          <ScalarProperty Name="IdJogo" ColumnName="IdJogo" />
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="Resultado" ColumnName="Resultado" />
-          <ScalarProperty Name="Realizado" ColumnName="Realizado" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="JogoCompeticao">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.JogoCompeticao)">
-        <MappingFragment StoreEntitySet="JogoCompeticao">
-          <ScalarProperty Name="IdJogoCompeticao" ColumnName="IdJogoCompeticao" />
-          <ScalarProperty Name="IdJogo" ColumnName="IdJogo" />
-          <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UtilizadorCompeticao">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.UtilizadorCompeticao)">
-        <MappingFragment StoreEntitySet="UtilizadorCompeticao">
-          <ScalarProperty Name="IdUtilizadorCompeticao" ColumnName="IdUtilizadorCompeticao" />
-          <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
-          <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Noticia">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Noticia)">
-        <MappingFragment StoreEntitySet="Noticia">
-          <ScalarProperty Name="IdNoticia" ColumnName="IdNoticia" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Utilizador">
-      <EntityTypeMapping TypeName="IsTypeOf(ApostasBalasDBModel.Utilizador)">
-        <MappingFragment StoreEntitySet="Utilizador">
-          <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="NomeUtilizador" ColumnName="NomeUtilizador" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Administrador" ColumnName="Administrador" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
+          <EntitySetMapping Name="Aposta">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Aposta">
+              <MappingFragment StoreEntitySet="Aposta">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="IdJogoCompeticao" ColumnName="IdJogoCompeticao" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="IdAposta" ColumnName="IdAposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classificacao">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Classificacao">
+              <MappingFragment StoreEntitySet="Classificacao">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Pontos" ColumnName="Pontos" />
+                <ScalarProperty Name="GolosSofridos" ColumnName="GolosSofridos" />
+                <ScalarProperty Name="GolosMarcados" ColumnName="GolosMarcados" />
+                <ScalarProperty Name="Derrotas" ColumnName="Derrotas" />
+                <ScalarProperty Name="Empates" ColumnName="Empates" />
+                <ScalarProperty Name="Vitorias" ColumnName="Vitorias" />
+                <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="IdClassificacao" ColumnName="IdClassificacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competicao">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Competicao">
+              <MappingFragment StoreEntitySet="Competicao">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jogo">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Jogo">
+              <MappingFragment StoreEntitySet="Jogo">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Realizado" ColumnName="Realizado" />
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="IdJogo" ColumnName="IdJogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JogoCompeticao">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.JogoCompeticao">
+              <MappingFragment StoreEntitySet="JogoCompeticao">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+                <ScalarProperty Name="IdJogo" ColumnName="IdJogo" />
+                <ScalarProperty Name="IdJogoCompeticao" ColumnName="IdJogoCompeticao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticia">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Noticia">
+              <MappingFragment StoreEntitySet="Noticia">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdNoticia" ColumnName="IdNoticia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizador">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Administrador" ColumnName="Administrador" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="NomeUtilizador" ColumnName="NomeUtilizador" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UtilizadorCompeticao">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.UtilizadorCompeticao">
+              <MappingFragment StoreEntitySet="UtilizadorCompeticao">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+                <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
+                <ScalarProperty Name="IdUtilizadorCompeticao" ColumnName="IdUtilizadorCompeticao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jornada">
+            <EntityTypeMapping TypeName="ApostasBalasDBModel.Jornada">
+              <MappingFragment StoreEntitySet="Jornada">
+                <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="IdJogo" ColumnName="IdJogo" />
+                <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
@@ -387,16 +420,17 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ApostasBalasDB" >
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Log" Width="1.5" PointX="0.75" PointY="3.125" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Aposta" Width="1.5" PointX="3.75" PointY="0.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Classificacao" Width="1.5" PointX="3.75" PointY="3.75" Height="3.1340950520833335" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Competicao" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7879850260416665" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Jogo" Width="1.5" PointX="5.75" PointY="3.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.JogoCompeticao" Width="1.5" PointX="0.75" PointY="6.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.UtilizadorCompeticao" Width="1.5" PointX="2.75" PointY="7.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Noticia" Width="1.5" PointX="5.375" PointY="7.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="ApostasBalasDBModel.Utilizador" Width="1.5" PointX="1" PointY="0.5" />
+      <Diagram Name="ApostasBalasDB" ZoomLevel="62" >
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Aposta" Width="1.5" PointX="0.75" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Classificacao" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Competicao" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Jogo" Width="1.5" PointX="0.75" PointY="4.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.JogoCompeticao" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Log" Width="1.5" PointX="4.75" PointY="3.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Noticia" Width="1.5" PointX="6.75" PointY="0.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Utilizador" Width="1.5" PointX="6.75" PointY="3.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.UtilizadorCompeticao" Width="1.5" PointX="2.75" PointY="7.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="ApostasBalasDBModel.Jornada" Width="1.5" PointX="5.375" PointY="7.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

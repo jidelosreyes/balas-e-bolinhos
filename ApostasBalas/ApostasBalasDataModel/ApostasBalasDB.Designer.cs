@@ -68,22 +68,6 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Log> Log
-        {
-            get
-            {
-                if ((_Log == null))
-                {
-                    _Log = base.CreateObjectSet<Log>("Log");
-                }
-                return _Log;
-            }
-        }
-        private ObjectSet<Log> _Log;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Aposta> Aposta
         {
             get
@@ -164,18 +148,18 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<UtilizadorCompeticao> UtilizadorCompeticao
+        public ObjectSet<Log> Log
         {
             get
             {
-                if ((_UtilizadorCompeticao == null))
+                if ((_Log == null))
                 {
-                    _UtilizadorCompeticao = base.CreateObjectSet<UtilizadorCompeticao>("UtilizadorCompeticao");
+                    _Log = base.CreateObjectSet<Log>("Log");
                 }
-                return _UtilizadorCompeticao;
+                return _Log;
             }
         }
-        private ObjectSet<UtilizadorCompeticao> _UtilizadorCompeticao;
+        private ObjectSet<Log> _Log;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -208,17 +192,41 @@ namespace ApostasBalasDataModel
             }
         }
         private ObjectSet<Utilizador> _Utilizador;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UtilizadorCompeticao> UtilizadorCompeticao
+        {
+            get
+            {
+                if ((_UtilizadorCompeticao == null))
+                {
+                    _UtilizadorCompeticao = base.CreateObjectSet<UtilizadorCompeticao>("UtilizadorCompeticao");
+                }
+                return _UtilizadorCompeticao;
+            }
+        }
+        private ObjectSet<UtilizadorCompeticao> _UtilizadorCompeticao;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Jornada> Jornada
+        {
+            get
+            {
+                if ((_Jornada == null))
+                {
+                    _Jornada = base.CreateObjectSet<Jornada>("Jornada");
+                }
+                return _Jornada;
+            }
+        }
+        private ObjectSet<Jornada> _Jornada;
 
         #endregion
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLog(Log log)
-        {
-            base.AddObject("Log", log);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Aposta EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -261,11 +269,11 @@ namespace ApostasBalasDataModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the UtilizadorCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUtilizadorCompeticao(UtilizadorCompeticao utilizadorCompeticao)
+        public void AddToLog(Log log)
         {
-            base.AddObject("UtilizadorCompeticao", utilizadorCompeticao);
+            base.AddObject("Log", log);
         }
     
         /// <summary>
@@ -282,6 +290,22 @@ namespace ApostasBalasDataModel
         public void AddToUtilizador(Utilizador utilizador)
         {
             base.AddObject("Utilizador", utilizador);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UtilizadorCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUtilizadorCompeticao(UtilizadorCompeticao utilizadorCompeticao)
+        {
+            base.AddObject("UtilizadorCompeticao", utilizadorCompeticao);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Jornada EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJornada(Jornada jornada)
+        {
+            base.AddObject("Jornada", jornada);
         }
 
         #endregion
@@ -1186,6 +1210,157 @@ namespace ApostasBalasDataModel
         private Nullable<global::System.Int32> _IdCompeticao;
         partial void OnIdCompeticaoChanging(Nullable<global::System.Int32> value);
         partial void OnIdCompeticaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataCriacao
+        {
+            get
+            {
+                return _DataCriacao;
+            }
+            set
+            {
+                OnDataCriacaoChanging(value);
+                ReportPropertyChanging("DataCriacao");
+                _DataCriacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataCriacao");
+                OnDataCriacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataCriacao;
+        partial void OnDataCriacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataCriacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataActualizacao
+        {
+            get
+            {
+                return _DataActualizacao;
+            }
+            set
+            {
+                OnDataActualizacaoChanging(value);
+                ReportPropertyChanging("DataActualizacao");
+                _DataActualizacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataActualizacao");
+                OnDataActualizacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataActualizacao;
+        partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataActualizacaoChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ApostasBalasDBModel", Name="Jornada")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Jornada : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Jornada object.
+        /// </summary>
+        /// <param name="idJornada">Initial value of the IdJornada property.</param>
+        public static Jornada CreateJornada(global::System.Int32 idJornada)
+        {
+            Jornada jornada = new Jornada();
+            jornada.IdJornada = idJornada;
+            return jornada;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdJornada
+        {
+            get
+            {
+                return _IdJornada;
+            }
+            set
+            {
+                if (_IdJornada != value)
+                {
+                    OnIdJornadaChanging(value);
+                    ReportPropertyChanging("IdJornada");
+                    _IdJornada = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IdJornada");
+                    OnIdJornadaChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdJornada;
+        partial void OnIdJornadaChanging(global::System.Int32 value);
+        partial void OnIdJornadaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdCompeticao
+        {
+            get
+            {
+                return _IdCompeticao;
+            }
+            set
+            {
+                OnIdCompeticaoChanging(value);
+                ReportPropertyChanging("IdCompeticao");
+                _IdCompeticao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdCompeticao");
+                OnIdCompeticaoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdCompeticao;
+        partial void OnIdCompeticaoChanging(Nullable<global::System.Int32> value);
+        partial void OnIdCompeticaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdJogo
+        {
+            get
+            {
+                return _IdJogo;
+            }
+            set
+            {
+                OnIdJogoChanging(value);
+                ReportPropertyChanging("IdJogo");
+                _IdJogo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdJogo");
+                OnIdJogoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdJogo;
+        partial void OnIdJogoChanging(Nullable<global::System.Int32> value);
+        partial void OnIdJogoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

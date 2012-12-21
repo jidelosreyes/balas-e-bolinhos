@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using ApostasBalasDataModel;
 using log4net;
+using System.Collections.Generic;
 
 namespace ApostasBalasBusinessModel
 {
@@ -37,13 +38,18 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
-                return ApostasBalasDB.Noticia.OrderByDescending(n => n.DataCriacao).FirstOrDefault();                
+                return ApostasBalasDB.Noticia.OrderByDescending(n => n.DataCriacao).FirstOrDefault();
             }
             catch (Exception Ex)
             {
                 LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 throw;
             }
+        }
+
+        public List<Jogo> ObterUltimaJornada()
+        {
+            return ApostasBalasDB.Jogo.OrderBy(j => j.IdJogo).ToList();
         }
 
         public void RegistarUtilizador(string Email, string Nome, string Password)
