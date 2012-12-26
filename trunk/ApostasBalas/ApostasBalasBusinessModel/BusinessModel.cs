@@ -34,6 +34,16 @@ namespace ApostasBalasBusinessModel
 
         #endregion
 
+        public class PrimeirosClassificados
+        {
+            public string Nome { get; set; }
+            public int? Jogos { get; set; }
+            public int? Vitorias { get; set; }
+            public int? Empates { get; set; }
+            public int? Derrotas { get; set; }
+            public int? Pontos { get; set; }
+        }
+
         public Noticia ObterUltimaNoticia()
         {
             try
@@ -49,7 +59,69 @@ namespace ApostasBalasBusinessModel
 
         public List<Jogo> ObterUltimaJornada()
         {
-            return ApostasBalasDB.Jogo.OrderBy(j => j.IdJogo).ToList();
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
+                var UltimaJornada = ApostasBalasDB.Jornada.OrderByDescending(j => j.IdJornada).Where(j => j.IdCompeticao == CompeticaoActiva).Select(j => j.IdJornada).FirstOrDefault();
+                var Jogos = (from j in ApostasBalasDB.Jogo
+                             join jjc in ApostasBalasDB.JornadaJogoCompeticao
+                             on j.IdJogo equals jjc.IdJogo
+                             where jjc.IdCompeticao == CompeticaoActiva & jjc.IdJornada == UltimaJornada
+                             select j).ToList();
+                return Jogos;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public List<PrimeirosClassificados> ObterPrimeirosClassificados()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var _PrimeirosClassificados = ApostasBalasDB.Classificacao
+                    .Join(ApostasBalasDB.Utilizador, c => c.IdUtilizador, u => u.IdUtilizador, (c, u) => new { c, u })
+                    .Join(ApostasBalasDB.UtilizadorCompeticao, uuc => uuc.u.IdUtilizador, uc => uc.IdUtilizador, (uuc, uc) => new { uuc, uc })
+                    .Where(w => w.uuc.u.IdUtilizador == Id && w.uc.Activo == true)
+                    .Select(pc => new PrimeirosClassificados
+                    {
+                        Nome = pc.uuc.u.NomeUtilizador,
+                        Derrotas = pc.uuc.c.Derrotas,
+                        Empates = pc.uuc.c.Empates,
+                        Jogos = pc.uuc.c.Jogos,
+                        Pontos = pc.uuc.c.Pontos,
+                        Vitorias = pc.uuc.c.Vitorias
+                    }).OrderByDescending(o => o.Pontos).ToList();
+                return _PrimeirosClassificados;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public string ObterNomeCompeticaoActiva()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var NomeCompeticao = (from uc in ApostasBalasDB.UtilizadorCompeticao
+                                      join c in ApostasBalasDB.Competicao
+                                      on uc.IdCompeticao equals c.IdCompeticao
+                                      where uc.IdUtilizador == Id && uc.Activo == true
+                                      select c.Descricao).FirstOrDefault();
+                return NomeCompeticao;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
         }
 
         public void RegistarUtilizador(string Email, string Nome, string Password)
@@ -157,16 +229,35 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public string VerificarSessao()
+        public string ObterNomeUtilizador()
         {
             try
             {
-                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty)
+                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
                 {
                     return NomeUtilizadorSessao;
                 }
-                HttpContext.Current.Response.RedirectToRoute(ConstantsModel.InicioRoute);
                 return string.Empty;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void VerificarSessao()
+        {
+            try
+            {
+                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
+                {
+                    return;
+                }
+                if (IsCookie)
+                {
+                    CookieLogin();
+                }
             }
             catch (Exception Ex)
             {
@@ -180,7 +271,7 @@ namespace ApostasBalasBusinessModel
     {
         public static BusinessModel Logic = BusinessModel.GetInstance;
 
-        internal string NomeUtilizadorSessao
+        public string NomeUtilizadorSessao
         {
             get
             {
@@ -194,7 +285,7 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        internal string PasswordSessao
+        public string PasswordSessao
         {
             get
             {
@@ -208,11 +299,11 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        internal string IdUtilizadorSessao
+        public string IdUtilizadorSessao
         {
             get
             {
-                if (HttpContext.Current.Session["IdUtilizadorSessao"].Equals(string.Empty))
+                if (HttpContext.Current.Session["IdUtilizadorSessao"] == null || HttpContext.Current.Session["IdUtilizadorSessao"].Equals(string.Empty))
                     return string.Empty;
                 return HttpContext.Current.Session["IdUtilizadorSessao"].ToString();
             }

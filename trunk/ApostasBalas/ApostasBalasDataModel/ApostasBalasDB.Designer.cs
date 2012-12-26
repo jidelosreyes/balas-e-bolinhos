@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace ApostasBalasDataModel
 {
     #region Contexts
@@ -132,18 +132,18 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<JogoCompeticao> JogoCompeticao
+        public ObjectSet<Jornada> Jornada
         {
             get
             {
-                if ((_JogoCompeticao == null))
+                if ((_Jornada == null))
                 {
-                    _JogoCompeticao = base.CreateObjectSet<JogoCompeticao>("JogoCompeticao");
+                    _Jornada = base.CreateObjectSet<Jornada>("Jornada");
                 }
-                return _JogoCompeticao;
+                return _Jornada;
             }
         }
-        private ObjectSet<JogoCompeticao> _JogoCompeticao;
+        private ObjectSet<Jornada> _Jornada;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -212,20 +212,21 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Jornada> Jornada
+        public ObjectSet<JornadaJogoCompeticao> JornadaJogoCompeticao
         {
             get
             {
-                if ((_Jornada == null))
+                if ((_JornadaJogoCompeticao == null))
                 {
-                    _Jornada = base.CreateObjectSet<Jornada>("Jornada");
+                    _JornadaJogoCompeticao = base.CreateObjectSet<JornadaJogoCompeticao>("JornadaJogoCompeticao");
                 }
-                return _Jornada;
+                return _JornadaJogoCompeticao;
             }
         }
-        private ObjectSet<Jornada> _Jornada;
+        private ObjectSet<JornadaJogoCompeticao> _JornadaJogoCompeticao;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -261,11 +262,11 @@ namespace ApostasBalasDataModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the JogoCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Jornada EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToJogoCompeticao(JogoCompeticao jogoCompeticao)
+        public void AddToJornada(Jornada jornada)
         {
-            base.AddObject("JogoCompeticao", jogoCompeticao);
+            base.AddObject("Jornada", jornada);
         }
     
         /// <summary>
@@ -301,19 +302,19 @@ namespace ApostasBalasDataModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Jornada EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the JornadaJogoCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToJornada(Jornada jornada)
+        public void AddToJornadaJogoCompeticao(JornadaJogoCompeticao jornadaJogoCompeticao)
         {
-            base.AddObject("Jornada", jornada);
+            base.AddObject("JornadaJogoCompeticao", jornadaJogoCompeticao);
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -338,6 +339,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -396,24 +398,24 @@ namespace ApostasBalasDataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdJogoCompeticao
+        public Nullable<global::System.Int32> IdJornadaJogoCompeticao
         {
             get
             {
-                return _IdJogoCompeticao;
+                return _IdJornadaJogoCompeticao;
             }
             set
             {
-                OnIdJogoCompeticaoChanging(value);
-                ReportPropertyChanging("IdJogoCompeticao");
-                _IdJogoCompeticao = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IdJogoCompeticao");
-                OnIdJogoCompeticaoChanged();
+                OnIdJornadaJogoCompeticaoChanging(value);
+                ReportPropertyChanging("IdJornadaJogoCompeticao");
+                _IdJornadaJogoCompeticao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdJornadaJogoCompeticao");
+                OnIdJornadaJogoCompeticaoChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdJogoCompeticao;
-        partial void OnIdJogoCompeticaoChanging(Nullable<global::System.Int32> value);
-        partial void OnIdJogoCompeticaoChanged();
+        private Nullable<global::System.Int32> _IdJornadaJogoCompeticao;
+        partial void OnIdJornadaJogoCompeticaoChanging(Nullable<global::System.Int32> value);
+        partial void OnIdJornadaJogoCompeticaoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -488,6 +490,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
     
@@ -513,6 +516,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -781,8 +785,33 @@ namespace ApostasBalasDataModel
         private Nullable<global::System.DateTime> _DataActualizacao;
         partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
         partial void OnDataActualizacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Jogos
+        {
+            get
+            {
+                return _Jogos;
+            }
+            set
+            {
+                OnJogosChanging(value);
+                ReportPropertyChanging("Jogos");
+                _Jogos = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Jogos");
+                OnJogosChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Jogos;
+        partial void OnJogosChanging(Nullable<global::System.Int32> value);
+        partial void OnJogosChanged();
 
         #endregion
+
     
     }
     
@@ -808,6 +837,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -910,6 +940,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
     
@@ -935,6 +966,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1109,157 +1141,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ApostasBalasDBModel", Name="JogoCompeticao")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class JogoCompeticao : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new JogoCompeticao object.
-        /// </summary>
-        /// <param name="idJogoCompeticao">Initial value of the IdJogoCompeticao property.</param>
-        public static JogoCompeticao CreateJogoCompeticao(global::System.Int32 idJogoCompeticao)
-        {
-            JogoCompeticao jogoCompeticao = new JogoCompeticao();
-            jogoCompeticao.IdJogoCompeticao = idJogoCompeticao;
-            return jogoCompeticao;
-        }
 
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IdJogoCompeticao
-        {
-            get
-            {
-                return _IdJogoCompeticao;
-            }
-            set
-            {
-                if (_IdJogoCompeticao != value)
-                {
-                    OnIdJogoCompeticaoChanging(value);
-                    ReportPropertyChanging("IdJogoCompeticao");
-                    _IdJogoCompeticao = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IdJogoCompeticao");
-                    OnIdJogoCompeticaoChanged();
-                }
-            }
-        }
-        private global::System.Int32 _IdJogoCompeticao;
-        partial void OnIdJogoCompeticaoChanging(global::System.Int32 value);
-        partial void OnIdJogoCompeticaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdJogo
-        {
-            get
-            {
-                return _IdJogo;
-            }
-            set
-            {
-                OnIdJogoChanging(value);
-                ReportPropertyChanging("IdJogo");
-                _IdJogo = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IdJogo");
-                OnIdJogoChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _IdJogo;
-        partial void OnIdJogoChanging(Nullable<global::System.Int32> value);
-        partial void OnIdJogoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdCompeticao
-        {
-            get
-            {
-                return _IdCompeticao;
-            }
-            set
-            {
-                OnIdCompeticaoChanging(value);
-                ReportPropertyChanging("IdCompeticao");
-                _IdCompeticao = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IdCompeticao");
-                OnIdCompeticaoChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _IdCompeticao;
-        partial void OnIdCompeticaoChanging(Nullable<global::System.Int32> value);
-        partial void OnIdCompeticaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DataCriacao
-        {
-            get
-            {
-                return _DataCriacao;
-            }
-            set
-            {
-                OnDataCriacaoChanging(value);
-                ReportPropertyChanging("DataCriacao");
-                _DataCriacao = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DataCriacao");
-                OnDataCriacaoChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _DataCriacao;
-        partial void OnDataCriacaoChanging(Nullable<global::System.DateTime> value);
-        partial void OnDataCriacaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DataActualizacao
-        {
-            get
-            {
-                return _DataActualizacao;
-            }
-            set
-            {
-                OnDataActualizacaoChanging(value);
-                ReportPropertyChanging("DataActualizacao");
-                _DataActualizacao = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DataActualizacao");
-                OnDataActualizacaoChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _DataActualizacao;
-        partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
-        partial void OnDataActualizacaoChanged();
-
-        #endregion
     
     }
     
@@ -1285,6 +1167,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1343,6 +1226,183 @@ namespace ApostasBalasDataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String Descricao
+        {
+            get
+            {
+                return _Descricao;
+            }
+            set
+            {
+                OnDescricaoChanging(value);
+                ReportPropertyChanging("Descricao");
+                _Descricao = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Descricao");
+                OnDescricaoChanged();
+            }
+        }
+        private global::System.String _Descricao;
+        partial void OnDescricaoChanging(global::System.String value);
+        partial void OnDescricaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataCriacao
+        {
+            get
+            {
+                return _DataCriacao;
+            }
+            set
+            {
+                OnDataCriacaoChanging(value);
+                ReportPropertyChanging("DataCriacao");
+                _DataCriacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataCriacao");
+                OnDataCriacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataCriacao;
+        partial void OnDataCriacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataCriacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DataActualizacao
+        {
+            get
+            {
+                return _DataActualizacao;
+            }
+            set
+            {
+                OnDataActualizacaoChanging(value);
+                ReportPropertyChanging("DataActualizacao");
+                _DataActualizacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DataActualizacao");
+                OnDataActualizacaoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DataActualizacao;
+        partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
+        partial void OnDataActualizacaoChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ApostasBalasDBModel", Name="JornadaJogoCompeticao")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class JornadaJogoCompeticao : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new JornadaJogoCompeticao object.
+        /// </summary>
+        /// <param name="idJornadaJogoCompeticao">Initial value of the IdJornadaJogoCompeticao property.</param>
+        public static JornadaJogoCompeticao CreateJornadaJogoCompeticao(global::System.Int32 idJornadaJogoCompeticao)
+        {
+            JornadaJogoCompeticao jornadaJogoCompeticao = new JornadaJogoCompeticao();
+            jornadaJogoCompeticao.IdJornadaJogoCompeticao = idJornadaJogoCompeticao;
+            return jornadaJogoCompeticao;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdJornadaJogoCompeticao
+        {
+            get
+            {
+                return _IdJornadaJogoCompeticao;
+            }
+            set
+            {
+                if (_IdJornadaJogoCompeticao != value)
+                {
+                    OnIdJornadaJogoCompeticaoChanging(value);
+                    ReportPropertyChanging("IdJornadaJogoCompeticao");
+                    _IdJornadaJogoCompeticao = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IdJornadaJogoCompeticao");
+                    OnIdJornadaJogoCompeticaoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdJornadaJogoCompeticao;
+        partial void OnIdJornadaJogoCompeticaoChanging(global::System.Int32 value);
+        partial void OnIdJornadaJogoCompeticaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdCompeticao
+        {
+            get
+            {
+                return _IdCompeticao;
+            }
+            set
+            {
+                OnIdCompeticaoChanging(value);
+                ReportPropertyChanging("IdCompeticao");
+                _IdCompeticao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdCompeticao");
+                OnIdCompeticaoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdCompeticao;
+        partial void OnIdCompeticaoChanging(Nullable<global::System.Int32> value);
+        partial void OnIdCompeticaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdJornada
+        {
+            get
+            {
+                return _IdJornada;
+            }
+            set
+            {
+                OnIdJornadaChanging(value);
+                ReportPropertyChanging("IdJornada");
+                _IdJornada = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdJornada");
+                OnIdJornadaChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdJornada;
+        partial void OnIdJornadaChanging(Nullable<global::System.Int32> value);
+        partial void OnIdJornadaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Int32> IdJogo
         {
             get
@@ -1411,6 +1471,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
     
@@ -1446,6 +1507,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1635,6 +1697,7 @@ namespace ApostasBalasDataModel
         partial void OnExceptionChanged();
 
         #endregion
+
     
     }
     
@@ -1660,6 +1723,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1786,6 +1850,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
     
@@ -1811,6 +1876,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2009,6 +2075,7 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
     
@@ -2034,6 +2101,7 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2184,9 +2252,11 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }
