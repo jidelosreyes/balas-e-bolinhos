@@ -12,7 +12,17 @@ namespace ApostasBalas.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!Page.IsPostBack)
+            {
+                Logic.VerificarSessao();
+                lblNomeCompeticao.Text = Logic.ObterNomeCompeticaoActiva();
+                var Class = Logic.ObterPrimeirosClassificados();
+                rptPrimeirosClassificados.DataSource = Class;
+                rptPrimeirosClassificados.DataBind();
+
+                GridView1.DataSource = Class;
+                GridView1.DataBind();
+            }
         }
 
         [WebMethod]
@@ -24,7 +34,7 @@ namespace ApostasBalas.Pages
         [WebMethod]
         public static ApostasBalasDataModel.Noticia ObterUltimaNoticia()
         {
-            return Logic.ObterUltimaNoticia();            
-        }
+            return Logic.ObterUltimaNoticia();
+        }      
     }
 }

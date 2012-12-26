@@ -286,6 +286,7 @@ ul#menu
         {
             padding: 0 0 0 35px;
             display: block;
+            text-decoration:none;
             background: transparent url(/Images/link.png) no-repeat left center;
         }
 

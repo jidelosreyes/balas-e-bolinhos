@@ -11,15 +11,24 @@ namespace ApostasBalas.Pages
     public partial class Site : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             if (!Page.IsPostBack)
             {
-                lblNome.Text = ApostasBalasBusinessModel.PlatformModel.Logic.VerificarSessao();
-
+                ApostasBalasBusinessModel.PlatformModel.Logic.VerificarSessao(); 
+                lblNome.Text = ApostasBalasBusinessModel.PlatformModel.Logic.ObterNomeUtilizador();
                 var Noticia = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaNoticia();
-                tituloNoticia.InnerText = Noticia.Titulo;
-                descricaoNoticia.InnerText = Noticia.Descricao;
-                dataNoticia.InnerText = Noticia.DataCriacao.ToString();
+                if (Noticia != null)
+                {
+                    tituloNoticia.InnerText = Noticia.Titulo;
+                    descricaoNoticia.InnerText = Noticia.Descricao;
+                    dataNoticia.InnerText = Noticia.DataCriacao.ToString();
+                }
+                var Jogos = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaJornada();
+                if (Jogos != null)
+                {
+                    rptUltimosJogos.DataSource = Jogos;
+                    rptUltimosJogos.DataBind();
+                }
             }
         }
     }

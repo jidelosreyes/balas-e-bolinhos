@@ -24,32 +24,9 @@ $(document).ready(function () {
         $(window.location).attr('href', 'Estatisticas');
     });
 
-    //#endregion   
+    //#endregion     
 
-    //$(function () {
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: 'Pages/Home.aspx/ObterUltimaNoticia',
-    //        data: '{}',
-    //        contentType: 'application/json; charset=utf-8',
-    //        dataType: 'json',
-    //        success: function (msg) {
-    //            debugger;                
-    //            $('#tituloNoticia').text(msg.d.Titulo);
-    //            $('#dataNoticia').text(msg.d.DataCriacao);
-    //            $('#descricaoNoticia').text(msg.d.Descricao);
-    //        },
-    //        error: function () {
-    //            jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-    //               {
-    //                   autoHide: false,
-    //                   TimeShown: 3000,
-    //                   HorizontalPosition: 'center',
-    //                   clickOverlay: true
-    //               });
-    //        }
-    //    });
-    //});
+    //#region Log Out
 
     $('#btnLogOut').click(function () {
         $.ajax({
@@ -72,6 +49,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    //#endregion
 
     //#region Process Indicator
 
