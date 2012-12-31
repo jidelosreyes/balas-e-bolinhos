@@ -195,6 +195,7 @@
     <Content Include="Images\bullet.png" />
     <Content Include="Images\email-icon.png" />
     <Content Include="Images\error.png" />
+    <Content Include="Images\facebook.png" />
     <Content Include="Images\graphic.png" />
     <Content Include="Images\info.png" />
     <Content Include="Images\link.png" />
