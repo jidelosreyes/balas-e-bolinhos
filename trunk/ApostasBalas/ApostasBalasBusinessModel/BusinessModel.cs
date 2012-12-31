@@ -34,7 +34,7 @@ namespace ApostasBalasBusinessModel
 
         #endregion
 
-        public class PrimeirosClassificados
+        public class PrimeiroClassificado
         {
             public string Nome { get; set; }
             public int? Jogos { get; set; }
@@ -42,6 +42,14 @@ namespace ApostasBalasBusinessModel
             public int? Empates { get; set; }
             public int? Derrotas { get; set; }
             public int? Pontos { get; set; }
+        }
+
+        public class UltimoResultado
+        {
+            public string Equipa1 { get; set; }
+            public string Equipa2 { get; set; }
+            public string Resultado1 { get; set; }
+            public string Resultado2 { get; set; }
         }
 
         public Noticia ObterUltimaNoticia()
@@ -57,19 +65,31 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<Jogo> ObterUltimaJornada()
+        public List<UltimoResultado> ObterUltimaJornada()
         {
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
                 var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
                 var UltimaJornada = ApostasBalasDB.Jornada.OrderByDescending(j => j.IdJornada).Where(j => j.IdCompeticao == CompeticaoActiva).Select(j => j.IdJornada).FirstOrDefault();
-                var Jogos = (from j in ApostasBalasDB.Jogo
-                             join jjc in ApostasBalasDB.JornadaJogoCompeticao
-                             on j.IdJogo equals jjc.IdJogo
-                             where jjc.IdCompeticao == CompeticaoActiva & jjc.IdJornada == UltimaJornada
-                             select j).ToList();
-                return Jogos;
+                var Jogos = ApostasBalasDB.Jogo
+                     .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
+                     .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == UltimaJornada && jc.j.Realizado == true)
+                     .Select(j => j.j).ToList();
+                var UltimoResultado = new List<UltimoResultado>();
+                foreach (var item in Jogos)
+                {
+                    string[] Equipas = item.Descricao.Split(ConstantsModel.Delimiter);
+                    string[] Resultados = item.Resultado.Split(ConstantsModel.Delimiter);
+                    UltimoResultado.Add(new UltimoResultado
+                    {
+                        Equipa1 = Equipas[0],
+                        Equipa2 = Equipas[1],
+                        Resultado1 = Resultados[0],
+                        Resultado2 = Resultados[1]
+                    });
+                }
+                return UltimoResultado;
             }
             catch (Exception Ex)
             {
@@ -78,7 +98,7 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<PrimeirosClassificados> ObterPrimeirosClassificados()
+        public List<PrimeiroClassificado> ObterPrimeirosClassificados()
         {
             try
             {
@@ -87,7 +107,7 @@ namespace ApostasBalasBusinessModel
                     .Join(ApostasBalasDB.Utilizador, c => c.IdUtilizador, u => u.IdUtilizador, (c, u) => new { c, u })
                     .Join(ApostasBalasDB.UtilizadorCompeticao, uuc => uuc.u.IdUtilizador, uc => uc.IdUtilizador, (uuc, uc) => new { uuc, uc })
                     .Where(w => w.uuc.u.IdUtilizador == Id && w.uc.Activo == true)
-                    .Select(pc => new PrimeirosClassificados
+                    .Select(pc => new PrimeiroClassificado
                     {
                         Nome = pc.uuc.u.NomeUtilizador,
                         Derrotas = pc.uuc.c.Derrotas,
@@ -95,8 +115,40 @@ namespace ApostasBalasBusinessModel
                         Jogos = pc.uuc.c.Jogos,
                         Pontos = pc.uuc.c.Pontos,
                         Vitorias = pc.uuc.c.Vitorias
-                    }).OrderByDescending(o => o.Pontos).ToList();
+                    }).OrderByDescending(o => o.Pontos).Take(5).ToList();
                 return _PrimeirosClassificados;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public List<Competicao> ObterCompeticoes()
+        {
+            try
+            {
+                return ApostasBalasDB.Competicao.OrderBy(c => c.IdCompeticao).ToList();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public List<Competicao> ObterCompeticoesRegistadas()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                return ApostasBalasDB.Competicao
+                    .Join(ApostasBalasDB.UtilizadorCompeticao, c => c.IdCompeticao, uc => uc.IdCompeticao, (c, uc) => new { c, uc })
+                    .Where(uc => uc.uc.IdUtilizador == Id)
+                    .OrderByDescending(c => c.c.IdCompeticao)
+                    .Select(c=>c.c)
+                    .ToList();
             }
             catch (Exception Ex)
             {
@@ -110,11 +162,12 @@ namespace ApostasBalasBusinessModel
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
-                var NomeCompeticao = (from uc in ApostasBalasDB.UtilizadorCompeticao
-                                      join c in ApostasBalasDB.Competicao
-                                      on uc.IdCompeticao equals c.IdCompeticao
-                                      where uc.IdUtilizador == Id && uc.Activo == true
-                                      select c.Descricao).FirstOrDefault();
+                var NomeCompeticao = ApostasBalasDB.UtilizadorCompeticao
+                    .Join(ApostasBalasDB.Competicao, uc => uc.IdCompeticao, c => c.IdCompeticao, (uc, c) => new { uc, c })
+                    .Where(uc => uc.uc.IdUtilizador == Id && uc.uc.Activo == true)
+                    .Select(c => c.c.Descricao)
+                    .FirstOrDefault();
+
                 return NomeCompeticao;
             }
             catch (Exception Ex)
@@ -275,13 +328,13 @@ namespace ApostasBalasBusinessModel
         {
             get
             {
-                if (HttpContext.Current.Session["NomeUtilizadorSessao"] == null || HttpContext.Current.Session["NomeUtilizadorSessao"].Equals(string.Empty))
+                if (HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao] == null || HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao].Equals(string.Empty))
                     return string.Empty;
-                return HttpContext.Current.Session["NomeUtilizadorSessao"].ToString();
+                return HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao].ToString();
             }
             set
             {
-                HttpContext.Current.Session["NomeUtilizadorSessao"] = value;
+                HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao] = value;
             }
         }
 
@@ -289,13 +342,13 @@ namespace ApostasBalasBusinessModel
         {
             get
             {
-                if (HttpContext.Current.Session["PasswordSessao"] == null || HttpContext.Current.Session["PasswordSessao"].Equals(string.Empty))
+                if (HttpContext.Current.Session[ConstantsModel.PasswordSessao] == null || HttpContext.Current.Session[ConstantsModel.PasswordSessao].Equals(string.Empty))
                     return string.Empty;
-                return HttpContext.Current.Session["PasswordSessao"].ToString();
+                return HttpContext.Current.Session[ConstantsModel.PasswordSessao].ToString();
             }
             set
             {
-                HttpContext.Current.Session["PasswordSessao"] = value;
+                HttpContext.Current.Session[ConstantsModel.PasswordSessao] = value;
             }
         }
 
@@ -303,13 +356,13 @@ namespace ApostasBalasBusinessModel
         {
             get
             {
-                if (HttpContext.Current.Session["IdUtilizadorSessao"] == null || HttpContext.Current.Session["IdUtilizadorSessao"].Equals(string.Empty))
+                if (HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao] == null || HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao].Equals(string.Empty))
                     return string.Empty;
-                return HttpContext.Current.Session["IdUtilizadorSessao"].ToString();
+                return HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao].ToString();
             }
             set
             {
-                HttpContext.Current.Session["IdUtilizadorSessao"] = value;
+                HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao] = value;
             }
         }
 
@@ -317,7 +370,7 @@ namespace ApostasBalasBusinessModel
         {
             get
             {
-                if (HttpContext.Current.Request.Cookies[ApostasBalasBusinessModel.ConstantsModel.CookieName] != null)
+                if (HttpContext.Current.Request.Cookies[ConstantsModel.CookieName] != null)
                     return true;
                 return false;
             }
@@ -332,6 +385,15 @@ namespace ApostasBalasBusinessModel
         public const string BemVindo = "Bem Vindo ";
         public const string HomeRoute = "Home";
         public const string InicioRoute = "Inicio";
+        public const string NomeUtilizadorSessao = "NomeUtilizadorSessao";
+        public const string PasswordSessao = "PasswordSessao";
+        public const string IdUtilizadorSessao = "IdUtilizadorSessao";
+        public const string Error = "Error";
+        public const string Debug = "Debug";
+        public const string Info = "Info";
+        public const string Warning = "Warning";
+        public const string Fatal = "Fatal";
+        public const char Delimiter = '-';
     }
 
     internal static class LoggingModel
@@ -342,20 +404,20 @@ namespace ApostasBalasBusinessModel
             log4net.Config.XmlConfigurator.Configure();
             switch (Mode)
             {
-                case "Error":
-                    log.Error("Error", Ex);
+                case ConstantsModel.Error:
+                    log.Error(ConstantsModel.Error, Ex);
                     break;
-                case "Debug":
-                    log.Debug("Debug", Ex);
+                case ConstantsModel.Debug:
+                    log.Debug(ConstantsModel.Debug, Ex);
                     break;
-                case "Info":
-                    log.Info("Info", Ex);
+                case ConstantsModel.Info:
+                    log.Info(ConstantsModel.Info, Ex);
                     break;
-                case "Warning":
-                    log.Warn("Warning", Ex);
+                case ConstantsModel.Warning:
+                    log.Warn(ConstantsModel.Warning, Ex);
                     break;
                 default:
-                    log.Fatal("Fatal", Ex);
+                    log.Fatal(ConstantsModel.Fatal, Ex);
                     break;
             }
         }
