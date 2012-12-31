@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\Apostas.js" />
+    <Content Include="Code\Campeonatos.js" />
     <Content Include="Code\Home.js" />
     <Content Include="Code\Login.js" />
     <Content Include="Code\Master.js" />
@@ -192,6 +193,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\back.png" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\email-icon.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\graphic.png" />
     <Content Include="Images\info.png" />
@@ -199,6 +201,7 @@
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\search.png" />
     <Content Include="Images\spinner.gif" />
+    <Content Include="Images\sport-soccer-icon.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\tab.png" />
     <Content Include="Images\valid.png" />

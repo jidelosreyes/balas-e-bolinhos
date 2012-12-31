@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using System.Web.UI.HtmlControls;
 
 namespace ApostasBalas.Pages
 {
@@ -19,9 +20,6 @@ namespace ApostasBalas.Pages
                 var Class = Logic.ObterPrimeirosClassificados();
                 rptPrimeirosClassificados.DataSource = Class;
                 rptPrimeirosClassificados.DataBind();
-
-                GridView1.DataSource = Class;
-                GridView1.DataBind();
             }
         }
 
@@ -35,6 +33,6 @@ namespace ApostasBalas.Pages
         public static ApostasBalasDataModel.Noticia ObterUltimaNoticia()
         {
             return Logic.ObterUltimaNoticia();
-        }      
+        }   
     }
 }
