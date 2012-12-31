@@ -269,25 +269,63 @@ ul#menu
     padding: 0 15px 20px 15px;
 }
 
+	.sidebar table
+	{
+		margin: 10px 0 30px 0;		
+	}  
+    .sidebar table tr
+    {
+    	float: left;
+    	height: 25px;    		
+    	background: transparent url(/Images/sport-soccer-icon.png) no-repeat left center;    	
+        color: #A4AA04;        
+    }
+    
+    .sidebar table td.icon
+    {   
+    	background: none;
+    	padding-left: 30px; 
+    	padding-right: 3px;                
+        color: #A4AA04;    
+    }
+    
+    .sidebar table td
+    {   
+    	background: none; 	
+    	padding-right: 3px;
+        color: #A4AA04;    
+    }
+
     .sidebar ul
     {
         width: 178px;
         padding: 4px 0 0 0;
         margin: 4px 0 30px 0;
     }
+    
+    .sidebar li a.linkFacebook
+    {    	
+         background: transparent url(/Images/facebook-icon.png) no-repeat left center;	
+	}
+	
+	.sidebar li a.linkEmail
+    {    	
+         background: transparent url(/Images/email-icon.png) no-repeat left center;	
+	}
 
     .sidebar li
     {
-        list-style: none;
-        padding: 0 0 7px 0;
+        list-style: none;        
+        padding: 0 0 7px 0;        
     }
 
-        .sidebar li a, .sidebar li a:hover
+        .sidebar li a
         {
             padding: 0 0 0 35px;
             display: block;
-            text-decoration:none;
-            background: transparent url(/Images/link.png) no-repeat left center;
+            text-decoration:none;            
+            height: 16px;
+            background: transparent url(/Images/sport-soccer-icon.png) no-repeat left center;
         }
 
             .sidebar li a.selected
@@ -479,12 +517,12 @@ ul#menu
     margin: 0 0 20px 0;
 }
 
-table
+.DataTable
 {
     margin: 10px 0 30px 0;
 }
 
-    table tr th, table tr td
+    .DataTable tr.TableNormal th, .DataTable tr.TableNormal td
     {
         background: #3B3B3B;
         color: #FFF;
@@ -492,12 +530,30 @@ table
         text-align: left;
     }
 
-    table tr td
+    .DataTable tr.TableNormal td
     {
         background: #E5E5DB;
         color: #47433F;
         border-top: 1px solid #FFF;
     }
+    
+	.DataTable tr.TableHighlight td 
+	{
+			background-color: #04691D;
+			color: #FFF;   
+			padding: 7px 4px;
+			text-align: left;    
+			border-top: 1px solid #FFF;
+	}
+	
+	.DataTable tr.TableOther td 
+	{
+			background-color: #A4AA04;
+			color: #47433F;
+			padding: 7px 4px;
+			text-align: left;    
+			border-top: 1px solid #FFF;
+	}
 
 #ProcessFilter
 {

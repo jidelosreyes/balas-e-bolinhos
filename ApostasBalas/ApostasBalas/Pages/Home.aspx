@@ -5,7 +5,8 @@
     <script src="../Code/Home.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Informação sobre a competição actual</h1>
+    <h1>
+        Informação sobre a competição actual</h1>
     <ul>
         <li>Nome da Competição:
             <asp:Label ID="lblNomeCompeticao" runat="server" Text="Label"></asp:Label></li>
@@ -14,67 +15,87 @@
         <li>Pontos por empate: 1</li>
         <li>Pontos por derrota: 0</li>
     </ul>
-    <h2>Primeiros classificados</h2>
+    <h2>
+        Primeiros classificados</h2>
     <asp:Repeater ID="rptPrimeirosClassificados" runat="server">
         <HeaderTemplate>
-            <table id="example" style="width: 100%; border-spacing: 0;">
+            <table id="example" class="DataTable" style="width: 100%; border-spacing: 0;">
                 <tr>
-                    <th>Posição
+                    <th>
+                        Posição
                     </th>
-                    <th>Nome
+                    <th>
+                        Nome
                     </th>
-                    <th>Jogos
+                    <th>
+                        Jogos
                     </th>
-                    <th>Vitorias
+                    <th>
+                        Vitorias
                     </th>
-                    <th>Empates
+                    <th>
+                        Empates
                     </th>
-                    <th>Derrotas
+                    <th>
+                        Derrotas
                     </th>
-                    <th>Pontos
+                    <th>
+                        Pontos
                     </th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td>1
+                <td>
+                    <%#(Container.ItemIndex + 1) %>
                 </td>
-                <td><%# Eval("Nome")%>
+                <td>
+                    <%# Eval("Nome")%>
                 </td>
-                <td><%# Eval("Jogos")%>
+                <td>
+                    <%# Eval("Jogos")%>
                 </td>
-                <td><%# Eval("Vitorias")%>
+                <td>
+                    <%# Eval("Vitorias")%>
                 </td>
-                <td><%# Eval("Empates")%>
+                <td>
+                    <%# Eval("Empates")%>
                 </td>
-                <td><%# Eval("Derrotas")%>
+                <td>
+                    <%# Eval("Derrotas")%>
                 </td>
-                <td><%# Eval("Pontos")%>
+                <td>
+                    <%# Eval("Pontos")%>
                 </td>
             </tr>
         </ItemTemplate>
         <AlternatingItemTemplate>
             <tr>
-                <td>1
+                <td>
+                    <%#(Container.ItemIndex + 1) %>
                 </td>
-                <td><%# Eval("Nome")%>
+                <td>
+                    <%# Eval("Nome")%>
                 </td>
-                <td><%# Eval("Jogos")%>
+                <td>
+                    <%# Eval("Jogos")%>
                 </td>
-                <td><%# Eval("Vitorias")%>
+                <td>
+                    <%# Eval("Vitorias")%>
                 </td>
-                <td><%# Eval("Empates")%>
+                <td>
+                    <%# Eval("Empates")%>
                 </td>
-                <td><%# Eval("Derrotas")%>
+                <td>
+                    <%# Eval("Derrotas")%>
                 </td>
-                <td><%# Eval("Pontos")%>
+                <td>
+                    <%# Eval("Pontos")%>
                 </td>
             </tr>
         </AlternatingItemTemplate>
         <FooterTemplate>
             </table>
         </FooterTemplate>
-    </asp:Repeater>
-
-    <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+    </asp:Repeater>  
 </asp:Content>
