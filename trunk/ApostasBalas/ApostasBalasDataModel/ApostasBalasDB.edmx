@@ -35,6 +35,7 @@
     <Property Name="IdClassificacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdUtilizador" Type="int" Nullable="true" />
     <Property Name="IdCompeticao" Type="int" Nullable="true" />
+    <Property Name="Jogos" Type="int" Nullable="true" />
     <Property Name="Vitorias" Type="int" Nullable="true" />
     <Property Name="Empates" Type="int" Nullable="true" />
     <Property Name="Derrotas" Type="int" Nullable="true" />
@@ -43,7 +44,6 @@
     <Property Name="Pontos" Type="int" Nullable="true" />
     <Property Name="DataCriacao" Type="datetime" Nullable="true" />
     <Property Name="DataActualizacao" Type="datetime" Nullable="true" />
-    <Property Name="Jogos" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Competicao">
     <Key>
@@ -172,6 +172,7 @@
           <Property Type="Int32" Name="IdClassificacao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="IdUtilizador" />
           <Property Type="Int32" Name="IdCompeticao" />
+          <Property Type="Int32" Name="Jogos" />
           <Property Type="Int32" Name="Vitorias" />
           <Property Type="Int32" Name="Empates" />
           <Property Type="Int32" Name="Derrotas" />
@@ -180,7 +181,6 @@
           <Property Type="Int32" Name="Pontos" />
           <Property Type="DateTime" Name="DataCriacao" Precision="3" />
           <Property Type="DateTime" Name="DataActualizacao" Precision="3" />
-          <Property Type="Int32" Name="Jogos" />
         </EntityType>
         <EntityType Name="Competicao">
           <Key>
@@ -299,6 +299,7 @@
           <ScalarProperty Name="IdClassificacao" ColumnName="IdClassificacao" />
           <ScalarProperty Name="IdUtilizador" ColumnName="IdUtilizador" />
           <ScalarProperty Name="IdCompeticao" ColumnName="IdCompeticao" />
+          <ScalarProperty Name="Jogos" ColumnName="Jogos" />
           <ScalarProperty Name="Vitorias" ColumnName="Vitorias" />
           <ScalarProperty Name="Empates" ColumnName="Empates" />
           <ScalarProperty Name="Derrotas" ColumnName="Derrotas" />
@@ -307,7 +308,6 @@
           <ScalarProperty Name="Pontos" ColumnName="Pontos" />
           <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
           <ScalarProperty Name="DataActualizacao" ColumnName="DataActualizacao" />
-          <ScalarProperty Name="Jogos" ColumnName="Jogos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
