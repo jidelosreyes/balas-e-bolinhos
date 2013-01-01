@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/31/2012 10:03:50
--- Generated from EDMX file: C:\JP\Projects\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
+-- Date Created: 01/01/2013 22:50:24
+-- Generated from EDMX file: C:\Projectos\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -37,9 +37,6 @@ GO
 IF OBJECT_ID(N'[dbo].[Jornada]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Jornada];
 GO
-IF OBJECT_ID(N'[dbo].[JornadaJogoCompeticao]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[JornadaJogoCompeticao];
-GO
 IF OBJECT_ID(N'[dbo].[Log]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Log];
 GO
@@ -51,6 +48,9 @@ IF OBJECT_ID(N'[dbo].[Utilizador]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[UtilizadorCompeticao]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UtilizadorCompeticao];
+GO
+IF OBJECT_ID(N'[dbo].[JornadaJogoCompeticao]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JornadaJogoCompeticao];
 GO
 
 -- --------------------------------------------------
@@ -73,6 +73,7 @@ CREATE TABLE [dbo].[Classificacao] (
     [IdClassificacao] int IDENTITY(1,1) NOT NULL,
     [IdUtilizador] int  NULL,
     [IdCompeticao] int  NULL,
+    [Jogos] int  NULL,
     [Vitorias] int  NULL,
     [Empates] int  NULL,
     [Derrotas] int  NULL,
@@ -80,8 +81,7 @@ CREATE TABLE [dbo].[Classificacao] (
     [GolosSofridos] int  NULL,
     [Pontos] int  NULL,
     [DataCriacao] datetime  NULL,
-    [DataActualizacao] datetime  NULL,
-    [Jogos] int  NULL
+    [DataActualizacao] datetime  NULL
 );
 GO
 
