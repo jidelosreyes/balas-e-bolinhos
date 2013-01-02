@@ -9,84 +9,68 @@
         Competicoes Existentes</h2>
     <asp:Repeater ID="rptCompeticoes" runat="server">
         <HeaderTemplate>
-            <table id="example" class="DataTable" style="width: 100%; border-spacing: 0;">
-                <tr class="TableNormal">
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Descricao
-                    </th>
-                    <th>
-                        Registar
-                    </th>
-                </tr>
+            <div id="DivCompeticoes" class="RegistarCompeticoes">
         </HeaderTemplate>
         <ItemTemplate>
-            <tr class="TableNormal">
-                <td>
-                    <%# Eval("IdCompeticao")%>
-                </td>
-                <td>
-                    <%# Eval("Descricao")%>
-                </td>
-                <td>
-                </td>
-            </tr>
+            <p>
+                <label>
+                    <%# Eval("Descricao")%></label>
+                <button class="buttondiv">
+                    Registar</button>
+                <button class="buttondiv">
+                    Activar</button>
+            </p>
         </ItemTemplate>
         <AlternatingItemTemplate>
-            <tr class="TableNormal">
-                <td>
-                    <%# Eval("IdCompeticao")%>
-                </td>
-                <td>
-                    <%# Eval("Descricao")%>
-                </td>
-                <td>
-                </td>
-            </tr>
+            <p>
+                <label>
+                    <%# Eval("Descricao")%></label>
+                <button class="buttondiv">
+                    Registar</button>
+                <button class="buttondiv">
+                    Activar</button>
+            </p>
         </AlternatingItemTemplate>
         <FooterTemplate>
-            </table>
+            </div>
         </FooterTemplate>
     </asp:Repeater>
     <h2>
         Competicoes Registadas</h2>
-        <asp:Repeater ID="rptCompeticoesRegistadas" runat="server">
+    <asp:Repeater ID="rptCompeticoesRegistadas" runat="server">
         <HeaderTemplate>
-            <table id="example" class="DataTable" style="width: 100%; border-spacing: 0;">
-                <tr class="TableNormal">
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Descricao
-                    </th>                   
-                </tr>
+            <div id="DivRegistadas" class="RegistarCompeticoes">
         </HeaderTemplate>
         <ItemTemplate>
-            <tr class="TableNormal">
-                <td>
-                    <%# Eval("IdCompeticao")%>
-                </td>
-                <td>
-                    <%# Eval("Descricao")%>
-                </td>
-               
-            </tr>
+            <p>
+                <%# Eval("Descricao")%>
+            </p>
+            <p>
+                <%# Eval("IdUtilizador")%>
+            </p>
+            <p>
+                <%# Eval("IdCompeticao")%>
+            </p>
+            <p>
+                <%# Eval("Activo")%>
+            </p>
         </ItemTemplate>
         <AlternatingItemTemplate>
-            <tr class="TableNormal">
-                <td>
-                    <%# Eval("IdCompeticao")%>
-                </td>
-                <td>
-                    <%# Eval("Descricao")%>
-                </td>               
-            </tr>
+            <p>
+                <%# Eval("Descricao")%>
+            </p>
+            <p>
+                <%# Eval("IdUtilizador")%>
+            </p>
+            <p>
+                <%# Eval("IdCompeticao")%>
+            </p>
+            <p>
+                <%# Eval("Activo")%>
+            </p>
         </AlternatingItemTemplate>
         <FooterTemplate>
-            </table>
+            </div>
         </FooterTemplate>
     </asp:Repeater>
 </asp:Content>

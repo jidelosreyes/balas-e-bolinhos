@@ -52,6 +52,14 @@ namespace ApostasBalasBusinessModel
             public string Resultado2 { get; set; }
         }
 
+        public class CompeticaoRegistada
+        {
+            public string Descricao { get; set; }
+            public int? IdUtilizador { get; set; }
+            public int? IdCompeticao { get; set; }
+            public bool? Activo { get; set; }
+        }
+
         public Noticia ObterUltimaNoticia()
         {
             try
@@ -138,17 +146,31 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<Competicao> ObterCompeticoesRegistadas()
+        public List<CompeticaoRegistada> ObterCompeticoesRegistadas()
         {
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
-                return ApostasBalasDB.Competicao
-                    .Join(ApostasBalasDB.UtilizadorCompeticao, c => c.IdCompeticao, uc => uc.IdCompeticao, (c, uc) => new { c, uc })
-                    .Where(uc => uc.uc.IdUtilizador == Id)
-                    .OrderByDescending(c => c.c.IdCompeticao)
-                    .Select(c=>c.c)
-                    .ToList();
+
+                return (from c in ApostasBalasDB.Competicao
+                        join uc in ApostasBalasDB.UtilizadorCompeticao
+                        on c.IdCompeticao equals uc.IdCompeticao into Cenas
+                        from t in Cenas.DefaultIfEmpty()
+                        where t.IdUtilizador == 1 || t.IdUtilizador == null
+                        select new CompeticaoRegistada
+                        {
+                            Descricao = c.Descricao,
+                            Activo = t.Activo,
+                            IdCompeticao = t.IdCompeticao,
+                            IdUtilizador = t.IdUtilizador
+                        }).ToList();
+
+                //return ApostasBalasDB.Competicao
+                //    .Join(ApostasBalasDB.UtilizadorCompeticao, c => c.IdCompeticao, uc => uc.IdCompeticao, (c, uc) => new { c, uc })
+                //    .Where(uc => uc.uc.IdUtilizador == Id)
+                //    .OrderByDescending(c => c.c.IdCompeticao)
+                //    .Select(c => c.c)
+                //    .ToList();
             }
             catch (Exception Ex)
             {
