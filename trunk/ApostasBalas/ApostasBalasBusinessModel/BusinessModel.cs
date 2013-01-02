@@ -160,7 +160,7 @@ namespace ApostasBalasBusinessModel
                         select new CompeticaoRegistada
                         {
                             Descricao = c.Descricao,
-                            Activo = t.Activo,
+                            Activo = null ? false : t.Activo,
                             IdCompeticao = t.IdCompeticao,
                             IdUtilizador = t.IdUtilizador
                         }).ToList();
