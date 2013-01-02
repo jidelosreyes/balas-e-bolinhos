@@ -49,11 +49,12 @@ $(document).ready(function () {
     $('#btnLogin').click(function () {
         var email = $('#txtEmail').val();
         var password = $('#txtPassword').val();
-        var lembrarme = $('#chkLembrarme').attr('checked') ? true : false;
+        var lembrarme = $('#chkLembrarme').attr('checked') ? true : false;   
+        var dataIn = '{' + '"Email":"' + email + '" ' + ',"Password":"'+ password +'"' + ',"Lembrarme":"'+ lembrarme +'"}';
         $.ajax({
             type: 'POST',
-            url: 'Default.aspx/Login',
-            data: "{'Email':'" + email + "','Password':'" + password + "','Lembrarme':'" + lembrarme + "'}",
+            url: '/Service/ApostasService.svc/Login',
+            data: dataIn,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (result) {
@@ -78,10 +79,11 @@ $(document).ready(function () {
             return false;
         }
         var email = $('#txtEmailRecup');
+        var dataIn = '{' + '"Email":"' + email.val() + '"}';
         $.ajax({
             type: 'POST',
-            url: 'Default.aspx/RecuperarPassword',
-            data: "{'Email':'" + email.val() + "'}",
+            url: '/Service/ApostasService.svc/RecuperarPassword',
+            data: dataIn,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function () {
@@ -114,10 +116,11 @@ $(document).ready(function () {
         var email = $('#txtEmailRegisto');
         var nome = $('#txtNomeRegisto');
         var password = $('#txtConfPasswordRegisto');
+        var dataIn = '{' + '"Email":"' + email.val() + '" ' + ',"Nome":"'+ nome.val() +'"' + ',"Password":"'+ password.val() +'"}';
         $.ajax({
             type: 'POST',
-            url: 'Default.aspx/Registar',
-            data: "{'Email':'" + email.val() + "','Nome':'" + nome.val() + "','Password':'" + password.val() + "'}",
+            url: '/Service/ApostasService.svc/Registar',
+            data: dataIn,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function () {
