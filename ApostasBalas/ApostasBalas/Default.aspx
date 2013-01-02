@@ -17,7 +17,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+            <ContentTemplate>           
                 <div id="main">
                     <div id="header">
                         <div id="logo">
