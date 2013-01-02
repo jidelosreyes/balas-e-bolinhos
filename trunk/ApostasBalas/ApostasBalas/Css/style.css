@@ -448,6 +448,39 @@ ul#menu
         background: none;
     }
 
+.RegistarCompeticoes 
+{
+	margin: 15px 0 0 0;
+}
+	.RegistarCompeticoes p
+	{
+		padding: 0 0 4px 0;
+	}
+	.RegistarCompeticoes label
+    {
+        float: left;
+        width: 200px;
+        text-align: left;
+    }
+    
+    .RegistarCompeticoes button
+    {   
+        padding: 5px;        
+        font: 100% arial;
+        border: 1px solid #E5E5DB;
+        background: #B60000;
+        color: white;
+    }
+    
+    .RegistarCompeticoes button.Registado
+    {   
+        padding: 5px;        
+        font: 100% arial;
+        border: 1px solid #E5E5DB;
+        background: #04691D;
+        color: white;
+    }
+
 .form_settings
 {
     margin: 15px 0 0 0;
@@ -473,7 +506,7 @@ ul#menu
         border: 1px solid #E5E5DB;
         background: #FFF;
         color: #47433F;
-    }
+    }  
 
     .form_settings .submit
     {
