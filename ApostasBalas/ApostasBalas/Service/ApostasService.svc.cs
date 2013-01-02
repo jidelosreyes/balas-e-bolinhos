@@ -11,20 +11,34 @@ namespace ApostasBalas.Service
 {
     [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class ApostasService
+    public class ApostasService : ApostasBalasBusinessModel.PlatformModel
     {
         // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
         // To create an operation that returns XML,
         //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
         //     and include the following line in the operation body:
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
+        #region Login
+
         [OperationContract]
-        public void DoWork()
+        public bool Login(string Email, string Password, string Lembrarme)
         {
-            // Add your operation implementation here
-            return;
+            return Logic.Login(Email, Password, bool.Parse(Lembrarme));
         }
 
-        // Add more operations here and mark them with [OperationContract]
+        [OperationContract]
+        public void Registar(string Email, string Nome, string Password)
+        {
+            Logic.RegistarUtilizador(Email, Nome, Password);
+        }
+
+        [OperationContract]
+        public void RecuperarPassword(string Email)
+        {
+            Logic.RecuperarPassword(Email);
+        }
+
+        #endregion
+
     }
 }

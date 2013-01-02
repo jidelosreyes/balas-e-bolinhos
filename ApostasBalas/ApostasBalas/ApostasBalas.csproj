@@ -289,6 +289,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ApostasService.svc.cs">
       <DependentUpon>ApostasService.svc</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
