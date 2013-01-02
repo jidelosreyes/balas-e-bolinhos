@@ -461,6 +461,8 @@ ul#menu
         float: left;
         width: 200px;
         text-align: left;
+        font-weight:900;
+        font-style:italic;
     }
     
     .RegistarCompeticoes button

@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace ApostasBalas.Service
 {
@@ -46,8 +47,15 @@ namespace ApostasBalas.Service
         public void LogOut()
         {
             Logic.LogOut();
-        }      
+        }
 
         #endregion
+
+        [OperationContract]
+        public string ObterComp()
+        {
+            var cenas = JsonConvert.SerializeObject(Logic.ObterCompeticoesRegistadas());
+            return cenas;
+        }
     }
 }

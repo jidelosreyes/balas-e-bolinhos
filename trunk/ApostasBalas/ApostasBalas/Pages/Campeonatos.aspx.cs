@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 namespace ApostasBalas.Pages
 {
@@ -15,9 +16,7 @@ namespace ApostasBalas.Pages
             {
                 Logic.VerificarSessao();
                 rptCompeticoes.DataSource = Logic.ObterCompeticoes();
-                rptCompeticoes.DataBind();
-                rptCompeticoesRegistadas.DataSource = Logic.ObterCompeticoesRegistadas();
-                rptCompeticoesRegistadas.DataBind();
+                rptCompeticoes.DataBind();                              
             }
         }
     }
