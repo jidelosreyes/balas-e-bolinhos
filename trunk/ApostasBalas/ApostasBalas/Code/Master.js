@@ -31,7 +31,7 @@ $(document).ready(function () {
     $('#btnLogOut').click(function () {
         $.ajax({
             type: 'POST',
-            url: 'Pages/Home.aspx/LogOut',
+            url: '/Service/ApostasService.svc/LogOut',
             data: '{}',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',

@@ -40,5 +40,14 @@ namespace ApostasBalas.Service
 
         #endregion
 
+        #region Master
+
+        [OperationContract]
+        public void LogOut()
+        {
+            Logic.LogOut();
+        }      
+
+        #endregion
     }
 }
