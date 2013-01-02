@@ -19,23 +19,5 @@ namespace ApostasBalas
                 Logic.CookieLogin();
             }
         }
-
-        [WebMethod]
-        public static bool Login(string Email, string Password, string Lembrarme)
-        {
-            return Logic.Login(Email, Password, bool.Parse(Lembrarme));
-        }
-
-        [WebMethod]
-        public static void Registar(string Email, string Nome, string Password)
-        {
-            Logic.RegistarUtilizador(Email, Nome, Password);
-        }
-
-        [WebMethod]
-        public static void RecuperarPassword(string Email)
-        {
-            Logic.RecuperarPassword(Email);
-        }
     }
 }
