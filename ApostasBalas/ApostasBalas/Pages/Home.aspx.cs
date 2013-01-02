@@ -21,18 +21,6 @@ namespace ApostasBalas.Pages
                 rptPrimeirosClassificados.DataSource = Class;
                 rptPrimeirosClassificados.DataBind();
             }
-        }
-
-        [WebMethod]
-        public static void LogOut()
-        {
-            Logic.LogOut();
-        }
-
-        [WebMethod]
-        public static ApostasBalasDataModel.Noticia ObterUltimaNoticia()
-        {
-            return Logic.ObterUltimaNoticia();
-        }   
+        }       
     }
 }
