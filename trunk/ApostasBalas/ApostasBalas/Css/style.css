@@ -465,24 +465,42 @@ ul#menu
         font-style:italic;
     }
     
-    .RegistarCompeticoes button
+    .RegistarCompeticoes button .registar
     {   
         padding: 5px;        
         font: 100% arial;
         border: 1px solid #E5E5DB;
         background: #B60000;
         color: white;
-    }
+    } 
     
-    .RegistarCompeticoes button.Registado
-    {   
-        padding: 5px;        
+    .RegistarCompeticoes button.registado .ui-button-icon-primary {
+		background-position: -208px -96px;    
+	}
+    
+     .RegistarCompeticoes button.registado
+    {
+        padding: 5px;
         font: 100% arial;
         border: 1px solid #E5E5DB;
         background: #04691D;
         color: white;
     }
-
+    /*
+.registado {
+   display: none;
+  
+}
+.registarregistado .registado {
+   display: block;  
+}
+.registarregistado .registar {
+   display: none;  
+}
+.registarregistado .ui-button-icon-primary {
+    background-position: -208px -96px;    
+}
+ */
 .form_settings
 {
     margin: 15px 0 0 0;
