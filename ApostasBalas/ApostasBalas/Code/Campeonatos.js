@@ -22,13 +22,9 @@ $(document).ready(function () {
 
     $(".buttondiv").button({
         icons: {
-            primary: "ui-icon-check"
+            primary: "ui-icon-locked"
         }
     });
-
-    function Teste() {
-        alert('cenas');
-    };
 
     $.ajax({
         type: 'POST',
@@ -39,8 +35,14 @@ $(document).ready(function () {
         success: function (data) {
             var object = JSON.parse(data.d);
             $.each(object, function (i, item) {
-                alert(item.Descricao);
-                alert(item.IdCompeticao);
+                var id = $('#hddId').val()
+                var pid = '#p' + id + ' #btnRegistar';
+                if (item.IdCompeticao == id) {
+                    $(pid).toggleClass('registado', 1000);
+                    
+                    $(pid).attr('disabled', true);                  
+                    return false;
+                }
             });
         },
         error: function () {
@@ -55,14 +57,7 @@ $(document).ready(function () {
     });
 
     $('#DivCompeticoes').delegate('button', 'click', function () {
-        //        var tr = $(this).parents('p');
-        //        $(tr).slideUp('slow', function () {
-        //            $(this).remove();
-        //            alert('ajax');
-        //        });
-
-        $(this).toggleClass('Registado', 1000);
-
+        $(this).toggleClass('registado', 1000);
         return false;
     });
 
