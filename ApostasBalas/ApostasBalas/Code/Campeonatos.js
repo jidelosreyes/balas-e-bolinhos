@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $(".buttondiv").button({
         icons: {
-            primary: "ui-icon-locked"
+            primary: "ui-icon-unlocked"
         }
     });
 
