@@ -466,8 +466,7 @@ ul#menu
     }
     
      .RegistarCompeticoes button
-    {   
-    	display: inline;
+    {       	
         padding: 5px;        
         font: 100% arial;
         border: 1px solid #E5E5DB;
@@ -476,8 +475,7 @@ ul#menu
     }
            
     .RegistarCompeticoes button .registar
-    {
-    	display: inline;
+    {    
         padding: 5px;        
         font: 100% arial;       
         background: #B60000;
@@ -489,8 +487,7 @@ ul#menu
 	}
     
      .RegistarCompeticoes button.registado
-    {
-    	display: inline;
+    {    	
         padding: 5px;
         font: 100% arial;
         border: 1px solid #E5E5DB;

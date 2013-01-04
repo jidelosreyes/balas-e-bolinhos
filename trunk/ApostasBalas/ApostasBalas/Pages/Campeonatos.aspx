@@ -5,8 +5,7 @@
     <script src="../Code/Campeonatos.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>
-        Registo de Competicoes</h2>
+    <h2>Registo de Competicoes</h2>
     <asp:Repeater ID="rptCompeticoes" runat="server">
         <HeaderTemplate>
             <div id="DivCompeticoes" class="RegistarCompeticoes" onload="Teste()">
@@ -27,13 +26,10 @@
                 <input id="hddId" type="hidden" value=" <%# Eval("IdCompeticao")%>" />
                 <label>
                     <%# Eval("Descricao")%></label>
-                <button class="buttondiv">
-                     <span class="registado">Registado</span> <span class="registar">Registar</button>
-                <button class="buttondiv">
+                <button id="btnRegistar" class="buttondiv">
+                    Registar</button>
+                <button id="btnactivar" class="buttondiv">
                     Activar</button>
-                <button class="buttondiv registarregistado">
-                    <span class="registar">Registado</span> <span class="registado">Registar</span>
-                </button>
             </p>
         </AlternatingItemTemplate>
         <FooterTemplate>

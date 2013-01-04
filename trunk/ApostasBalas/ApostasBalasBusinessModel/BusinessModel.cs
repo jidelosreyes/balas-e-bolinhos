@@ -150,21 +150,7 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
-                var Id = Int32.Parse(IdUtilizadorSessao);
-
-                //return (from c in ApostasBalasDB.Competicao
-                //        join uc in ApostasBalasDB.UtilizadorCompeticao
-                //        on c.IdCompeticao equals uc.IdCompeticao into Cenas
-                //        from t in Cenas.DefaultIfEmpty()
-                //        where t.IdUtilizador == 1 || t.IdUtilizador == null
-                //        select new CompeticaoRegistada
-                //        {
-                //            Descricao = c.Descricao,
-                //            Activo = t.Activo,
-                //            IdCompeticao = t.IdCompeticao,
-                //            IdUtilizador = t.IdUtilizador
-                //        }).ToList();
-
+                var Id = Int32.Parse(IdUtilizadorSessao);      
                 return ApostasBalasDB.Competicao
                     .Join(ApostasBalasDB.UtilizadorCompeticao, c => c.IdCompeticao, uc => uc.IdCompeticao, (c, uc) => new { c, uc })
                     .Where(uc => uc.uc.IdUtilizador == Id)
