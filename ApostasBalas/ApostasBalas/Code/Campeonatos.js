@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'POST',
-        url: '/Service/ApostasService.svc/ObterComp',
+        url: '/Service/ApostasService.svc/ObterCompeticoesRegistadas',
         data: '{}',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -39,8 +39,7 @@ $(document).ready(function () {
                 var pid = '#p' + id + ' #btnRegistar';
                 if (item.IdCompeticao == id) {
                     $(pid).toggleClass('registado', 1000);
-                    
-                    $(pid).attr('disabled', true);                  
+                    $(pid).attr('disabled', true);
                     return false;
                 }
             });
@@ -56,8 +55,29 @@ $(document).ready(function () {
         }
     });
 
-    $('#DivCompeticoes').delegate('button', 'click', function () {
+    $('#DivCompeticoes').delegate('#btnRegistar', 'click', function () {
         $(this).toggleClass('registado', 1000);
+        $(this).attr('disabled', true);
+        $.ajax({
+            type: 'POST',
+            url: '/Service/ApostasService.svc/RegistarCompeticao',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+                var id = $('#hddId').val()
+                alert(id);
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            }
+        });
         return false;
     });
 

@@ -52,10 +52,16 @@ namespace ApostasBalas.Service
         #endregion
 
         [OperationContract]
-        public string ObterComp()
+        public string ObterCompeticoesRegistadas()
         {
             var cenas = JsonConvert.SerializeObject(Logic.ObterCompeticoesRegistadas());
             return cenas;
+        }
+
+        [OperationContract]
+        public void RegistarCompeticao()
+        {
+
         }
     }
 }
