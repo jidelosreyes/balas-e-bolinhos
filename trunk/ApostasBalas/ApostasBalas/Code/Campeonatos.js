@@ -3,22 +3,10 @@
 /// <reference path="../Scripts/jquery-ui-1.9.2.min.js" />
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
+
+    var DivCompeticoes = '#DivCompeticoes';
+
     $('#liCampeonatos').addClass('selected');
-
-    //    $('#example').delegate('input', 'click', function () {
-    //        var tr = $(this).parents('tr:first');
-    //        tds = tr.find('td');
-    //        l = tds.length;
-
-    //        tds.fadeOut('slow', function () {
-    //            if (! --l) {
-    //                tr.remove();
-    //                alert('ajax');
-    //            }
-    //        });
-    //        //alert('teste');
-    //        return false;
-    //    });
 
     $(".buttondiv").button({
         icons: {
@@ -26,47 +14,45 @@ $(document).ready(function () {
         }
     });
 
-    $.ajax({
-        type: 'POST',
-        url: '/Service/ApostasService.svc/ObterCompeticoesRegistadas',
-        data: '{}',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (data) {
-            var object = JSON.parse(data.d);
-            $.each(object, function (i, item) {
-                var id = $('#hddId').val()
-                var pid = '#p' + id + ' #btnRegistar';
-                if (item.IdCompeticao == id) {
-                    $(pid).toggleClass('registado', 1000);
-                    $(pid).attr('disabled', true);
-                    return false;
-                }
-            });
-        },
-        error: function () {
-            jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-               {
-                   autoHide: false,
-                   TimeShown: 3000,
-                   HorizontalPosition: 'center',
-                   clickOverlay: true
-               });
-        }
+    $(DivCompeticoes).on('click', '#btnactivar', function (e) {
+        $(this).toggleClass('registado', 1000).attr('disabled', true);
+        Activar();
+        return false;
     });
 
-    $('#DivCompeticoes').delegate('#btnRegistar', 'click', function () {
-        $(this).toggleClass('registado', 1000);
-        $(this).attr('disabled', true);
+    $(DivCompeticoes).on('click', '#btnRegistar', function () {
+        $(this).toggleClass('registado', 1000).attr('disabled', true);
+        Registar($(this).attr('itemid'));
+        return false;
+    });
+
+    CarregarCompeticoes();
+
+    //#region Funcoes
+
+    function CarregarCompeticoes() {
         $.ajax({
             type: 'POST',
-            url: '/Service/ApostasService.svc/RegistarCompeticao',
+            url: '/Service/ApostasService.svc/ObterCompeticoesRegistadas',
             data: '{}',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            success: function () {
-                var id = $('#hddId').val()
-                alert(id);
+            success: function (data) {
+                var object = JSON.parse(data.d);
+                $.each(object, function (i, item) {
+                    var ids = $('#DivCompeticoes p input[type=hidden]');
+                    $.each(ids, function (i2, item2) {
+                        if (item.IdCompeticao == item2.value) {
+                            var itemid = '#btnRegistar[itemid="' + item2.value + '"]';
+                            $(itemid).toggleClass('registado', 1000).attr('disabled', true);
+                            if (item.Activo) {
+                                var itemid = '#btnactivar[itemid="' + item.IdCompeticao + '"]';
+                                $(itemid).toggleClass('registado', 1000).attr('disabled', true);
+                            }
+                        }
+                    });
+                });
+                return false;
             },
             error: function () {
                 jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
@@ -78,7 +64,60 @@ $(document).ready(function () {
                    });
             }
         });
-        return false;
-    });
+    };
+
+    function Registar(id) {        
+        var dataIn = '{' + '"IdCompeticao":"' + id + '"}';
+        $.ajax({
+            type: 'POST',
+            url: '/Service/ApostasService.svc/RegistarCompeticao',
+            data: dataIn,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+                jSuccess('Competicao registada com sucesso.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            }
+        });
+    };
+
+    function Activar() {
+        var id = $(this).attr('itemid');
+        $.ajax({
+            type: 'POST',
+            url: '/Service/ApostasService.svc/ActivarCompeticao',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            }
+        });
+    };
+
+    //#endregion    
 
 });
