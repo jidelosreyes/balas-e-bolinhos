@@ -4,7 +4,13 @@
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
 
+    //#region Variaveis
+
     var DivCompeticoes = '#DivCompeticoes';
+
+    //#endregion
+
+    //#region Bind de Eventos
 
     $('#liCampeonatos').addClass('selected');
 
@@ -14,19 +20,44 @@ $(document).ready(function () {
         }
     });
 
+    $('#DivCompeticoes p #btnactivar').attr('disabled', true);
+
     $(DivCompeticoes).on('click', '#btnactivar', function (e) {
+        var Id = $(this).attr('itemid');
         $(this).toggleClass('registado', 1000).attr('disabled', true);
-        Activar();
+        var botoes = $('#DivCompeticoes p');
+        $.each(botoes, function myfunction(i, item) {
+            var btnregClass = $(item).children('#btnRegistar').hasClass('registado');
+            var btnAct = $(item).children('#btnactivar');
+            var btnItemId = $(btnAct).attr('itemid');
+            if (btnItemId != Id) {
+                if (btnregClass) {
+                    btnAct.removeClass('registado').attr('disabled', false);
+                } else {
+                    btnAct.attr('disabled', true);
+                };
+            };
+        });
+        Activar(Id);
         return false;
     });
 
     $(DivCompeticoes).on('click', '#btnRegistar', function () {
         $(this).toggleClass('registado', 1000).attr('disabled', true);
-        Registar($(this).attr('itemid'));
+        var itemid = $(this).attr('itemid');
+        Registar(itemid);
+        var btnActivarId = '#btnactivar[itemid="' + itemid + '"]';
+        $(btnActivarId).attr('disabled', false);
         return false;
     });
 
+    //#endregion
+
+    //#region Carregar Competicoes
+
     CarregarCompeticoes();
+
+    //#endregion
 
     //#region Funcoes
 
@@ -43,11 +74,12 @@ $(document).ready(function () {
                     var ids = $('#DivCompeticoes p input[type=hidden]');
                     $.each(ids, function (i2, item2) {
                         if (item.IdCompeticao == item2.value) {
-                            var itemid = '#btnRegistar[itemid="' + item2.value + '"]';
-                            $(itemid).toggleClass('registado', 1000).attr('disabled', true);
+                            var btnRegistar = '#btnRegistar[itemid="' + item2.value + '"]';
+                            var btnActivar = '#btnactivar[itemid="' + item.IdCompeticao + '"]';
+                            $(btnActivar).attr('disabled', false);
+                            $(btnRegistar).toggleClass('registado', 1000).attr('disabled', true);
                             if (item.Activo) {
-                                var itemid = '#btnactivar[itemid="' + item.IdCompeticao + '"]';
-                                $(itemid).toggleClass('registado', 1000).attr('disabled', true);
+                                $(btnActivar).toggleClass('registado', 1000).attr('disabled', true);
                             }
                         }
                     });
@@ -66,7 +98,7 @@ $(document).ready(function () {
         });
     };
 
-    function Registar(id) {        
+    function Registar(id) {
         var dataIn = '{' + '"IdCompeticao":"' + id + '"}';
         $.ajax({
             type: 'POST',
@@ -95,16 +127,22 @@ $(document).ready(function () {
         });
     };
 
-    function Activar() {
-        var id = $(this).attr('itemid');
+    function Activar(id) {
+        var dataIn = '{' + '"IdCompeticao":"' + id + '"}';
         $.ajax({
             type: 'POST',
             url: '/Service/ApostasService.svc/ActivarCompeticao',
-            data: '{}',
+            data: dataIn,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function () {
-
+                jSuccess('Competicao activada com sucesso.',
+                  {
+                      autoHide: false,
+                      TimeShown: 3000,
+                      HorizontalPosition: 'center',
+                      clickOverlay: true
+                  });
             },
             error: function () {
                 jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
