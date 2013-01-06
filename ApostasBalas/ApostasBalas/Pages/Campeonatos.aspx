@@ -8,27 +8,27 @@
     <h2>Registo de Competicoes</h2>
     <asp:Repeater ID="rptCompeticoes" runat="server">
         <HeaderTemplate>
-            <div id="DivCompeticoes" class="RegistarCompeticoes" onload="Teste()">
+            <div id="DivCompeticoes" class="RegistarCompeticoes">
         </HeaderTemplate>
         <ItemTemplate>
-            <p id="p<%# Eval("IdCompeticao")%>">
-                <input id="hddId" type="hidden" value="<%# Eval("IdCompeticao")%>" />
+            <p>
+                <input type="hidden" value="<%# Eval("IdCompeticao")%>" />
                 <label>
                     <%# Eval("Descricao")%></label>
-                <button id="btnRegistar" class="buttondiv">
+                <button id="btnRegistar" class="buttondiv" itemid="<%# Eval("IdCompeticao")%>">
                     Registar</button>
-                <button id="btnactivar" class="buttondiv">
+                <button id="btnactivar" class="buttondiv" itemid="<%# Eval("IdCompeticao")%>">
                     Activar</button>
             </p>
         </ItemTemplate>
         <AlternatingItemTemplate>
             <p>
-                <input id="hddId" type="hidden" value=" <%# Eval("IdCompeticao")%>" />
+                <input type="hidden" value="<%# Eval("IdCompeticao")%>" />
                 <label>
                     <%# Eval("Descricao")%></label>
-                <button id="btnRegistar" class="buttondiv">
+                <button id="btnRegistar" class="buttondiv" itemid="<%# Eval("IdCompeticao")%>">
                     Registar</button>
-                <button id="btnactivar" class="buttondiv">
+                <button id="btnactivar" class="buttondiv" itemid="<%# Eval("IdCompeticao")%>">
                     Activar</button>
             </p>
         </AlternatingItemTemplate>

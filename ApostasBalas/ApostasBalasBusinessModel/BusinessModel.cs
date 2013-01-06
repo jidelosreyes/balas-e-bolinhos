@@ -150,7 +150,7 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
-                var Id = Int32.Parse(IdUtilizadorSessao);      
+                var Id = Int32.Parse(IdUtilizadorSessao);
                 return ApostasBalasDB.Competicao
                     .Join(ApostasBalasDB.UtilizadorCompeticao, c => c.IdCompeticao, uc => uc.IdCompeticao, (c, uc) => new { c, uc })
                     .Where(uc => uc.uc.IdUtilizador == Id)
@@ -183,6 +183,55 @@ namespace ApostasBalasBusinessModel
                     .FirstOrDefault();
 
                 return NomeCompeticao;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void RegistarCompeticao(string IdCompeticao)
+        {
+            try
+            {
+                ApostasBalasDB.UtilizadorCompeticao.AddObject(new UtilizadorCompeticao
+                {
+                    IdCompeticao = Int32.Parse(IdCompeticao),
+                    IdUtilizador = Int32.Parse(IdUtilizadorSessao),
+                    Activo = false,
+                    DataActualizacao = DateTime.Now,
+                    DataCriacao = DateTime.Now
+                });
+                ApostasBalasDB.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void ActivarCompeticao(string IdCompeticao)
+        {
+            try
+            {
+                var _CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdCompeticao == Int32.Parse(IdCompeticao))
+                    .FirstOrDefault();
+                _CompeticaoActiva.Activo = true;
+                ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(_CompeticaoActiva);
+
+                var _CompeticoesDesactivar = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdCompeticao != Int32.Parse(IdCompeticao))
+                    .ToList();
+                foreach (var item in _CompeticoesDesactivar)
+                {
+                    item.Activo = false;
+                    ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(item);
+                }
+                
+                ApostasBalasDB.SaveChanges();
             }
             catch (Exception Ex)
             {
