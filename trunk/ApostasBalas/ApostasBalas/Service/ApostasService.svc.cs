@@ -65,9 +65,9 @@ namespace ApostasBalas.Service
         }
 
         [OperationContract]
-        public void ActivarCompeticao()
+        public void ActivarCompeticao(string IdCompeticao)
         {
-
+            Logic.ActivarCompeticao(IdCompeticao);
         }
     }
 }

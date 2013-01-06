@@ -216,14 +216,16 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
+                var Id = Int32.Parse(IdCompeticao);
+                var IdUtilizador = Int32.Parse(IdUtilizadorSessao);
                 var _CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
-                    .Where(uc => uc.IdCompeticao == Int32.Parse(IdCompeticao))
+                    .Where(uc => uc.IdCompeticao == Id && uc.IdUtilizador == IdUtilizador)
                     .FirstOrDefault();
                 _CompeticaoActiva.Activo = true;
                 ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(_CompeticaoActiva);
 
                 var _CompeticoesDesactivar = ApostasBalasDB.UtilizadorCompeticao
-                    .Where(uc => uc.IdCompeticao != Int32.Parse(IdCompeticao))
+                    .Where(uc => uc.IdCompeticao != Id && uc.IdUtilizador == IdUtilizador)
                     .ToList();
                 foreach (var item in _CompeticoesDesactivar)
                 {
