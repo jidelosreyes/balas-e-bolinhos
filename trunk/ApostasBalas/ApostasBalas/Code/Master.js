@@ -4,25 +4,47 @@ $(document).ready(function () {
 
     //#region Menu Routing
 
-    $('#liHome').click(function () {
-        $(window.location).attr('href', 'Home');
+    $('body').css('display', 'none');
+    $('body').fadeIn(500);
+
+    $('#liHome').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Home';
+        $('body').fadeOut(500, redirectPage);
+        //$(window.location).attr('href', 'Home');
     });
 
-    $('#liCampeonatos').click(function () {
-        $(window.location).attr('href', 'Campeonatos');
+    $('#liCampeonatos').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Campeonatos';
+        $('body').fadeOut(500, redirectPage);
+        //$(window.location).attr('href', 'Campeonatos');
     });
 
-    $('#liApostas').click(function () {
-        $(window.location).attr('href', 'Apostas');
+    $('#liApostas').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Apostas';
+        $('body').fadeOut(500, redirectPage);
+        //$(window.location).attr('href', 'Apostas');
     });
 
-    $('#liClassificacao').click(function () {
-        $(window.location).attr('href', 'Classificacao');
+    $('#liClassificacao').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Classificacao';
+        $('body').fadeOut(500, redirectPage);
+        //$(window.location).attr('href', 'Classificacao');
     });
 
-    $('#liEstatisticas').click(function () {
-        $(window.location).attr('href', 'Estatisticas');
+    $('#liEstatisticas').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Estatisticas';
+        $('body').fadeOut(500, redirectPage);
+        //$(window.location).attr('href', 'Estatisticas');
     });
+
+    function redirectPage() {
+        window.location = linkLocation;
+    }
 
     //#endregion     
 
