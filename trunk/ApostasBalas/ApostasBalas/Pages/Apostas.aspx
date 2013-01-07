@@ -5,19 +5,21 @@
     <script src="../Code/Apostas.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>Apostar</h2>
+    <h2>
+        Apostar</h2>
     <div class="form_settings">
         <p>
             <span>Escolher Jornada</span>
-            <select id="id" name="name">
+            <select id="ddlApostar">                
             </select>
         </p>
     </div>
-    <h2>Apostas Anteriores</h2>
+    <h2>
+        Apostas Anteriores</h2>
     <div class="form_settings">
         <p>
             <span>Escolher Jornada</span>
-            <select id="Select1" name="name">
+            <select id="ddlVerApostas">             
             </select>
         </p>
     </div>
