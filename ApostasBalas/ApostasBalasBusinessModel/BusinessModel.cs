@@ -171,6 +171,27 @@ namespace ApostasBalasBusinessModel
             }
         }
 
+        public List<Jornada> ObterJornadas()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var IdCompeticaActiva = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdUtilizador == Id && uc.Activo == true)
+                    .Select(uc => uc.IdCompeticao)
+                    .FirstOrDefault();
+                return ApostasBalasDB.Jornada
+                    .OrderBy(j => j.Descricao)
+                    .Where(j => j.IdCompeticao == IdCompeticaActiva)
+                    .ToList();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
         public string ObterNomeCompeticaoActiva()
         {
             try

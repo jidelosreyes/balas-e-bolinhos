@@ -51,11 +51,13 @@ namespace ApostasBalas.Service
 
         #endregion
 
+        #region Competicoes
+
         [OperationContract]
         public string ObterCompeticoesRegistadas()
         {
-            var cenas = JsonConvert.SerializeObject(Logic.ObterCompeticoesRegistadas());
-            return cenas;
+            var CompeticoesRegistadas = JsonConvert.SerializeObject(Logic.ObterCompeticoesRegistadas());
+            return CompeticoesRegistadas;
         }
 
         [OperationContract]
@@ -69,5 +71,15 @@ namespace ApostasBalas.Service
         {
             Logic.ActivarCompeticao(IdCompeticao);
         }
+
+        #endregion
+
+        [OperationContract]
+        public string ObterJornadas()
+        {
+            var Jornadas = JsonConvert.SerializeObject(Logic.ObterJornadas());
+            return Jornadas;
+        }
+
     }
 }
