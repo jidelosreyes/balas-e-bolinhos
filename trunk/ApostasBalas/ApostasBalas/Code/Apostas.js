@@ -4,4 +4,7 @@
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
     $('#liApostas').addClass('selected');
+
+   
+
 });
