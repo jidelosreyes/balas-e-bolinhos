@@ -13,7 +13,12 @@ namespace ApostasBalas.Pages
         {
             if (!Page.IsPostBack)
             {
-                
+                var Jogos = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaJornada();
+                if (Jogos != null)
+                {
+                    rptUltimosJogos.DataSource = Jogos;
+                    rptUltimosJogos.DataBind();
+                }
             }
         }
     }

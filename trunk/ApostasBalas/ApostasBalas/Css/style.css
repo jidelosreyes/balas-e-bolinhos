@@ -510,6 +510,35 @@ ul#menu
     background-position: -192px -96px;
 }
  */
+ .ApostasForm_settings {
+	margin: 15px 0 15px 0;
+}
+
+ .ApostasForm_settings span
+    {
+        float: left;
+        width: 200px;
+        text-align: left;
+    }
+    
+    .ApostasForm_settings label
+    {
+        float: left;
+        width: 100px;
+        text-align: left;
+    }
+    
+     .ApostasForm_settings input
+    {
+        padding: 5px;
+        width: 299px;
+        font: 100% arial;
+        border: 1px solid #E5E5DB;
+        background: #FFF;
+        color: #47433F;
+    }  
+ 
+ 
 .form_settings
 {
     margin: 15px 0 0 0;
@@ -524,6 +553,13 @@ ul#menu
     {
         float: left;
         width: 200px;
+        text-align: left;
+    }
+    
+    .form_settings label
+    {
+        float: left;
+        width: 100px;
         text-align: left;
     }
 
