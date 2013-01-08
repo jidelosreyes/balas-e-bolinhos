@@ -16,35 +16,38 @@
         </p>
     </div>
     <div id="grdApostar">
-        <asp:Repeater ID="rptUltimosJogos" runat="server">
+        <asp:Repeater ID="rptApostar" runat="server">
             <HeaderTemplate>
-                <div class="ApostasForm_settings">
+                <div id="grdApostar" class="ApostasForm_settings">
             </HeaderTemplate>
             <ItemTemplate>
-                <span>Jogo
-                    <%#(Container.ItemIndex + 1) %></span>
-                <label>
-                    <%# Eval("Equipa1")%></label>
-                <label>
-                    <%# Eval("Resultado1")%></label>
-                <label>
-                    <%# Eval("Resultado2")%></label>
-                <label>
-                    <%# Eval("Equipa2")%></label>
+                <p>
+                    <span>Jogo
+                        <%#(Container.ItemIndex + 1) %></span>
+                    <label>
+                        <%# Eval("Equipa1")%></label>
+                    <input type="text" value="<%# Eval("Resultado1")%>" />
+                    <input type="text" value="<%# Eval("Resultado2")%>" />
+                    <label>
+                        <%# Eval("Equipa2")%></label>
+                </p>
             </ItemTemplate>
             <AlternatingItemTemplate>
-                <span>Jogo
-                    <%#(Container.ItemIndex + 1) %></span>
-                <label>
-                    <%# Eval("Equipa1")%></label>
-                <label>
-                    <%# Eval("Resultado1")%></label>
-                <label>
-                    <%# Eval("Resultado2")%></label>
-                <label>
-                    <%# Eval("Equipa2")%></label>
+                <p>
+                    <span>Jogo
+                        <%#(Container.ItemIndex + 1) %></span>
+                    <label>
+                        <%# Eval("Equipa1")%></label>
+                    <input type="text" value="<%# Eval("Resultado1")%>" />
+                    <input type="text" value="<%# Eval("Resultado2")%>" />
+                    <label>
+                        <%# Eval("Equipa2")%></label>
+                </p>
             </AlternatingItemTemplate>
             <FooterTemplate>
+                <p style="padding-top: 15px">
+                    <span>&nbsp;</span><input class="submit" type="submit" id="btnApostar" value="Apostar" />
+                </p>
                 </div>
             </FooterTemplate>
         </asp:Repeater>

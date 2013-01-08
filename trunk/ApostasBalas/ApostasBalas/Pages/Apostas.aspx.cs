@@ -16,8 +16,8 @@ namespace ApostasBalas.Pages
                 var Jogos = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaJornada();
                 if (Jogos != null)
                 {
-                    rptUltimosJogos.DataSource = Jogos;
-                    rptUltimosJogos.DataBind();
+                    rptApostar.DataSource = Jogos;
+                    rptApostar.DataBind();
                 }
             }
         }
