@@ -5,8 +5,7 @@
     <script src="../Code/Apostas.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>
-        Apostar</h2>
+    <h2>Apostar</h2>
     <div class="form_settings">
         <p>
             <span>Jornadas</span>
@@ -15,8 +14,11 @@
             </select>
         </p>
     </div>
-    <div id="grdApostar">
-        <asp:Repeater ID="rptApostar" runat="server">
+    <div id="grdApostar" class="ApostasForm_settings">
+
+
+
+        <%--<asp:Repeater ID="rptApostar" runat="server">
             <HeaderTemplate>
                 <div id="grdApostar" class="ApostasForm_settings">
             </HeaderTemplate>
@@ -50,7 +52,7 @@
                 </p>
                 </div>
             </FooterTemplate>
-        </asp:Repeater>
+        </asp:Repeater>--%>
         <%-- <asp:Repeater ID="rptUltimosJogos" runat="server">
             <HeaderTemplate>
                 <table style="width: 50%">
@@ -92,8 +94,7 @@
             </FooterTemplate>
         </asp:Repeater>--%>
     </div>
-    <h2>
-        Apostas Anteriores</h2>
+    <h2>Apostas Anteriores</h2>
     <div class="form_settings">
         <p>
             <span>Jornadas</span>
