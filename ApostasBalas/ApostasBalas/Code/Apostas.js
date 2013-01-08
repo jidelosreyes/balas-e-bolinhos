@@ -5,7 +5,25 @@
 $(document).ready(function () {
     $('#liApostas').addClass('selected');
 
+    $('#ddlApostar, #ddlVerApostas').on('change', function () {
+        //alert($(this).val());
+        runEffect();
+        return false;
+    });
+
+    $('#btnApostar').click(function () {
+        alert('cenas');
+        return false;
+    });
+
     CarregarJornadas();
+
+    function runEffect() {
+
+        // run the effect
+        $("#grdApostar").hide('Blind', null, 1000);
+        $("#grdApostar").show();
+    };
 
     function CarregarJornadas() {
         $.ajax({
@@ -34,10 +52,4 @@ $(document).ready(function () {
             }
         });
     };
-
-    $('#ddlApostar, #ddlVerApostas').on('change', function () {
-        alert($(this).val());
-        return false;
-    });
-
 });

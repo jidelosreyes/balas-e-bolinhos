@@ -511,14 +511,26 @@ ul#menu
 }
  */
  .ApostasForm_settings {
-	margin: 15px 0 15px 0;
+	margin: 15px 0 15px 0;	
+	border-width: 1px;
+	border-style: solid;
+	border-color: #47433F;
+	border-radius: 5px;
 }
+
+	 .ApostasForm_settings p
+    {
+        padding: 4px 4px 4px 4px;
+        
+    }
 
  .ApostasForm_settings span
     {
         float: left;
         width: 200px;
         text-align: left;
+        font-weight: bolder;
+        color: #B60000;
     }
     
     .ApostasForm_settings label
@@ -526,17 +538,31 @@ ul#menu
         float: left;
         width: 100px;
         text-align: left;
+        font-weight: bolder;
     }
     
      .ApostasForm_settings input
-    {
-        padding: 5px;
-        width: 299px;
+    {    	
+        padding: 5px;        
+        width: 50px;
         font: 100% arial;
         border: 1px solid #E5E5DB;
         background: #FFF;
         color: #47433F;
     }  
+    
+    .ApostasForm_settings .submit
+    {
+        font: 100% arial;
+        border: 0;
+        width: 99px;
+        margin: 0 0 0 212px;
+        height: 33px;
+        padding: 2px 0 3px 0;
+        cursor: pointer;
+        background: #3B3B3B;
+        color: #FFF;
+    }
  
  
 .form_settings
