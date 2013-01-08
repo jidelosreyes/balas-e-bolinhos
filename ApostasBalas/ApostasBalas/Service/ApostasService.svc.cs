@@ -81,5 +81,12 @@ namespace ApostasBalas.Service
             return Jornadas;
         }
 
+        [OperationContract]
+        public string ObterJornadaById(string IdJornada)
+        {
+            var Jornada = JsonConvert.SerializeObject(Logic.ObterJornadaById(IdJornada));
+            return Jornada;
+        }
+
     }
 }

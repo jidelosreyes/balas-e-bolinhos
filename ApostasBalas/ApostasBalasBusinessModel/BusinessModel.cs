@@ -64,7 +64,9 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
-                return ApostasBalasDB.Noticia.OrderByDescending(n => n.DataCriacao).FirstOrDefault();
+                return ApostasBalasDB.Noticia
+                    .OrderByDescending(n => n.DataCriacao)
+                    .FirstOrDefault();
             }
             catch (Exception Ex)
             {
@@ -78,8 +80,15 @@ namespace ApostasBalasBusinessModel
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
-                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
-                var UltimaJornada = ApostasBalasDB.Jornada.OrderByDescending(j => j.IdJornada).Where(j => j.IdCompeticao == CompeticaoActiva).Select(j => j.IdJornada).FirstOrDefault();
+                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdUtilizador == Id & uc.Activo == true)
+                    .Select(uc => uc.IdCompeticao)
+                    .FirstOrDefault();
+                var UltimaJornada = ApostasBalasDB.Jornada
+                    .OrderByDescending(j => j.IdJornada)
+                    .Where(j => j.IdCompeticao == CompeticaoActiva)
+                    .Select(j => j.IdJornada)
+                    .FirstOrDefault();
                 var Jogos = ApostasBalasDB.Jogo
                      .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
                      .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == UltimaJornada && jc.j.Realizado == true)
@@ -137,7 +146,9 @@ namespace ApostasBalasBusinessModel
         {
             try
             {
-                return ApostasBalasDB.Competicao.OrderBy(c => c.IdCompeticao).ToList();
+                return ApostasBalasDB.Competicao
+                    .OrderBy(c => c.IdCompeticao)
+                    .ToList();
             }
             catch (Exception Ex)
             {
@@ -184,6 +195,43 @@ namespace ApostasBalasBusinessModel
                     .OrderBy(j => j.Descricao)
                     .Where(j => j.IdCompeticao == IdCompeticaActiva)
                     .ToList();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public List<UltimoResultado> ObterJornadaById(string IdJornada)
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var _IdJornada = Int32.Parse(IdJornada);
+                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
+                var Jornada = ApostasBalasDB.Jornada                  
+                    .Where(j => j.IdCompeticao == CompeticaoActiva && j.IdJornada == _IdJornada)
+                    .Select(j => j.IdJornada)
+                    .FirstOrDefault();
+                var Jogos = ApostasBalasDB.Jogo
+                     .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
+                     .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == Jornada && jc.j.Realizado == true)
+                     .Select(j => j.j).ToList();
+                var UltimoResultado = new List<UltimoResultado>();
+                foreach (var item in Jogos)
+                {
+                    string[] Equipas = item.Descricao.Split(ConstantsModel.Delimiter);
+                    string[] Resultados = item.Resultado.Split(ConstantsModel.Delimiter);
+                    UltimoResultado.Add(new UltimoResultado
+                    {
+                        Equipa1 = Equipas[0],
+                        Equipa2 = Equipas[1],
+                        Resultado1 = Resultados[0],
+                        Resultado2 = Resultados[1]
+                    });
+                }
+                return UltimoResultado;
             }
             catch (Exception Ex)
             {
@@ -253,7 +301,7 @@ namespace ApostasBalasBusinessModel
                     item.Activo = false;
                     ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(item);
                 }
-                
+
                 ApostasBalasDB.SaveChanges();
             }
             catch (Exception Ex)
