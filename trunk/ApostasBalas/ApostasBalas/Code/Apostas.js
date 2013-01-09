@@ -49,7 +49,27 @@ $(document).ready(function () {
     });
 
     $('#btnApostar').live('click', function () {
-        alert($('#grdApostar p > input').val());
+        //alert($('#grdApostar p > input').val());
+        var dataIn = '{}';
+        $.ajax({
+            type: 'POST',
+            url: '/Service/ApostasService.svc/ObterJogosApostar',
+            data: dataIn,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                       {
+                           autoHide: false,
+                           TimeShown: 3000,
+                           HorizontalPosition: 'center',
+                           clickOverlay: true
+                       });
+            }
+        });
         return false;
     });
 

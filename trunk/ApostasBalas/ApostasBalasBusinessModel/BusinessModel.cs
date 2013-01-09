@@ -44,12 +44,14 @@ namespace ApostasBalasBusinessModel
             public int? Pontos { get; set; }
         }
 
-        public class UltimoResultado
+        public class InfoJogo
         {
+            public string Id { get; set; }
             public string Equipa1 { get; set; }
             public string Equipa2 { get; set; }
             public string Resultado1 { get; set; }
             public string Resultado2 { get; set; }
+            public string Realizado { get; set; }
         }
 
         public class CompeticaoRegistada
@@ -58,7 +60,7 @@ namespace ApostasBalasBusinessModel
             public int? IdUtilizador { get; set; }
             public int? IdCompeticao { get; set; }
             public bool? Activo { get; set; }
-        }
+        }       
 
         public Noticia ObterUltimaNoticia()
         {
@@ -75,7 +77,7 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<UltimoResultado> ObterUltimaJornada()
+        public List<InfoJogo> ObterUltimaJornada()
         {
             try
             {
@@ -93,12 +95,12 @@ namespace ApostasBalasBusinessModel
                      .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
                      .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == UltimaJornada && jc.j.Realizado == true)
                      .Select(j => j.j).ToList();
-                var UltimoResultado = new List<UltimoResultado>();
+                var UltimoResultado = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {
                     string[] Equipas = item.Descricao.Split(ConstantsModel.Delimiter);
                     string[] Resultados = item.Resultado.Split(ConstantsModel.Delimiter);
-                    UltimoResultado.Add(new UltimoResultado
+                    UltimoResultado.Add(new InfoJogo
                     {
                         Equipa1 = Equipas[0],
                         Equipa2 = Equipas[1],
@@ -203,14 +205,14 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<UltimoResultado> ObterJornadaById(string IdJornada)
+        public List<InfoJogo> ObterJornadaById(string IdJornada)
         {
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
                 var _IdJornada = Int32.Parse(IdJornada);
                 var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
-                var Jornada = ApostasBalasDB.Jornada                  
+                var Jornada = ApostasBalasDB.Jornada
                     .Where(j => j.IdCompeticao == CompeticaoActiva && j.IdJornada == _IdJornada)
                     .Select(j => j.IdJornada)
                     .FirstOrDefault();
@@ -218,12 +220,12 @@ namespace ApostasBalasBusinessModel
                      .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
                      .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == Jornada && jc.j.Realizado == true)
                      .Select(j => j.j).ToList();
-                var UltimoResultado = new List<UltimoResultado>();
+                var UltimoResultado = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {
                     string[] Equipas = item.Descricao.Split(ConstantsModel.Delimiter);
                     string[] Resultados = item.Resultado.Split(ConstantsModel.Delimiter);
-                    UltimoResultado.Add(new UltimoResultado
+                    UltimoResultado.Add(new InfoJogo
                     {
                         Equipa1 = Equipas[0],
                         Equipa2 = Equipas[1],
@@ -238,6 +240,62 @@ namespace ApostasBalasBusinessModel
                 LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 throw;
             }
+        }
+
+        public List<InfoJogo> ObterJogosApostar()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var _IdJornada = Int32.Parse("2");
+                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
+                var Jogos = ApostasBalasDB.Jogo
+                    .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jjc => jjc.IdJogo, (j, jjc) => new { j, jjc })
+                    .Where(r => r.jjc.IdJornada == _IdJornada && r.jjc.IdCompeticao == CompeticaoActiva)
+                    .ToList();
+                var InfoJogos = new List<InfoJogo>();
+                foreach (var item in Jogos)
+                {
+                    if (item.j.Resultado == null) { item.j.Resultado = "0-0"; }
+                    string[] Equipas = item.j.Descricao.Split(ConstantsModel.Delimiter);
+                    string[] Resultados = item.j.Resultado.Split(ConstantsModel.Delimiter);
+                    InfoJogos.Add(new InfoJogo
+                    {
+                        Id = item.jjc.IdJornadaJogoCompeticao.ToString(),
+                        Realizado = item.j.Realizado.ToString(),
+                        Equipa1 = Equipas[0],
+                        Equipa2 = Equipas[1],
+                        Resultado1 = Resultados[0],
+                        Resultado2 = Resultados[1]
+                    });
+                }
+                foreach (var item in InfoJogos)
+                {
+                    var IdJornadaJogoCompeticao = Int32.Parse(item.Id);
+                    var Aposta = ApostasBalasDB.Aposta
+                    .Where(a => a.IdUtilizador == Id && a.IdJornadaJogoCompeticao == IdJornadaJogoCompeticao)
+                    .Select(a => a.Descricao)
+                    .FirstOrDefault();
+                    if (Aposta != null)
+                    {
+                        string[] Resultado = Aposta.Split(ConstantsModel.Delimiter);
+                        item.Resultado1 = Resultado[0];
+                        item.Resultado2 = Resultado[1];
+                    }
+                    if(Aposta == null && bool.Parse(item.Realizado) == false)
+                    {
+                        item.Resultado1 = "0";
+                        item.Resultado2 = "0";
+                    }
+                }
+                return InfoJogos;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+
         }
 
         public string ObterNomeCompeticaoActiva()

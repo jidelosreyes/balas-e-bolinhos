@@ -88,5 +88,11 @@ namespace ApostasBalas.Service
             return Jornada;
         }
 
+        [OperationContract]
+        public void ObterJogosApostar()
+        {
+            Logic.ObterJogosApostar();
+        }
+
     }
 }
