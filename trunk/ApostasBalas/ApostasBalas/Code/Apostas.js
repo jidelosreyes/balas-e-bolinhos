@@ -116,7 +116,7 @@ $(document).ready(function () {
             var Resultado1 = $(item).find('#txtResultado1').val();
             var Resultado2 = $(item).find('#txtResultado2').val();
             var Id = $(item).find('#hdd').val();
-            var dataIn = '{}';
+            var dataIn = '{' + '"Id":"' + Id + '" ' + ',"Resultado1":"' + Resultado1 + '"' + ',"Resultado2":"' + Resultado2 + '"}';
             $.ajax({
                 type: 'POST',
                 url: '/Service/ApostasService.svc/Apostar',
@@ -148,6 +148,35 @@ $(document).ready(function () {
 
     CarregarJornadas();
 
+    CarregarJornadasAnteriores();
+
+    function CarregarJornadasAnteriores() {
+        $.ajax({
+            type: 'POST',
+            url: '/Service/ApostasService.svc/ObterJornadasAnteriores',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+                var object = JSON.parse(data.d);
+                $.each(object, function (i, item) {
+                    var itemToAppend = '<option value="' + item.IdJornada + '">' + item.Descricao + '</option>';              
+                    $(itemToAppend).appendTo('#ddlVerApostas');
+                });
+                return false;
+            },
+            error: function () {
+                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                   {
+                       autoHide: false,
+                       TimeShown: 3000,
+                       HorizontalPosition: 'center',
+                       clickOverlay: true
+                   });
+            }
+        });
+    }
+
     function CarregarJornadas() {
         $.ajax({
             type: 'POST',
@@ -159,8 +188,7 @@ $(document).ready(function () {
                 var object = JSON.parse(data.d);
                 $.each(object, function (i, item) {
                     var itemToAppend = '<option value="' + item.IdJornada + '">' + item.Descricao + '</option>';
-                    $(itemToAppend).appendTo('#ddlApostar');
-                    $(itemToAppend).appendTo('#ddlVerApostas');
+                    $(itemToAppend).appendTo('#ddlApostar');                  
                 });
                 return false;
             },
