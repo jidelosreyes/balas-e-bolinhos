@@ -270,32 +270,33 @@ ul#menu
     padding: 0 15px 20px 15px;
 }
 
-	.sidebar table
-	{
-		margin: 10px 0 30px 0;		
-	}  
-    .sidebar table tr
+    .sidebar table
     {
-    	float: left;
-    	height: 25px;    		
-    	background: transparent url(/Images/sport-soccer-icon.png) no-repeat left center;    	
-        color: #A4AA04;        
+        margin: 10px 0 30px 0;
     }
-    
-    .sidebar table td.icon
-    {   
-    	background: none;
-    	padding-left: 30px; 
-    	padding-right: 3px;                
-        color: #A4AA04;    
-    }
-    
-    .sidebar table td
-    {   
-    	background: none; 	
-    	padding-right: 3px;
-        color: #A4AA04;    
-    }
+
+        .sidebar table tr
+        {
+            float: left;
+            height: 25px;
+            background: transparent url(/Images/sport-soccer-icon.png) no-repeat left center;
+            color: #A4AA04;
+        }
+
+        .sidebar table td.icon
+        {
+            background: none;
+            padding-left: 30px;
+            padding-right: 3px;
+            color: #A4AA04;
+        }
+
+        .sidebar table td
+        {
+            background: none;
+            padding-right: 3px;
+            color: #A4AA04;
+        }
 
     .sidebar ul
     {
@@ -303,28 +304,28 @@ ul#menu
         padding: 4px 0 0 0;
         margin: 4px 0 30px 0;
     }
-    
+
     .sidebar li a.linkFacebook
-    {    	
-         background: transparent url(/Images/facebook.png) no-repeat left center;	
-	}
-	
-	.sidebar li a.linkEmail
-    {    	
-         background: transparent url(/Images/email-icon.png) no-repeat left center;	
-	}
+    {
+        background: transparent url(/Images/facebook.png) no-repeat left center;
+    }
+
+    .sidebar li a.linkEmail
+    {
+        background: transparent url(/Images/email-icon.png) no-repeat left center;
+    }
 
     .sidebar li
     {
-        list-style: none;        
-        padding: 0 0 7px 0;        
+        list-style: none;
+        padding: 0 0 7px 0;
     }
 
         .sidebar li a
         {
             padding: 0 0 0 35px;
             display: block;
-            text-decoration:none;            
+            text-decoration: none;
             height: 16px;
             background: transparent url(/Images/sport-soccer-icon.png) no-repeat left center;
         }
@@ -449,53 +450,56 @@ ul#menu
         background: none;
     }
 
-.RegistarCompeticoes 
+.RegistarCompeticoes
 {
-	margin: 15px 0 0 0;
+    margin: 15px 0 0 0;
 }
-	.RegistarCompeticoes p
-	{
-		padding: 0 0 4px 0;
-	}
-	.RegistarCompeticoes label
+
+    .RegistarCompeticoes p
+    {
+        padding: 0 0 4px 0;
+    }
+
+    .RegistarCompeticoes label
     {
         float: left;
         width: 200px;
         text-align: left;
-        font-weight:900;
-        font-style:italic;
+        font-weight: 900;
+        font-style: italic;
     }
-    
-     .RegistarCompeticoes button
-    {       	
-        padding: 5px;        
-        font: 100% arial;
-        border: 1px solid #E5E5DB;
-        background: #B60000;
-        color: white;
-    }
-           
-    .RegistarCompeticoes button .registar
-    {    
-        padding: 5px;        
-        font: 100% arial;       
-        background: #B60000;
-        color: white;
-    } 
-    
-    .RegistarCompeticoes button.registado .ui-button-icon-primary {
-		background-position: -192px -96px;
-	}
-    
-     .RegistarCompeticoes button.registado
-    {    	
+
+    .RegistarCompeticoes button
+    {
         padding: 5px;
         font: 100% arial;
         border: 1px solid #E5E5DB;
-        background: #04691D;
+        background: #B60000;
         color: white;
     }
-    /*
+
+        .RegistarCompeticoes button .registar
+        {
+            padding: 5px;
+            font: 100% arial;
+            background: #B60000;
+            color: white;
+        }
+
+        .RegistarCompeticoes button.registado .ui-button-icon-primary
+        {
+            background-position: -192px -96px;
+        }
+
+        .RegistarCompeticoes button.registado
+        {
+            padding: 5px;
+            font: 100% arial;
+            border: 1px solid #E5E5DB;
+            background: #04691D;
+            color: white;
+        }
+/*
 .registado {
    display: none;
   
@@ -510,21 +514,21 @@ ul#menu
     background-position: -192px -96px;
 }
  */
- .ApostasForm_settings {
-	margin: 15px 0 15px 0;	
-	border-width: 1px;
-	border-style: solid;
-	border-color: #47433F;
-	border-radius: 5px;
+.ApostasForm_settings
+{
+    margin: 15px 0 15px 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #47433F;
+    border-radius: 5px;
 }
 
-	 .ApostasForm_settings p
+    .ApostasForm_settings p
     {
         padding: 4px 4px 4px 4px;
-        
     }
 
- .ApostasForm_settings span
+    .ApostasForm_settings span
     {
         float: left;
         width: 200px;
@@ -532,7 +536,7 @@ ul#menu
         font-weight: bolder;
         color: #B60000;
     }
-    
+
     .ApostasForm_settings label
     {
         float: left;
@@ -540,17 +544,17 @@ ul#menu
         text-align: left;
         font-weight: bolder;
     }
-    
-     .ApostasForm_settings input
-    {    	
-        padding: 5px;        
+
+    .ApostasForm_settings input
+    {
+        padding: 5px;
         width: 50px;
         font: 100% arial;
         border: 1px solid #E5E5DB;
         background: #FFF;
         color: #47433F;
-    }  
-    
+    }
+
     .ApostasForm_settings .submit
     {
         font: 100% arial;
@@ -563,8 +567,27 @@ ul#menu
         background: #3B3B3B;
         color: #FFF;
     }
- 
- 
+
+    .ApostasForm_settings .total
+    {
+        margin: 0 0 0 212px;
+        padding: 5px;
+        width: 38px;
+        font: 100% arial;
+        border: 1px solid #E5E5DB;
+        background: #FFF;
+        color: #47433F;
+    }
+
+    .ApostasForm_settings a
+    {
+        padding: 0 0 0 20px;
+        margin-left: 10px;
+        height: 16px;
+        background: transparent url(/Images/info.png) no-repeat left center;
+    }
+
+
 .form_settings
 {
     margin: 15px 0 0 0;
@@ -581,7 +604,7 @@ ul#menu
         width: 200px;
         text-align: left;
     }
-    
+
     .form_settings label
     {
         float: left;
@@ -597,7 +620,7 @@ ul#menu
         border: 1px solid #E5E5DB;
         background: #FFF;
         color: #47433F;
-    }  
+    }
 
     .form_settings .submit
     {
@@ -660,24 +683,24 @@ ul#menu
         color: #47433F;
         border-top: 1px solid #FFF;
     }
-    
-	.DataTable tr.TableHighlight td 
-	{
-			background-color: #04691D;
-			color: #FFF;   
-			padding: 7px 4px;
-			text-align: left;    
-			border-top: 1px solid #FFF;
-	}
-	
-	.DataTable tr.TableOther td 
-	{
-			background-color: #A4AA04;
-			color: #47433F;
-			padding: 7px 4px;
-			text-align: left;    
-			border-top: 1px solid #FFF;
-	}
+
+    .DataTable tr.TableHighlight td
+    {
+        background-color: #04691D;
+        color: #FFF;
+        padding: 7px 4px;
+        text-align: left;
+        border-top: 1px solid #FFF;
+    }
+
+    .DataTable tr.TableOther td
+    {
+        background-color: #A4AA04;
+        color: #47433F;
+        padding: 7px 4px;
+        text-align: left;
+        border-top: 1px solid #FFF;
+    }
 
 #ProcessFilter
 {
@@ -717,19 +740,19 @@ ul#menu
 }
 
 
-    label.valid
-    {
-        width: 24px;
-        height: 24px;
-        background: url(/Images/valid.png) center center no-repeat;
-        display: inline-block;
-        text-indent: -9999px;
-    }
+label.valid
+{
+    width: 24px;
+    height: 24px;
+    background: url(/Images/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
 
-    label.error
-    {
-        font-weight: bold;
-        color: red;
-        padding: 2px 8px;
-        margin-top: 2px;
-    }
+label.error
+{
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}

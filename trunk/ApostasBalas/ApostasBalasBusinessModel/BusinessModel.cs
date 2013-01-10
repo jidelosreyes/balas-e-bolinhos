@@ -7,6 +7,7 @@ using System.Web;
 using ApostasBalasDataModel;
 using log4net;
 using System.Collections.Generic;
+using System.Resources;
 
 namespace ApostasBalasBusinessModel
 {
@@ -47,6 +48,7 @@ namespace ApostasBalasBusinessModel
         public class InfoJogo
         {
             public string Id { get; set; }
+            public string Data { get; set; }
             public string Equipa1 { get; set; }
             public string Equipa2 { get; set; }
             public string Resultado1 { get; set; }
@@ -60,7 +62,7 @@ namespace ApostasBalasBusinessModel
             public int? IdUtilizador { get; set; }
             public int? IdCompeticao { get; set; }
             public bool? Activo { get; set; }
-        }       
+        }
 
         public Noticia ObterUltimaNoticia()
         {
@@ -242,13 +244,16 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public List<InfoJogo> ObterJogosApostar()
+        public List<InfoJogo> ObterJogosApostar(string IdJornada)
         {
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
-                var _IdJornada = Int32.Parse("2");
-                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao.Where(uc => uc.IdUtilizador == Id & uc.Activo == true).Select(uc => uc.IdCompeticao).FirstOrDefault();
+                var _IdJornada = Int32.Parse(IdJornada);
+                var CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdUtilizador == Id & uc.Activo == true)
+                    .Select(uc => uc.IdCompeticao)
+                    .FirstOrDefault();
                 var Jogos = ApostasBalasDB.Jogo
                     .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jjc => jjc.IdJogo, (j, jjc) => new { j, jjc })
                     .Where(r => r.jjc.IdJornada == _IdJornada && r.jjc.IdCompeticao == CompeticaoActiva)
@@ -256,12 +261,13 @@ namespace ApostasBalasBusinessModel
                 var InfoJogos = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {
-                    if (item.j.Resultado == null) { item.j.Resultado = "0-0"; }
+                    if (item.j.Resultado == null) { item.j.Resultado = ConstantsModel.NullResult; }
                     string[] Equipas = item.j.Descricao.Split(ConstantsModel.Delimiter);
                     string[] Resultados = item.j.Resultado.Split(ConstantsModel.Delimiter);
                     InfoJogos.Add(new InfoJogo
                     {
                         Id = item.jjc.IdJornadaJogoCompeticao.ToString(),
+                        Data = item.j.Data.ToString(),
                         Realizado = item.j.Realizado.ToString(),
                         Equipa1 = Equipas[0],
                         Equipa2 = Equipas[1],
@@ -282,10 +288,10 @@ namespace ApostasBalasBusinessModel
                         item.Resultado1 = Resultado[0];
                         item.Resultado2 = Resultado[1];
                     }
-                    if(Aposta == null && bool.Parse(item.Realizado) == false)
+                    if (Aposta == null && bool.Parse(item.Realizado) == false)
                     {
-                        item.Resultado1 = "0";
-                        item.Resultado2 = "0";
+                        item.Resultado1 = ConstantsModel.Zero;
+                        item.Resultado2 = ConstantsModel.Zero;
                     }
                 }
                 return InfoJogos;
@@ -586,6 +592,8 @@ namespace ApostasBalasBusinessModel
         public const string Warning = "Warning";
         public const string Fatal = "Fatal";
         public const char Delimiter = '-';
+        public const string NullResult = "0-0";
+        public const string Zero = "0";
     }
 
     internal static class LoggingModel
