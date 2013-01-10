@@ -19,6 +19,7 @@ namespace ApostasBalas.Service
         //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
         //     and include the following line in the operation body:
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
+
         #region Login
 
         [OperationContract]
@@ -74,6 +75,8 @@ namespace ApostasBalas.Service
 
         #endregion
 
+        #region Apostas
+
         [OperationContract]
         public string ObterJornadas()
         {
@@ -82,10 +85,10 @@ namespace ApostasBalas.Service
         }
 
         [OperationContract]
-        public string ObterJornadaById(string IdJornada)
+        public string ObterJornadasAnteriores()
         {
-            var Jornada = JsonConvert.SerializeObject(Logic.ObterJornadaById(IdJornada));
-            return Jornada;
+            var JornadasAnteriores = JsonConvert.SerializeObject(Logic.ObterJornadasAnteriores());
+            return JornadasAnteriores;
         }
 
         [OperationContract]
@@ -96,9 +99,18 @@ namespace ApostasBalas.Service
         }
 
         [OperationContract]
-        public void Apostar()
+        public void Apostar(string Id, string Resultado1, string Resultado2)
         {
 
+        }
+
+        #endregion
+
+        [OperationContract]
+        public string ObterJornadaById(string IdJornada)
+        {
+            var Jornada = JsonConvert.SerializeObject(Logic.ObterJornadaById(IdJornada));
+            return Jornada;
         }
 
     }
