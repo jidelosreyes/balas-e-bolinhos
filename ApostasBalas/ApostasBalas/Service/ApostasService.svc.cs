@@ -89,9 +89,16 @@ namespace ApostasBalas.Service
         }
 
         [OperationContract]
-        public void ObterJogosApostar()
+        public string ObterJogosApostar(string IdJornada)
         {
-            Logic.ObterJogosApostar();
+            var Jogos = JsonConvert.SerializeObject(Logic.ObterJogosApostar(IdJornada));
+            return Jogos;
+        }
+
+        [OperationContract]
+        public void Apostar()
+        {
+
         }
 
     }

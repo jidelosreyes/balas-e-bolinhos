@@ -4,6 +4,17 @@
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
     $('#liApostas').addClass('selected');
+
+    $(document).tooltip(
+    {
+        show: {
+            effect: 'slideDown'
+        },
+        hide: {
+            effect: 'slideUp'
+        }
+    });
+
     $("#grdApostar").css('display', 'none');
     $('#ddlApostar').on('change', function () {
         var Id = $(this).val();
@@ -19,7 +30,7 @@ $(document).ready(function () {
             var dataIn = '{' + '"IdJornada":"' + Id + '"}';
             $.ajax({
                 type: 'POST',
-                url: '/Service/ApostasService.svc/ObterJornadaById',
+                url: '/Service/ApostasService.svc/ObterJogosApostar',
                 data: dataIn,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -27,7 +38,13 @@ $(document).ready(function () {
                     grdApostar.empty();
                     var object = JSON.parse(result.d);
                     $.each(object, function (i, item) {
-                        var htmltoApend = '<p><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input type="text" value=' + item.Resultado1 + ' /><input type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label></p>';
+                        var disabled = '';
+                        var jogoRealizado = '<a title="Data: ' + item.Data + '" />';
+                        if (item.Realizado == 'True') {
+                            disabled = 'disabled="disabled"';
+                            jogoRealizado = '<a title="Jogo já realizado." />';
+                        }
+                        var htmltoApend = '<p class="jogo"><input id="hdd" type="hidden" value=' + item.Id + ' /><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input id="txtResultado1" ' + disabled + ' type="text" value=' + item.Resultado1 + ' /><input id="txtResultado2" ' + disabled + ' type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label>' + jogoRealizado + '</p>';
                         $(htmltoApend).appendTo(grdApostar);
                     });
                     var submitBtn = '<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" id="btnApostar" value="Apostar" /></p>';
@@ -48,27 +65,83 @@ $(document).ready(function () {
         return false;
     });
 
-    $('#btnApostar').live('click', function () {
-        //alert($('#grdApostar p > input').val());
-        var dataIn = '{}';
-        $.ajax({
-            type: 'POST',
-            url: '/Service/ApostasService.svc/ObterJogosApostar',
-            data: dataIn,
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function () {
-
-            },
-            error: function () {
-                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+    $('#ddlVerApostas').on('change', function () {
+        var Id = $(this).val();
+        var grdVerApostas = $("#grdVerApostas");
+        if (Id == '0') {
+            grdVerApostas.fadeOut(1000, function () {
+                grdVerApostas.css('display', 'none');
+                grdVerApostas.empty();
+            });
+            return false;
+        };
+        grdVerApostas.fadeOut(1000, function () {
+            var dataIn = '{' + '"IdJornada":"' + Id + '"}';
+            $.ajax({
+                type: 'POST',
+                url: '/Service/ApostasService.svc/ObterJogosApostar',
+                data: dataIn,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    grdApostar.empty();
+                    var object = JSON.parse(result.d);
+                    $.each(object, function (i, item) {
+                        var htmltoApend = '<p><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input type="text" value=' + item.Resultado1 + ' /><input type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label></p>';
+                        $(htmltoApend).appendTo(grdVerApostas);
+                    });
+                    var totalPontos = '<p><span>Total de Pontos</span><input disabled="disabled" class="total" type="text" value="" /></p>';
+                    var submitBtn = '<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" id="btnApostar" value="Apostar" /></p>';
+                    $(totalPontos).appendTo(grdVerApostas);
+                    $(submitBtn).appendTo(grdVerApostas);
+                },
+                error: function () {
+                    jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
                        {
                            autoHide: false,
                            TimeShown: 3000,
                            HorizontalPosition: 'center',
                            clickOverlay: true
                        });
-            }
+                }
+            });
+            grdVerApostas.fadeIn(1000);
+        });
+        return false;
+    });
+
+    $('#btnApostar').live('click', function () {
+        var apostas = $('#grdApostar p.jogo');
+        $.each(apostas, function (i, item) {
+            var Resultado1 = $(item).find('#txtResultado1').val();
+            var Resultado2 = $(item).find('#txtResultado2').val();
+            var Id = $(item).find('#hdd').val();
+            var dataIn = '{}';
+            $.ajax({
+                type: 'POST',
+                url: '/Service/ApostasService.svc/Apostar',
+                data: dataIn,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function () {
+                    jSuccess('Apostas realizadas com sucesso.',
+                       {
+                           autoHide: false,
+                           TimeShown: 3000,
+                           HorizontalPosition: 'center',
+                           clickOverlay: true
+                       });
+                },
+                error: function () {
+                    jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+                           {
+                               autoHide: false,
+                               TimeShown: 3000,
+                               HorizontalPosition: 'center',
+                               clickOverlay: true
+                           });
+                }
+            });
         });
         return false;
     });
