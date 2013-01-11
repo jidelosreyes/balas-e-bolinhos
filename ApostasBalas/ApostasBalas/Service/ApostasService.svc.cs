@@ -101,7 +101,7 @@ namespace ApostasBalas.Service
         [OperationContract]
         public void Apostar(string Id, string Resultado1, string Resultado2)
         {
-
+            Logic.Apostar(Id, Resultado1, Resultado2);
         }
 
         #endregion
