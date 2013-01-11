@@ -222,7 +222,7 @@ namespace ApostasBalasBusinessModel
                     .Count();
                 return ApostasBalasDB.Jornada
                     .OrderBy(j => j.Descricao)
-                    .Where(j => j.IdCompeticao == IdCompeticaActiva)                    
+                    .Where(j => j.IdCompeticao == IdCompeticaActiva)
                     .Take(Total - 1)
                     .ToList();
             }
@@ -248,7 +248,7 @@ namespace ApostasBalasBusinessModel
                      .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
                      .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == Jornada && jc.j.Realizado == true)
                      .Select(j => j.j).ToList();
-                var UltimoResultado = new List<InfoJogo>();                
+                var UltimoResultado = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {
                     string[] Equipas = item.Descricao.Split(ConstantsModel.Delimiter);
@@ -287,9 +287,9 @@ namespace ApostasBalasBusinessModel
                 var InfoJogos = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {
-                    if (item.j.Resultado == null) { item.j.Resultado = ConstantsModel.NullResult; }
+                    //if (item.j.Resultado == null) { item.j.Resultado = ConstantsModel.NullResult; }
                     string[] Equipas = item.j.Descricao.Split(ConstantsModel.Delimiter);
-                    string[] Resultados = item.j.Resultado.Split(ConstantsModel.Delimiter);
+                    //string[] Resultados = item.j.Resultado.Split(ConstantsModel.Delimiter);
                     InfoJogos.Add(new InfoJogo
                     {
                         Id = item.jjc.IdJornadaJogoCompeticao.ToString(),
@@ -297,8 +297,8 @@ namespace ApostasBalasBusinessModel
                         Realizado = item.j.Realizado.ToString(),
                         Equipa1 = Equipas[0],
                         Equipa2 = Equipas[1],
-                        Resultado1 = Resultados[0],
-                        Resultado2 = Resultados[1]
+                        Resultado1 = ConstantsModel.Zero,
+                        Resultado2 = ConstantsModel.Zero
                     });
                 }
                 foreach (var item in InfoJogos)
@@ -403,14 +403,26 @@ namespace ApostasBalasBusinessModel
                 var _Id = Int32.Parse(IdUtilizadorSessao);
                 var _IdJornadaJogoCompeticao = Int32.Parse(Id);
                 string Descricao = Resultado1 + "-" + Resultado2;
-                ApostasBalasDB.Aposta.AddObject(new Aposta
+                var iExiste = ApostasBalasDB.Aposta
+                    .Where(a => a.IdJornadaJogoCompeticao == _IdJornadaJogoCompeticao && a.IdUtilizador == _Id)
+                    .FirstOrDefault();
+                if (iExiste != null)
                 {
-                    DataActualizacao = DateTime.Now,
-                    DataCriacao = DateTime.Now,
-                    Descricao = Descricao,
-                    IdJornadaJogoCompeticao = _IdJornadaJogoCompeticao,
-                    IdUtilizador = _Id
-                });
+                    iExiste.Descricao = Descricao;
+                    iExiste.DataActualizacao = DateTime.Now;
+                    ApostasBalasDB.Aposta.ApplyCurrentValues(iExiste);
+                }
+                else
+                {
+                    ApostasBalasDB.Aposta.AddObject(new Aposta
+                                   {
+                                       DataActualizacao = DateTime.Now,
+                                       DataCriacao = DateTime.Now,
+                                       Descricao = Descricao,
+                                       IdJornadaJogoCompeticao = _IdJornadaJogoCompeticao,
+                                       IdUtilizador = _Id
+                                   });                    
+                }
                 ApostasBalasDB.SaveChanges();
             }
             catch (Exception Ex)

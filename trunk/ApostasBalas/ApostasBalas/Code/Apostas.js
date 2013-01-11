@@ -16,6 +16,7 @@ $(document).ready(function () {
     });
 
     $("#grdApostar").css('display', 'none');
+    $("#grdVerApostas").css('display', 'none');
     $('#ddlApostar').on('change', function () {
         var Id = $(this).val();
         var grdApostar = $("#grdApostar");
@@ -79,21 +80,19 @@ $(document).ready(function () {
             var dataIn = '{' + '"IdJornada":"' + Id + '"}';
             $.ajax({
                 type: 'POST',
-                url: '/Service/ApostasService.svc/ObterJogosApostar',
+                url: '/Service/ApostasService.svc/ObterJornadaById',
                 data: dataIn,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (result) {
-                    grdApostar.empty();
+                    grdVerApostas.empty();
                     var object = JSON.parse(result.d);
                     $.each(object, function (i, item) {
-                        var htmltoApend = '<p><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input type="text" value=' + item.Resultado1 + ' /><input type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label></p>';
+                        var htmltoApend = '<p><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input disabled="disabled" type="text" value=' + item.Resultado1 + ' /><input disabled="disabled" type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label></p>';
                         $(htmltoApend).appendTo(grdVerApostas);
                     });
                     var totalPontos = '<p><span>Total de Pontos</span><input disabled="disabled" class="total" type="text" value="" /></p>';
-                    var submitBtn = '<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" id="btnApostar" value="Apostar" /></p>';
                     $(totalPontos).appendTo(grdVerApostas);
-                    $(submitBtn).appendTo(grdVerApostas);
                 },
                 error: function () {
                     jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
@@ -148,34 +147,34 @@ $(document).ready(function () {
 
     CarregarJornadas();
 
-    CarregarJornadasAnteriores();
+    //CarregarJornadasAnteriores();
 
-    function CarregarJornadasAnteriores() {
-        $.ajax({
-            type: 'POST',
-            url: '/Service/ApostasService.svc/ObterJornadasAnteriores',
-            data: '{}',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                var object = JSON.parse(data.d);
-                $.each(object, function (i, item) {
-                    var itemToAppend = '<option value="' + item.IdJornada + '">' + item.Descricao + '</option>';              
-                    $(itemToAppend).appendTo('#ddlVerApostas');
-                });
-                return false;
-            },
-            error: function () {
-                jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-                   {
-                       autoHide: false,
-                       TimeShown: 3000,
-                       HorizontalPosition: 'center',
-                       clickOverlay: true
-                   });
-            }
-        });
-    }
+    //function CarregarJornadasAnteriores() {
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '/Service/ApostasService.svc/ObterJornadasAnteriores',
+    //        data: '{}',
+    //        contentType: 'application/json; charset=utf-8',
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            var object = JSON.parse(data.d);
+    //            $.each(object, function (i, item) {
+    //                var itemToAppend = '<option value="' + item.IdJornada + '">' + item.Descricao + '</option>';
+    //                $(itemToAppend).appendTo('#ddlVerApostas');
+    //            });
+    //            return false;
+    //        },
+    //        error: function () {
+    //            jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
+    //               {
+    //                   autoHide: false,
+    //                   TimeShown: 3000,
+    //                   HorizontalPosition: 'center',
+    //                   clickOverlay: true
+    //               });
+    //        }
+    //    });
+    //}
 
     function CarregarJornadas() {
         $.ajax({
@@ -188,7 +187,8 @@ $(document).ready(function () {
                 var object = JSON.parse(data.d);
                 $.each(object, function (i, item) {
                     var itemToAppend = '<option value="' + item.IdJornada + '">' + item.Descricao + '</option>';
-                    $(itemToAppend).appendTo('#ddlApostar');                  
+                    $(itemToAppend).appendTo('#ddlApostar');
+                    $(itemToAppend).appendTo('#ddlVerApostas');
                 });
                 return false;
             },

@@ -16,7 +16,7 @@
     </div>
     <div id="grdApostar" class="ApostasForm_settings">       
     </div>
-    <h2>Apostas Anteriores</h2>
+    <h2>Ver Resultados</h2>
     <div class="form_settings">
         <p>
             <span>Jornadas</span>
@@ -25,6 +25,6 @@
             </select>
         </p>
     </div>
-    <div id="grdVerApostas">
+    <div id="grdVerApostas" class="ApostasForm_settings">
     </div>
 </asp:Content>
