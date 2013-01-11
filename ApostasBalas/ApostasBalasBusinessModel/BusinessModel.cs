@@ -35,6 +35,8 @@ namespace ApostasBalasBusinessModel
 
         #endregion
 
+        #region Objectos
+
         public class PrimeiroClassificado
         {
             public string Nome { get; set; }
@@ -63,6 +65,139 @@ namespace ApostasBalasBusinessModel
             public int? IdCompeticao { get; set; }
             public bool? Activo { get; set; }
         }
+
+        #endregion
+
+        #region Login
+
+        public bool Login(string Email, string Password, bool Lembrarme)
+        {
+            try
+            {
+                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.Email == Email & u.Password == Password & u.Activo == true).SingleOrDefault();
+                if (Utilizador != null)
+                {
+                    NomeUtilizadorSessao = Utilizador.NomeUtilizador;
+                    PasswordSessao = Utilizador.Password;
+                    IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
+                    HttpContext.Current.Session.Timeout = ConstantsModel.SessionTimeOut;
+                    if (Lembrarme)
+                    {
+                        HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
+                        Cookie.Value = IdUtilizadorSessao;
+                        Cookie.Expires = DateTime.Now.AddDays(5);
+                        HttpContext.Current.Response.Cookies.Add(Cookie);
+                    }
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void RegistarUtilizador(string Email, string Nome, string Password)
+        {
+            try
+            {
+                var Utilizador = new Utilizador()
+                {
+                    Activo = false,
+                    Administrador = false,
+                    DataActualizacao = DateTime.Now,
+                    DataCriacao = DateTime.Now,
+                    Email = Email,
+                    NomeUtilizador = Nome,
+                    Password = Password
+                };
+                ApostasBalasDB.Utilizador.AddObject(Utilizador);
+                ApostasBalasDB.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void RecuperarPassword(string Email)
+        {
+            try
+            {
+
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void LogOut()
+        {
+            try
+            {
+                HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
+                if (IsCookie)
+                {
+                    HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
+                    Cookie.Expires = DateTime.Now.AddDays(-1d);
+                    HttpContext.Current.Response.Cookies.Add(Cookie);
+                }
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void CookieLogin()
+        {
+            try
+            {
+                var IdUtilizador = Int32.Parse(HttpContext.Current.Request.Cookies[ConstantsModel.CookieName].Value.ToString());
+                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.IdUtilizador == IdUtilizador).SingleOrDefault();
+                NomeUtilizadorSessao = Utilizador.NomeUtilizador;
+                PasswordSessao = Utilizador.Password;
+                IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
+                Session.Timeout = ConstantsModel.SessionTimeOut;
+                HttpContext.Current.Response.RedirectToRoute(ConstantsModel.HomeRoute);
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void VerificarSessao()
+        {
+            try
+            {
+                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
+                {
+                    return;
+                }
+                if (IsCookie)
+                {
+                    CookieLogin();
+                }
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Master
 
         public Noticia ObterUltimaNoticia()
         {
@@ -119,6 +254,27 @@ namespace ApostasBalasBusinessModel
             }
         }
 
+        public string ObterNomeUtilizador()
+        {
+            try
+            {
+                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
+                {
+                    return NomeUtilizadorSessao;
+                }
+                return string.Empty;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Home
+
         public List<PrimeiroClassificado> ObterPrimeirosClassificados()
         {
             try
@@ -145,6 +301,30 @@ namespace ApostasBalasBusinessModel
                 throw;
             }
         }
+
+        public string ObterNomeCompeticaoActiva()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                var NomeCompeticao = ApostasBalasDB.UtilizadorCompeticao
+                    .Join(ApostasBalasDB.Competicao, uc => uc.IdCompeticao, c => c.IdCompeticao, (uc, c) => new { uc, c })
+                    .Where(uc => uc.uc.IdUtilizador == Id && uc.uc.Activo == true)
+                    .Select(c => c.c.Descricao)
+                    .FirstOrDefault();
+
+                return NomeCompeticao;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Competicoes
 
         public List<Competicao> ObterCompeticoes()
         {
@@ -185,6 +365,61 @@ namespace ApostasBalasBusinessModel
                 throw;
             }
         }
+
+        public void RegistarCompeticao(string IdCompeticao)
+        {
+            try
+            {
+                ApostasBalasDB.UtilizadorCompeticao.AddObject(new UtilizadorCompeticao
+                {
+                    IdCompeticao = Int32.Parse(IdCompeticao),
+                    IdUtilizador = Int32.Parse(IdUtilizadorSessao),
+                    Activo = false,
+                    DataActualizacao = DateTime.Now,
+                    DataCriacao = DateTime.Now
+                });
+                ApostasBalasDB.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        public void ActivarCompeticao(string IdCompeticao)
+        {
+            try
+            {
+                var Id = Int32.Parse(IdCompeticao);
+                var IdUtilizador = Int32.Parse(IdUtilizadorSessao);
+                var _CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdCompeticao == Id && uc.IdUtilizador == IdUtilizador)
+                    .FirstOrDefault();
+                _CompeticaoActiva.Activo = true;
+                ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(_CompeticaoActiva);
+
+                var _CompeticoesDesactivar = ApostasBalasDB.UtilizadorCompeticao
+                    .Where(uc => uc.IdCompeticao != Id && uc.IdUtilizador == IdUtilizador)
+                    .ToList();
+                foreach (var item in _CompeticoesDesactivar)
+                {
+                    item.Activo = false;
+                    ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(item);
+                }
+
+                ApostasBalasDB.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Apostas
 
         public List<Jornada> ObterJornadas()
         {
@@ -330,72 +565,6 @@ namespace ApostasBalasBusinessModel
 
         }
 
-        public string ObterNomeCompeticaoActiva()
-        {
-            try
-            {
-                var Id = Int32.Parse(IdUtilizadorSessao);
-                var NomeCompeticao = ApostasBalasDB.UtilizadorCompeticao
-                    .Join(ApostasBalasDB.Competicao, uc => uc.IdCompeticao, c => c.IdCompeticao, (uc, c) => new { uc, c })
-                    .Where(uc => uc.uc.IdUtilizador == Id && uc.uc.Activo == true)
-                    .Select(c => c.c.Descricao)
-                    .FirstOrDefault();
-
-                return NomeCompeticao;
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
-
-        public string ObterNomeUtilizador()
-        {
-            try
-            {
-                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
-                {
-                    return NomeUtilizadorSessao;
-                }
-                return string.Empty;
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
-
-        public bool Login(string Email, string Password, bool Lembrarme)
-        {
-            try
-            {
-                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.Email == Email & u.Password == Password & u.Activo == true).SingleOrDefault();
-                if (Utilizador != null)
-                {
-                    NomeUtilizadorSessao = Utilizador.NomeUtilizador;
-                    PasswordSessao = Utilizador.Password;
-                    IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
-                    HttpContext.Current.Session.Timeout = ConstantsModel.SessionTimeOut;
-                    if (Lembrarme)
-                    {
-                        HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
-                        Cookie.Value = IdUtilizadorSessao;
-                        Cookie.Expires = DateTime.Now.AddDays(5);
-                        HttpContext.Current.Response.Cookies.Add(Cookie);
-                    }
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
-
         public void Apostar(string Id, string Resultado1, string Resultado2)
         {
             try
@@ -415,13 +584,13 @@ namespace ApostasBalasBusinessModel
                 else
                 {
                     ApostasBalasDB.Aposta.AddObject(new Aposta
-                                   {
-                                       DataActualizacao = DateTime.Now,
-                                       DataCriacao = DateTime.Now,
-                                       Descricao = Descricao,
-                                       IdJornadaJogoCompeticao = _IdJornadaJogoCompeticao,
-                                       IdUtilizador = _Id
-                                   });                    
+                    {
+                        DataActualizacao = DateTime.Now,
+                        DataCriacao = DateTime.Now,
+                        Descricao = Descricao,
+                        IdJornadaJogoCompeticao = _IdJornadaJogoCompeticao,
+                        IdUtilizador = _Id
+                    });
                 }
                 ApostasBalasDB.SaveChanges();
             }
@@ -432,152 +601,25 @@ namespace ApostasBalasBusinessModel
             }
         }
 
-        public void RegistarCompeticao(string IdCompeticao)
-        {
-            try
-            {
-                ApostasBalasDB.UtilizadorCompeticao.AddObject(new UtilizadorCompeticao
-                {
-                    IdCompeticao = Int32.Parse(IdCompeticao),
-                    IdUtilizador = Int32.Parse(IdUtilizadorSessao),
-                    Activo = false,
-                    DataActualizacao = DateTime.Now,
-                    DataCriacao = DateTime.Now
-                });
-                ApostasBalasDB.SaveChanges();
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
+        #endregion
 
-        public void ActivarCompeticao(string IdCompeticao)
-        {
-            try
-            {
-                var Id = Int32.Parse(IdCompeticao);
-                var IdUtilizador = Int32.Parse(IdUtilizadorSessao);
-                var _CompeticaoActiva = ApostasBalasDB.UtilizadorCompeticao
-                    .Where(uc => uc.IdCompeticao == Id && uc.IdUtilizador == IdUtilizador)
-                    .FirstOrDefault();
-                _CompeticaoActiva.Activo = true;
-                ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(_CompeticaoActiva);
+        #region Classificacao
 
-                var _CompeticoesDesactivar = ApostasBalasDB.UtilizadorCompeticao
-                    .Where(uc => uc.IdCompeticao != Id && uc.IdUtilizador == IdUtilizador)
-                    .ToList();
-                foreach (var item in _CompeticoesDesactivar)
-                {
-                    item.Activo = false;
-                    ApostasBalasDB.UtilizadorCompeticao.ApplyCurrentValues(item);
-                }
 
-                ApostasBalasDB.SaveChanges();
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
 
-        public void RegistarUtilizador(string Email, string Nome, string Password)
-        {
-            try
-            {
-                var Utilizador = new Utilizador()
-                           {
-                               Activo = false,
-                               Administrador = false,
-                               DataActualizacao = DateTime.Now,
-                               DataCriacao = DateTime.Now,
-                               Email = Email,
-                               NomeUtilizador = Nome,
-                               Password = Password
-                           };
-                ApostasBalasDB.Utilizador.AddObject(Utilizador);
-                ApostasBalasDB.SaveChanges();
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
+        #endregion
 
-        public void RecuperarPassword(string Email)
-        {
-            try
-            {
+        #region Estatisticas
 
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
 
-        public void LogOut()
-        {
-            try
-            {
-                HttpContext.Current.Session.Clear();
-                HttpContext.Current.Session.Abandon();
-                if (IsCookie)
-                {
-                    HttpCookie Cookie = new HttpCookie(ConstantsModel.CookieName);
-                    Cookie.Expires = DateTime.Now.AddDays(-1d);
-                    HttpContext.Current.Response.Cookies.Add(Cookie);
-                }
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
 
-        public void CookieLogin()
-        {
-            try
-            {
-                var IdUtilizador = Int32.Parse(HttpContext.Current.Request.Cookies[ConstantsModel.CookieName].Value.ToString());
-                var Utilizador = ApostasBalasDB.Utilizador.Where(u => u.IdUtilizador == IdUtilizador).SingleOrDefault();
-                NomeUtilizadorSessao = Utilizador.NomeUtilizador;
-                PasswordSessao = Utilizador.Password;
-                IdUtilizadorSessao = Utilizador.IdUtilizador.ToString();
-                Session.Timeout = ConstantsModel.SessionTimeOut;
-                HttpContext.Current.Response.RedirectToRoute(ConstantsModel.HomeRoute);
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
+        #endregion
 
-        public void VerificarSessao()
-        {
-            try
-            {
-                if (NomeUtilizadorSessao != string.Empty & PasswordSessao != string.Empty & IdUtilizadorSessao != string.Empty)
-                {
-                    return;
-                }
-                if (IsCookie)
-                {
-                    CookieLogin();
-                }
-            }
-            catch (Exception Ex)
-            {
-                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
-                throw;
-            }
-        }
+        #region Admin
+
+
+
+        #endregion
     }
 
     public abstract class PlatformModel : System.Web.UI.Page
