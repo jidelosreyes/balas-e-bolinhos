@@ -9,9 +9,15 @@
     <script src="../Scripts/jqwidgets/jqxlistbox.js" type="text/javascript"></script>
     <script src="../Scripts/jqwidgets/jqxscrollbar.js" type="text/javascript"></script>
     <script src="../Scripts/jqwidgets/jqxdropdownlist.js" type="text/javascript"></script>
+    <script src="../Scripts/jqwidgets/jqxgrid.js" type="text/javascript"></script>
+    <script src="../Scripts/jqwidgets/jqxgrid.columnsresize.js" type="text/javascript"></script>
+    <script src="../Scripts/jqwidgets/jqxgrid.selection.js" type="text/javascript"></script>
+    <script src="../Scripts/jqwidgets/jqxdata.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input type="button" value="Click Me" id='myButton' />
     <div id='jqxWidget'>
+    </div>
+    <div id="jqxgrid">
     </div>
 </asp:Content>
