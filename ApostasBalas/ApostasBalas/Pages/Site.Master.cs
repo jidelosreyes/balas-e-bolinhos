@@ -16,6 +16,11 @@ namespace ApostasBalas.Pages
             {
                 ApostasBalasBusinessModel.PlatformModel.Logic.VerificarSessao(); 
                 lblNome.Text = ApostasBalasBusinessModel.PlatformModel.Logic.ObterNomeUtilizador();
+                bool? Admin = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUtilizadorAdmin();
+                if (Admin != null && Admin == true)
+                {
+                    liAdmin.Visible = true;
+                }
                 var Noticia = ApostasBalasBusinessModel.PlatformModel.Logic.ObterUltimaNoticia();
                 if (Noticia != null)
                 {
