@@ -17,7 +17,8 @@ namespace ApostasBalas
             Routes.MapPageRoute("Apostas", "Apostas", "~/Pages/Apostas.aspx");
             Routes.MapPageRoute("Campeonatos", "Campeonatos", "~/Pages/Campeonatos.aspx");
             Routes.MapPageRoute("Classificacao", "Classificacao", "~/Pages/Classificacao.aspx");
-            Routes.MapPageRoute("Estatisticas", "Estatisticas", "~/Pages/Estatisticas.aspx");            
+            Routes.MapPageRoute("Estatisticas", "Estatisticas", "~/Pages/Estatisticas.aspx");
+            Routes.MapPageRoute("Admin", "Admin", "~/Pages/Admin.aspx");            
         }
 
         protected void Application_Start(object sender, EventArgs e)

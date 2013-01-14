@@ -69,11 +69,113 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Code\Admin.js" />
     <Content Include="Code\Apostas.js" />
     <Content Include="Code\Campeonatos.js" />
     <Content Include="Code\Home.js" />
     <Content Include="Code\Login.js" />
     <Content Include="Code\Master.js" />
+    <Content Include="Content\jqwidgets\images\arrow_bottom.png" />
+    <Content Include="Content\jqwidgets\images\arrow_left.png" />
+    <Content Include="Content\jqwidgets\images\arrow_right.png" />
+    <Content Include="Content\jqwidgets\images\arrow_top.png" />
+    <Content Include="Content\jqwidgets\images\backgroundTop.png" />
+    <Content Include="Content\jqwidgets\images\backImage.png" />
+    <Content Include="Content\jqwidgets\images\bar-hue.png" />
+    <Content Include="Content\jqwidgets\images\bar-saturation.png" />
+    <Content Include="Content\jqwidgets\images\bg_black.png" />
+    <Content Include="Content\jqwidgets\images\bg_black2.png" />
+    <Content Include="Content\jqwidgets\images\bg_blackhover.png" />
+    <Content Include="Content\jqwidgets\images\bg_blackhover_horizontal.png" />
+    <Content Include="Content\jqwidgets\images\bg_blackpressed.png" />
+    <Content Include="Content\jqwidgets\images\bg_blackpressed_horizontal.png" />
+    <Content Include="Content\jqwidgets\images\bg_black_horizontal.png" />
+    <Content Include="Content\jqwidgets\images\bg_blueenergy.png" />
+    <Content Include="Content\jqwidgets\images\bg_darkblue.png" />
+    <Content Include="Content\jqwidgets\images\bg_darkbluehover.png" />
+    <Content Include="Content\jqwidgets\images\bg_darkbluepressed.png" />
+    <Content Include="Content\jqwidgets\images\blackbackground.png" />
+    <Content Include="Content\jqwidgets\images\black_gradient.png" />
+    <Content Include="Content\jqwidgets\images\check_black.png" />
+    <Content Include="Content\jqwidgets\images\check_disabled.png" />
+    <Content Include="Content\jqwidgets\images\check_indeterminate_black.png" />
+    <Content Include="Content\jqwidgets\images\check_indeterminate_disabled.png" />
+    <Content Include="Content\jqwidgets\images\check_indeterminate_white.png" />
+    <Content Include="Content\jqwidgets\images\check_white.png" />
+    <Content Include="Content\jqwidgets\images\close.png" />
+    <Content Include="Content\jqwidgets\images\close_white.png" />
+    <Content Include="Content\jqwidgets\images\crosshair-white.png" />
+    <Content Include="Content\jqwidgets\images\crosshair.png" />
+    <Content Include="Content\jqwidgets\images\darkred_gradient.png" />
+    <Content Include="Content\jqwidgets\images\icon-down - Copy.png" />
+    <Content Include="Content\jqwidgets\images\icon-down-white.png" />
+    <Content Include="Content\jqwidgets\images\icon-down.png" />
+    <Content Include="Content\jqwidgets\images\icon-left-white.png" />
+    <Content Include="Content\jqwidgets\images\icon-left.png" />
+    <Content Include="Content\jqwidgets\images\icon-right-white.png" />
+    <Content Include="Content\jqwidgets\images\icon-right.png" />
+    <Content Include="Content\jqwidgets\images\icon-up-white.png" />
+    <Content Include="Content\jqwidgets\images\icon-up.png" />
+    <Content Include="Content\jqwidgets\images\map-hue.png" />
+    <Content Include="Content\jqwidgets\images\map-saturation-overlay.png" />
+    <Content Include="Content\jqwidgets\images\map-saturation.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-down-white.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-down.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-left-white.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-left.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-right-white.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-right.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-up-white.png" />
+    <Content Include="Content\jqwidgets\images\metro-icon-up.png" />
+    <Content Include="Content\jqwidgets\images\multi-arrow.gif" />
+    <Content Include="Content\jqwidgets\images\nav-arrow-down.png" />
+    <Content Include="Content\jqwidgets\images\nav-arrow-left.png" />
+    <Content Include="Content\jqwidgets\images\nav-arrow-right.png" />
+    <Content Include="Content\jqwidgets\images\nav-arrow-up.png" />
+    <Content Include="Content\jqwidgets\images\office-icon-down.png" />
+    <Content Include="Content\jqwidgets\images\office-icon-left.png" />
+    <Content Include="Content\jqwidgets\images\office-icon-right.png" />
+    <Content Include="Content\jqwidgets\images\office-icon-up.png" />
+    <Content Include="Content\jqwidgets\images\pointer.png" />
+    <Content Include="Content\jqwidgets\images\rangebar_classic.png" />
+    <Content Include="Content\jqwidgets\images\rangebar_darkblue.png" />
+    <Content Include="Content\jqwidgets\images\rangebar_shinyblack.png" />
+    <Content Include="Content\jqwidgets\images\rangebar_summer.png" />
+    <Content Include="Content\jqwidgets\images\red_gradient.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_check_black.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_check_disabled.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_check_indeterminate.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_check_white.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_classic_hover.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_classic_normal.png" />
+    <Content Include="Content\jqwidgets\images\roundbg_disabled.png" />
+    <Content Include="Content\jqwidgets\images\star.png" />
+    <Content Include="Content\jqwidgets\images\star_disabled.png" />
+    <Content Include="Content\jqwidgets\images\star_hover.png" />
+    <Content Include="Content\jqwidgets\images\tick.png" />
+    <Content Include="Content\jqwidgets\images\track_classic.png" />
+    <Content Include="Content\jqwidgets\images\track_darkblue.png" />
+    <Content Include="Content\jqwidgets\images\track_shinyblack.png" />
+    <Content Include="Content\jqwidgets\images\track_summer.png" />
+    <Content Include="Content\jqwidgets\jqx.base.css" />
+    <Content Include="Content\jqwidgets\jqx.black.css" />
+    <Content Include="Content\jqwidgets\jqx.classic.css" />
+    <Content Include="Content\jqwidgets\jqx.darkblue.css" />
+    <Content Include="Content\jqwidgets\jqx.energyblue.css" />
+    <Content Include="Content\jqwidgets\jqx.fresh.css" />
+    <Content Include="Content\jqwidgets\jqx.highcontrast.css" />
+    <Content Include="Content\jqwidgets\jqx.metro.css" />
+    <Content Include="Content\jqwidgets\jqx.office.css" />
+    <Content Include="Content\jqwidgets\jqx.shinyblack.css" />
+    <Content Include="Content\jqwidgets\jqx.summer.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-darkness.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-le-frog.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-lightness.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-overcast.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-redmond.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-smoothness.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-start.css" />
+    <Content Include="Content\jqwidgets\jqx.ui-sunny.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -213,6 +315,7 @@
     <Content Include="Images\success.png" />
     <Content Include="Images\tab.png" />
     <Content Include="Images\valid.png" />
+    <Content Include="Pages\Admin.aspx" />
     <Content Include="Pages\Apostas.aspx" />
     <Content Include="Pages\Campeonatos.aspx" />
     <Content Include="Pages\Classificacao.aspx" />
@@ -227,6 +330,61 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jqwidgets\jqx-all.js" />
+    <Content Include="Scripts\jqwidgets\jqxbuttongroup.js" />
+    <Content Include="Scripts\jqwidgets\jqxbuttons.js" />
+    <Content Include="Scripts\jqwidgets\jqxcalendar.js" />
+    <Content Include="Scripts\jqwidgets\jqxchart.js" />
+    <Content Include="Scripts\jqwidgets\jqxcheckbox.js" />
+    <Content Include="Scripts\jqwidgets\jqxcolorpicker.js" />
+    <Content Include="Scripts\jqwidgets\jqxcombobox.js" />
+    <Content Include="Scripts\jqwidgets\jqxcore.js" />
+    <Content Include="Scripts\jqwidgets\jqxdata.export.js" />
+    <Content Include="Scripts\jqwidgets\jqxdata.js" />
+    <Content Include="Scripts\jqwidgets\jqxdatetimeinput.js" />
+    <Content Include="Scripts\jqwidgets\jqxdocking.js" />
+    <Content Include="Scripts\jqwidgets\jqxdockpanel.js" />
+    <Content Include="Scripts\jqwidgets\jqxdragdrop.js" />
+    <Content Include="Scripts\jqwidgets\jqxdropdownbutton.js" />
+    <Content Include="Scripts\jqwidgets\jqxdropdownlist.js" />
+    <Content Include="Scripts\jqwidgets\jqxexpander.js" />
+    <Content Include="Scripts\jqwidgets\jqxgauge.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.aggregates.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.columnsreorder.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.columnsresize.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.edit.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.export.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.filter.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.grouping.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.pager.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.selection.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.sort.js" />
+    <Content Include="Scripts\jqwidgets\jqxgrid.storage.js" />
+    <Content Include="Scripts\jqwidgets\jqxinput.js" />
+    <Content Include="Scripts\jqwidgets\jqxknockout.js" />
+    <Content Include="Scripts\jqwidgets\jqxlistbox.js" />
+    <Content Include="Scripts\jqwidgets\jqxlistmenu.js" />
+    <Content Include="Scripts\jqwidgets\jqxmaskedinput.js" />
+    <Content Include="Scripts\jqwidgets\jqxmenu.js" />
+    <Content Include="Scripts\jqwidgets\jqxnavigationbar.js" />
+    <Content Include="Scripts\jqwidgets\jqxnumberinput.js" />
+    <Content Include="Scripts\jqwidgets\jqxpanel.js" />
+    <Content Include="Scripts\jqwidgets\jqxpopup.js" />
+    <Content Include="Scripts\jqwidgets\jqxprogressbar.js" />
+    <Content Include="Scripts\jqwidgets\jqxradiobutton.js" />
+    <Content Include="Scripts\jqwidgets\jqxrating.js" />
+    <Content Include="Scripts\jqwidgets\jqxscrollbar.js" />
+    <Content Include="Scripts\jqwidgets\jqxscrollview.js" />
+    <Content Include="Scripts\jqwidgets\jqxslider.js" />
+    <Content Include="Scripts\jqwidgets\jqxsplitter.js" />
+    <Content Include="Scripts\jqwidgets\jqxswitchbutton.js" />
+    <Content Include="Scripts\jqwidgets\jqxtabs.js" />
+    <Content Include="Scripts\jqwidgets\jqxtooltip.js" />
+    <Content Include="Scripts\jqwidgets\jqxtouch.js" />
+    <Content Include="Scripts\jqwidgets\jqxtree.js" />
+    <Content Include="Scripts\jqwidgets\jqxvalidator.js" />
+    <Content Include="Scripts\jqwidgets\jqxwindow.js" />
     <Content Include="Service\ApostasService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -248,6 +406,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Apostas.aspx.cs">
       <DependentUpon>Apostas.aspx</DependentUpon>
@@ -325,6 +490,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

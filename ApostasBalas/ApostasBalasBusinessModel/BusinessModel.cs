@@ -271,6 +271,20 @@ namespace ApostasBalasBusinessModel
             }
         }
 
+        public bool? ObterUtilizadorAdmin()
+        {
+            try
+            {
+                var Id = Int32.Parse(IdUtilizadorSessao);
+                return ApostasBalasDB.Utilizador.Where(u => u.IdUtilizador == Id && u.Activo == true).SingleOrDefault().Administrador;
+            }
+            catch (Exception Ex)
+            {
+                LoggingModel.Log(ConstantsModel.LogMode, Ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw;
+            }
+        }
+
         #endregion
 
         #region Home
@@ -538,7 +552,7 @@ namespace ApostasBalasBusinessModel
                     Pontos.Add(item.j.IdJogo, 1);
                     continue;
                 }
-            }            
+            }
         }
 
         public List<InfoJogo> ObterJogosApostar(string IdJornada)
