@@ -38,6 +38,7 @@
                     <li id="liApostas"><a href="#">Apostas</a></li>
                     <li id="liClassificacao"><a href="#">Classificacao</a></li>
                     <li id="liEstatisticas"><a href="#">Estatisticas</a></li>
+                    <li runat="server" visible="false" id="liAdmin"><a href="#">Admin</a></li>
                 </ul>
             </div>
         </div>
