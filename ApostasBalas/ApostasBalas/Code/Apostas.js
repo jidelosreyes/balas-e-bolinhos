@@ -31,7 +31,7 @@ $(document).ready(function () {
             var dataIn = '{' + '"IdJornada":"' + Id + '"}';
             $.ajax({
                 type: 'POST',
-                url: '/Service/ApostasService.svc/ObterJogosApostar',
+                url: '/Service/ApostasService.svc/ObterCompeticoes',
                 data: dataIn,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',

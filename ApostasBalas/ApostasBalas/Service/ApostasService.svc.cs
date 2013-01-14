@@ -55,6 +55,13 @@ namespace ApostasBalas.Service
         #region Competicoes
 
         [OperationContract]
+        public string ObterCompeticoes()
+        {
+            var CompeticoesRegistadas = JsonConvert.SerializeObject(Logic.ObterCompeticoes());
+            return CompeticoesRegistadas;
+        }
+
+        [OperationContract]
         public string ObterCompeticoesRegistadas()
         {
             var CompeticoesRegistadas = JsonConvert.SerializeObject(Logic.ObterCompeticoesRegistadas());
