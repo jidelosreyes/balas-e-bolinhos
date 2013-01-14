@@ -42,6 +42,13 @@ $(document).ready(function () {
         //$(window.location).attr('href', 'Estatisticas');
     });
 
+    $('#liAdmin').click(function (event) {
+        event.preventDefault();
+        linkLocation = 'Admin';
+        $('body').fadeOut(1000, redirectPage);
+        //$(window.location).attr('href', 'Estatisticas');
+    });
+
     function redirectPage() {
         window.location = linkLocation;
     }
