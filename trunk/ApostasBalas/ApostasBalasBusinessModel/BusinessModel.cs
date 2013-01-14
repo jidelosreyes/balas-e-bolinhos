@@ -505,6 +505,42 @@ namespace ApostasBalasBusinessModel
             }
         }
 
+        public void CalcularPontosJornada()
+        {
+            var Dados = ApostasBalasDB.Aposta
+                .Join(ApostasBalasDB.JornadaJogoCompeticao, a => a.IdJornadaJogoCompeticao, jjc => jjc.IdJornadaJogoCompeticao, (a, jjc) => new { a, jjc })
+                .Join(ApostasBalasDB.Jogo, jjc => jjc.jjc.IdJogo, j => j.IdJogo, (jjc, j) => new { jjc, j })
+                .Where(w => w.jjc.a.IdUtilizador == 1 && w.jjc.jjc.IdCompeticao == 1 && w.jjc.jjc.IdJornada == 1 && w.j.Realizado == true)
+                .ToList();
+            Dictionary<int, int> Pontos = new Dictionary<int, int>();
+            foreach (var item in Dados)
+            {
+                string[] Aposta = item.jjc.a.Descricao.Split(ConstantsModel.Delimiter);
+                string[] Resultado = item.j.Resultado.Split(ConstantsModel.Delimiter);
+
+                if (Aposta.Equals(Resultado))
+                {
+                    Pontos.Add(item.j.IdJogo, 3);
+                    continue;
+                }
+                if (Int32.Parse(Aposta[0]) > Int32.Parse(Aposta[1]) && Int32.Parse(Resultado[0]) > Int32.Parse(Resultado[1]))
+                {
+                    Pontos.Add(item.j.IdJogo, 1);
+                    continue;
+                }
+                if (Int32.Parse(Aposta[0]) < Int32.Parse(Aposta[1]) && Int32.Parse(Resultado[0]) < Int32.Parse(Resultado[1]))
+                {
+                    Pontos.Add(item.j.IdJogo, 1);
+                    continue;
+                }
+                if (Int32.Parse(Aposta[0]) == Int32.Parse(Aposta[1]) && Int32.Parse(Resultado[0]) == Int32.Parse(Resultado[1]))
+                {
+                    Pontos.Add(item.j.IdJogo, 1);
+                    continue;
+                }
+            }            
+        }
+
         public List<InfoJogo> ObterJogosApostar(string IdJornada)
         {
             try

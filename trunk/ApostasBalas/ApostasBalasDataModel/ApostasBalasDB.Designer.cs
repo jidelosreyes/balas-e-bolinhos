@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+
 namespace ApostasBalasDataModel
 {
     #region Contexts
@@ -148,6 +148,22 @@ namespace ApostasBalasDataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<JornadaJogoCompeticao> JornadaJogoCompeticao
+        {
+            get
+            {
+                if ((_JornadaJogoCompeticao == null))
+                {
+                    _JornadaJogoCompeticao = base.CreateObjectSet<JornadaJogoCompeticao>("JornadaJogoCompeticao");
+                }
+                return _JornadaJogoCompeticao;
+            }
+        }
+        private ObjectSet<JornadaJogoCompeticao> _JornadaJogoCompeticao;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Log> Log
         {
             get
@@ -208,25 +224,8 @@ namespace ApostasBalasDataModel
             }
         }
         private ObjectSet<UtilizadorCompeticao> _UtilizadorCompeticao;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<JornadaJogoCompeticao> JornadaJogoCompeticao
-        {
-            get
-            {
-                if ((_JornadaJogoCompeticao == null))
-                {
-                    _JornadaJogoCompeticao = base.CreateObjectSet<JornadaJogoCompeticao>("JornadaJogoCompeticao");
-                }
-                return _JornadaJogoCompeticao;
-            }
-        }
-        private ObjectSet<JornadaJogoCompeticao> _JornadaJogoCompeticao;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -270,6 +269,14 @@ namespace ApostasBalasDataModel
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the JornadaJogoCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJornadaJogoCompeticao(JornadaJogoCompeticao jornadaJogoCompeticao)
+        {
+            base.AddObject("JornadaJogoCompeticao", jornadaJogoCompeticao);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToLog(Log log)
@@ -300,21 +307,13 @@ namespace ApostasBalasDataModel
         {
             base.AddObject("UtilizadorCompeticao", utilizadorCompeticao);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the JornadaJogoCompeticao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToJornadaJogoCompeticao(JornadaJogoCompeticao jornadaJogoCompeticao)
-        {
-            base.AddObject("JornadaJogoCompeticao", jornadaJogoCompeticao);
-        }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -339,7 +338,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -446,6 +444,30 @@ namespace ApostasBalasDataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Pontos
+        {
+            get
+            {
+                return _Pontos;
+            }
+            set
+            {
+                OnPontosChanging(value);
+                ReportPropertyChanging("Pontos");
+                _Pontos = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Pontos");
+                OnPontosChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Pontos;
+        partial void OnPontosChanging(Nullable<global::System.Int32> value);
+        partial void OnPontosChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> DataCriacao
         {
             get
@@ -490,7 +512,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -516,7 +537,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -593,30 +613,6 @@ namespace ApostasBalasDataModel
         private Nullable<global::System.Int32> _IdCompeticao;
         partial void OnIdCompeticaoChanging(Nullable<global::System.Int32> value);
         partial void OnIdCompeticaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Jogos
-        {
-            get
-            {
-                return _Jogos;
-            }
-            set
-            {
-                OnJogosChanging(value);
-                ReportPropertyChanging("Jogos");
-                _Jogos = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Jogos");
-                OnJogosChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Jogos;
-        partial void OnJogosChanging(Nullable<global::System.Int32> value);
-        partial void OnJogosChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -809,9 +805,32 @@ namespace ApostasBalasDataModel
         private Nullable<global::System.DateTime> _DataActualizacao;
         partial void OnDataActualizacaoChanging(Nullable<global::System.DateTime> value);
         partial void OnDataActualizacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Jogos
+        {
+            get
+            {
+                return _Jogos;
+            }
+            set
+            {
+                OnJogosChanging(value);
+                ReportPropertyChanging("Jogos");
+                _Jogos = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Jogos");
+                OnJogosChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Jogos;
+        partial void OnJogosChanging(Nullable<global::System.Int32> value);
+        partial void OnJogosChanged();
 
         #endregion
-
     
     }
     
@@ -837,7 +856,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -940,7 +958,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -966,7 +983,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1141,7 +1157,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -1167,7 +1182,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1250,6 +1264,30 @@ namespace ApostasBalasDataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Realizada
+        {
+            get
+            {
+                return _Realizada;
+            }
+            set
+            {
+                OnRealizadaChanging(value);
+                ReportPropertyChanging("Realizada");
+                _Realizada = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Realizada");
+                OnRealizadaChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Realizada;
+        partial void OnRealizadaChanging(Nullable<global::System.Boolean> value);
+        partial void OnRealizadaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> DataCriacao
         {
             get
@@ -1294,7 +1332,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -1320,7 +1357,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1471,7 +1507,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -1507,7 +1542,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1697,7 +1731,6 @@ namespace ApostasBalasDataModel
         partial void OnExceptionChanged();
 
         #endregion
-
     
     }
     
@@ -1723,7 +1756,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1850,7 +1882,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -1876,7 +1907,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2075,7 +2105,6 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
     
@@ -2101,7 +2130,6 @@ namespace ApostasBalasDataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2252,11 +2280,9 @@ namespace ApostasBalasDataModel
         partial void OnDataActualizacaoChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     
 }
