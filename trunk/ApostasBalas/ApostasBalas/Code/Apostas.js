@@ -3,6 +3,13 @@
 /// <reference path="../Scripts/jquery-ui-1.9.2.min.js" />
 /// <reference path="../Scripts/jquery.validate.min.js" />
 $(document).ready(function () {
+
+    //#region Variaveis
+
+    var JogoRealizado = 'Jogo já realizado.';
+
+    //#endregion
+
     $('#liApostas').addClass('selected');
 
     $(document).tooltip(
@@ -13,6 +20,14 @@ $(document).ready(function () {
         hide: {
             effect: 'slideUp'
         }
+    });
+
+    $('#showApostasResult').dialog({
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        show: 'blind',
+        hide: 'blind'
     });
 
     $("#grdApostar").css('display', 'none');
@@ -31,7 +46,7 @@ $(document).ready(function () {
             var dataIn = '{' + '"IdJornada":"' + Id + '"}';
             $.ajax({
                 type: 'POST',
-                url: '/Service/ApostasService.svc/ObterCompeticoes',
+                url: '/Service/ApostasService.svc/ObterJogosApostar',
                 data: dataIn,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -43,7 +58,7 @@ $(document).ready(function () {
                         var jogoRealizado = '<a title="Data: ' + item.Data + '" />';
                         if (item.Realizado == 'True') {
                             disabled = 'disabled="disabled"';
-                            jogoRealizado = '<a title="Jogo já realizado." />';
+                            jogoRealizado = '<a title="' + JogoRealizado + '" />';
                         }
                         var htmltoApend = '<p class="jogo"><input id="hdd" type="hidden" value=' + item.Id + ' /><span>Jogo ' + (i + 1) + '</span><label>' + item.Equipa1 + '</label><input id="txtResultado1" ' + disabled + ' type="text" value=' + item.Resultado1 + ' /><input id="txtResultado2" ' + disabled + ' type="text" value=' + item.Resultado2 + ' /><label>' + item.Equipa2 + '</label>' + jogoRealizado + '</p>';
                         $(htmltoApend).appendTo(grdApostar);
@@ -111,10 +126,18 @@ $(document).ready(function () {
 
     $('#btnApostar').live('click', function () {
         var apostas = $('#grdApostar p.jogo');
+        $('#showApostasResult').empty();
+        $('#showApostasResult').dialog('open');
         $.each(apostas, function (i, item) {
             var Resultado1 = $(item).find('#txtResultado1').val();
             var Resultado2 = $(item).find('#txtResultado2').val();
             var Id = $(item).find('#hdd').val();
+            var text = $(item).find('a').attr('title');
+            if (text == JogoRealizado) {
+                var html = '<p>Jogo ' + (i + 1) + ' já realizado.</p>';
+                $(html).appendTo('#showApostasResult');
+                return;
+            }
             var dataIn = '{' + '"Id":"' + Id + '" ' + ',"Resultado1":"' + Resultado1 + '"' + ',"Resultado2":"' + Resultado2 + '"}';
             $.ajax({
                 type: 'POST',
@@ -122,23 +145,13 @@ $(document).ready(function () {
                 data: dataIn,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                success: function () {
-                    jSuccess('Apostas realizadas com sucesso.',
-                       {
-                           autoHide: false,
-                           TimeShown: 3000,
-                           HorizontalPosition: 'center',
-                           clickOverlay: true
-                       });
+                success: function () {                   
+                    var html = '<p>Aposta ' + (i + 1) + ' realiza com sucesso.</p>';
+                    $(html).appendTo('#showApostasResult');
                 },
-                error: function () {
-                    jError('Ocorreu um erro contacte o suporte tecnico dos balas.',
-                           {
-                               autoHide: false,
-                               TimeShown: 3000,
-                               HorizontalPosition: 'center',
-                               clickOverlay: true
-                           });
+                error: function () {                 
+                    var html = '<p>Aposta ' + (i + 1) + ' não realizada.</p>';
+                    $(html).appendTo('#showApostasResult');
                 }
             });
         });
