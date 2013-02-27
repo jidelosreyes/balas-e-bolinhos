@@ -56,6 +56,7 @@ namespace ApostasBalasBusinessModel
             public string Resultado1 { get; set; }
             public string Resultado2 { get; set; }
             public string Realizado { get; set; }
+            public string TotalPontos { get; set; }
         }
 
         public class CompeticaoRegistada
@@ -294,10 +295,14 @@ namespace ApostasBalasBusinessModel
             try
             {
                 var Id = Int32.Parse(IdUtilizadorSessao);
+                var IdCompeticaActiva = ApostasBalasDB.UtilizadorCompeticao
+                   .Where(uc => uc.IdUtilizador == Id && uc.Activo == true)
+                   .Select(uc => uc.IdCompeticao)
+                   .FirstOrDefault();
                 var _PrimeirosClassificados = ApostasBalasDB.Classificacao
                     .Join(ApostasBalasDB.Utilizador, c => c.IdUtilizador, u => u.IdUtilizador, (c, u) => new { c, u })
                     .Join(ApostasBalasDB.UtilizadorCompeticao, uuc => uuc.u.IdUtilizador, uc => uc.IdUtilizador, (uuc, uc) => new { uuc, uc })
-                    .Where(w => w.uuc.u.IdUtilizador == Id && w.uc.Activo == true)
+                    .Where(w => w.uc.IdCompeticao == IdCompeticaActiva && w.uc.Activo == true)
                     .Select(pc => new PrimeiroClassificado
                     {
                         Nome = pc.uuc.u.NomeUtilizador,
@@ -497,6 +502,7 @@ namespace ApostasBalasBusinessModel
                      .Join(ApostasBalasDB.JornadaJogoCompeticao, j => j.IdJogo, jc => jc.IdJogo, (j, jc) => new { j, jc })
                      .Where(jc => jc.jc.IdCompeticao == CompeticaoActiva && jc.jc.IdJornada == Jornada && jc.j.Realizado == true)
                      .Select(j => j.j).ToList();
+                
                 var UltimoResultado = new List<InfoJogo>();
                 foreach (var item in Jogos)
                 {

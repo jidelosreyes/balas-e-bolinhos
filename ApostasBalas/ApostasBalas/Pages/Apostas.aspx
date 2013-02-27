@@ -27,4 +27,6 @@
     </div>
     <div id="grdVerApostas" class="ApostasForm_settings">
     </div>
+    <div id="showApostasResult" title="Estado das Apostas">
+    </div>
 </asp:Content>
