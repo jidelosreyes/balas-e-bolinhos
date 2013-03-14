@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessModel.cs">
+    <Compile Include="Code\BusinessModel.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Constants.Designer.cs">
@@ -54,9 +54,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Constants.resx</DependentUpon>
     </Compile>
-    <Compile Include="ConstantsModel.cs" />
-    <Compile Include="LoggingModel.cs" />
-    <Compile Include="PlatformModel.cs">
+    <Compile Include="Code\ConstantsModel.cs" />
+    <Compile Include="Code\LoggingModel.cs" />
+    <Compile Include="Code\PlatformModel.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,9 +76,7 @@
       <LastGenOutput>Constants.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Code\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
