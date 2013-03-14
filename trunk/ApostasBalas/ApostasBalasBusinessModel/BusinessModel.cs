@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Web;
 using ApostasBalasDataModel;
-using log4net;
-using System.Collections.Generic;
-using System.Resources;
 
 namespace ApostasBalasBusinessModel
 {
@@ -676,110 +672,5 @@ namespace ApostasBalasBusinessModel
 
 
         #endregion
-    }
-
-    public abstract class PlatformModel : System.Web.UI.Page
-    {
-        public static BusinessModel Logic = BusinessModel.GetInstance;
-
-        public string NomeUtilizadorSessao
-        {
-            get
-            {
-                if (HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao] == null || HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao].Equals(string.Empty))
-                    return string.Empty;
-                return HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao].ToString();
-            }
-            set
-            {
-                HttpContext.Current.Session[ConstantsModel.NomeUtilizadorSessao] = value;
-            }
-        }
-
-        public string PasswordSessao
-        {
-            get
-            {
-                if (HttpContext.Current.Session[ConstantsModel.PasswordSessao] == null || HttpContext.Current.Session[ConstantsModel.PasswordSessao].Equals(string.Empty))
-                    return string.Empty;
-                return HttpContext.Current.Session[ConstantsModel.PasswordSessao].ToString();
-            }
-            set
-            {
-                HttpContext.Current.Session[ConstantsModel.PasswordSessao] = value;
-            }
-        }
-
-        public string IdUtilizadorSessao
-        {
-            get
-            {
-                if (HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao] == null || HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao].Equals(string.Empty))
-                    return string.Empty;
-                return HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao].ToString();
-            }
-            set
-            {
-                HttpContext.Current.Session[ConstantsModel.IdUtilizadorSessao] = value;
-            }
-        }
-
-        public bool IsCookie
-        {
-            get
-            {
-                if (HttpContext.Current.Request.Cookies[ConstantsModel.CookieName] != null)
-                    return true;
-                return false;
-            }
-        }
-    }
-
-    public static class ConstantsModel
-    {
-        public static string LogMode = ConfigurationManager.AppSettings["LogMode"].ToString();
-        public static string CookieName = ConfigurationManager.AppSettings["CookieName"].ToString();
-        public const int SessionTimeOut = 15;
-        public const string BemVindo = "Bem Vindo ";
-        public const string HomeRoute = "Home";
-        public const string InicioRoute = "Inicio";
-        public const string NomeUtilizadorSessao = "NomeUtilizadorSessao";
-        public const string PasswordSessao = "PasswordSessao";
-        public const string IdUtilizadorSessao = "IdUtilizadorSessao";
-        public const string Error = "Error";
-        public const string Debug = "Debug";
-        public const string Info = "Info";
-        public const string Warning = "Warning";
-        public const string Fatal = "Fatal";
-        public const char Delimiter = '-';
-        public const string NullResult = "0-0";
-        public const string Zero = "0";
-    }
-
-    internal static class LoggingModel
-    {
-        public static void Log(string Mode, Exception Ex, string Method)
-        {
-            ILog log = LogManager.GetLogger(Method);
-            log4net.Config.XmlConfigurator.Configure();
-            switch (Mode)
-            {
-                case ConstantsModel.Error:
-                    log.Error(ConstantsModel.Error, Ex);
-                    break;
-                case ConstantsModel.Debug:
-                    log.Debug(ConstantsModel.Debug, Ex);
-                    break;
-                case ConstantsModel.Info:
-                    log.Info(ConstantsModel.Info, Ex);
-                    break;
-                case ConstantsModel.Warning:
-                    log.Warn(ConstantsModel.Warning, Ex);
-                    break;
-                default:
-                    log.Fatal(ConstantsModel.Fatal, Ex);
-                    break;
-            }
-        }
-    }
+    }    
 }
