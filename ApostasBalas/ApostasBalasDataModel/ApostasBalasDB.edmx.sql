@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 01/01/2013 22:50:24
--- Generated from EDMX file: C:\Projectos\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
+-- Date Created: 03/28/2013 12:03:22
+-- Generated from EDMX file: C:\JP\Projects\B&B\trunk\ApostasBalas\ApostasBalasDataModel\ApostasBalasDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -37,6 +37,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Jornada]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Jornada];
 GO
+IF OBJECT_ID(N'[dbo].[JornadaJogoCompeticao]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JornadaJogoCompeticao];
+GO
 IF OBJECT_ID(N'[dbo].[Log]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Log];
 GO
@@ -49,9 +52,6 @@ GO
 IF OBJECT_ID(N'[dbo].[UtilizadorCompeticao]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UtilizadorCompeticao];
 GO
-IF OBJECT_ID(N'[dbo].[JornadaJogoCompeticao]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[JornadaJogoCompeticao];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -63,6 +63,7 @@ CREATE TABLE [dbo].[Aposta] (
     [IdUtilizador] int  NULL,
     [IdJornadaJogoCompeticao] int  NULL,
     [Descricao] varchar(max)  NULL,
+    [Pontos] int  NULL,
     [DataCriacao] datetime  NULL,
     [DataActualizacao] datetime  NULL
 );
@@ -73,7 +74,6 @@ CREATE TABLE [dbo].[Classificacao] (
     [IdClassificacao] int IDENTITY(1,1) NOT NULL,
     [IdUtilizador] int  NULL,
     [IdCompeticao] int  NULL,
-    [Jogos] int  NULL,
     [Vitorias] int  NULL,
     [Empates] int  NULL,
     [Derrotas] int  NULL,
@@ -81,7 +81,8 @@ CREATE TABLE [dbo].[Classificacao] (
     [GolosSofridos] int  NULL,
     [Pontos] int  NULL,
     [DataCriacao] datetime  NULL,
-    [DataActualizacao] datetime  NULL
+    [DataActualizacao] datetime  NULL,
+    [Jogos] int  NULL
 );
 GO
 
@@ -111,6 +112,18 @@ CREATE TABLE [dbo].[Jornada] (
     [IdJornada] int IDENTITY(1,1) NOT NULL,
     [IdCompeticao] int  NULL,
     [Descricao] varchar(100)  NULL,
+    [Realizada] bit  NULL,
+    [DataCriacao] datetime  NULL,
+    [DataActualizacao] datetime  NULL
+);
+GO
+
+-- Creating table 'JornadaJogoCompeticao'
+CREATE TABLE [dbo].[JornadaJogoCompeticao] (
+    [IdJornadaJogoCompeticao] int IDENTITY(1,1) NOT NULL,
+    [IdCompeticao] int  NULL,
+    [IdJornada] int  NULL,
+    [IdJogo] int  NULL,
     [DataCriacao] datetime  NULL,
     [DataActualizacao] datetime  NULL
 );
@@ -162,17 +175,6 @@ CREATE TABLE [dbo].[UtilizadorCompeticao] (
 );
 GO
 
--- Creating table 'JornadaJogoCompeticao'
-CREATE TABLE [dbo].[JornadaJogoCompeticao] (
-    [IdJornadaJogoCompeticao] int IDENTITY(1,1) NOT NULL,
-    [IdCompeticao] int  NULL,
-    [IdJornada] int  NULL,
-    [IdJogo] int  NULL,
-    [DataCriacao] datetime  NULL,
-    [DataActualizacao] datetime  NULL
-);
-GO
-
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -207,6 +209,12 @@ ADD CONSTRAINT [PK_Jornada]
     PRIMARY KEY CLUSTERED ([IdJornada] ASC);
 GO
 
+-- Creating primary key on [IdJornadaJogoCompeticao] in table 'JornadaJogoCompeticao'
+ALTER TABLE [dbo].[JornadaJogoCompeticao]
+ADD CONSTRAINT [PK_JornadaJogoCompeticao]
+    PRIMARY KEY CLUSTERED ([IdJornadaJogoCompeticao] ASC);
+GO
+
 -- Creating primary key on [Id], [Date], [Thread], [Level], [Logger], [Message] in table 'Log'
 ALTER TABLE [dbo].[Log]
 ADD CONSTRAINT [PK_Log]
@@ -229,12 +237,6 @@ GO
 ALTER TABLE [dbo].[UtilizadorCompeticao]
 ADD CONSTRAINT [PK_UtilizadorCompeticao]
     PRIMARY KEY CLUSTERED ([IdUtilizadorCompeticao] ASC);
-GO
-
--- Creating primary key on [IdJornadaJogoCompeticao] in table 'JornadaJogoCompeticao'
-ALTER TABLE [dbo].[JornadaJogoCompeticao]
-ADD CONSTRAINT [PK_JornadaJogoCompeticao]
-    PRIMARY KEY CLUSTERED ([IdJornadaJogoCompeticao] ASC);
 GO
 
 -- --------------------------------------------------
